@@ -30,7 +30,7 @@ window.onload = function() {
       'Or contact me directly at <a href="mailto:hello@oktayevin.com">hello@oktayevin.com</a>',
       getCurrentTime(),
       '~ Oktay.',
-      '<a target="_blank" href="/">← Return to home page</a>'
+      '<a href="/">← Return to home page</a>'
     ]
   
     var getFontSize = function() {
