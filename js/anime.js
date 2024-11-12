@@ -2,8 +2,8 @@
  * Anime.js v0.0.0
  * https://animejs.com
  * JavaScript animation engine
- * Copyright (c) 2016 Julian Garnier
- * https://juliangarnier.com
+ * Copyright (c) 2024 Oktay Evin
+ * https://oktayevin.com/contact
  * Released under the MIT license
  */
 var anime = function() {

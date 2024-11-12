@@ -25,7 +25,7 @@ window.onload = function() {
       'Hey there 👋',
       'I\'m Oktay',
       'I design and code things on the web',
-      'I\'m currently working on <a href="https://github.com/sponsors/oktayevin" target="_blank">anime.js v4</a>',
+      'I\'m currently an Industrial Design student at <a href="https://id.khas.edu.tr" target="_blank">Kadir Has University</a>',
       'You can find me on <a target="_blank" href="https://x.com/Oktay_Evin">X</a>, <a target="_blank" href="https://instagram.com/oktayevin">Instagram</a> and <a target="_blank" href="https://github.com/oktayevin">GitHub</a>',
       'Or contact me directly at <a href="mailto:hello@oktayevin.com">hello@oktayevin.com</a>',
       getCurrentTime(),
