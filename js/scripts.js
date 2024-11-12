@@ -29,7 +29,8 @@ window.onload = function() {
       'You can find me on <a target="_blank" href="https://x.com/Oktay_Evin">X</a>, <a target="_blank" href="https://instagram.com/oktayevin">Instagram</a> and <a target="_blank" href="https://github.com/oktayevin">GitHub</a>',
       'Or contact me directly at <a href="mailto:hello@oktayevin.com">hello@oktayevin.com</a>',
       getCurrentTime(),
-      '~ J.',
+      '~ Oktay.',
+      '← Return to home page'
     ]
   
     var getFontSize = function() {
