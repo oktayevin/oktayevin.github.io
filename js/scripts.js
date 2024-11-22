@@ -24,12 +24,12 @@ window.onload = function() {
     var messages = [
       'Hey there 👋',
       'I\'m Oktay',
-      'I design and code things on the web',
-      'I\'m currently an Industrial Design student at <a href="https://id.khas.edu.tr" target="_blank">Kadir Has University</a>',
-      'You can find me on <a target="_blank" href="https://x.com/Oktay_Evin">X</a>, <a target="_blank" href="https://instagram.com/oktayevin">Instagram</a> and <a target="_blank" href="https://github.com/oktayevin">GitHub</a>',
+      'I design and code things',
+      'I\'m currently an Industrial Design student at <a href="https://khas.edu.tr" target="_blank">Kadir Has University</a>',
+      'You can find me on <a target="_blank" href="https://x.com/Oktay_Evin">X</a>, <a target="_blank" href="https://instagram.com/oktayevin">Instagram</a> and <a target="_blank" href="https://linkedin.com/in/oktayevin">LinkedIn</a>',
       'Or contact me directly at <a href="mailto:hello@oktayevin.com">hello@oktayevin.com</a>',
       getCurrentTime(),
-      '~ Oktay.',
+      '-Oktay.',
       '<a href="/">← Return to home page</a>'
     ]
   
