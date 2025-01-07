@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Oktay Evin - IND211 Portfolio</title>
+  
+  <!-- 1. jQuery (required by Turn.js) -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  
+  <!-- 2. Turn.js -->
+  <script src="https://cdn.jsdelivr.net/npm/turn.js@4/turn.min.js"></script>
+  
+  <!-- 3. pdf.js (core) and its worker -->
+  <!-- Make sure to use matching version for pdf.min.js and pdf.worker.min.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.12.313/pdf.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.12.313/pdf.worker.min.js"></script>
+  
+  <style>
+    /* Basic page styling */
+    body {
+      margin: 0;
+      padding: 0;
+      background: #f0f0f0;
+      font-family: Arial, sans-serif;
+    }
+    
+    /* Flipbook container styling */
+    .flipbook-viewport {
+      width: 90%;
+      max-width: 1000px;
+      margin: 2em auto;
+    }
+    
+    .container {
+      width: 100%;
+      position: relative;
+      margin: 0 auto;
+    }
+    
+    .flipbook {
+      /* Adjust as needed */
+      width: 800px;
+      height: 500px;
+      margin: 0 auto;
+      background: #ccc;
+    }
+    
+    /* Each page (added dynamically) will be sized automatically by Turn.js */
+    .flipbook .page {
+      background-size: cover;
+      background-position: center;
+    }
+    
+    /* Hard covers styling */
+    .hard {
+      background: #999;
+      font-weight: bold;
+      color: #fff;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Flipbook container -->
+<div class="flipbook-viewport">
+  <div class="container">
+    <div class="flipbook" id="flipbook">
+      <!-- Pages will be appended here by JavaScript -->
+    </div>
+  </div>
+</div>
+
+<script>
+/*
+ * 1) Load the PDF using pdf.js
+ * 2) For each page in the PDF:
+ *    - Render to a canvas
+ *    - Convert canvas to dataURL
+ *    - Create a DIV with that dataURL as its background
+ *    - Append to the flipbook
+ * 3) Initialize Turn.js
+ */
+
+// The URL of the PDF you want to display. 
+// For local testing, put your PDF in the same folder or use an absolute URL with correct CORS settings.
+const pdfURL = 'sample.pdf';
+
+// PDF.js configuration
+pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.12.313/pdf.worker.min.js';
+
+async function loadPDFAndCreateFlipbook() {
+  try {
+    // 1) Load the PDF document
+    const pdf = await pdfjsLib.getDocument(pdfURL).promise;
+    const totalPages = pdf.numPages;
+
+    // 2) Create a "front cover" page
+    const frontCover = document.createElement('div');
+    frontCover.classList.add('hard');
+    frontCover.innerHTML = 'Front Cover';
+    document.getElementById('flipbook').appendChild(frontCover);
+
+    // 3) Render each page as a canvas -> dataURL -> turn.js page
+    for (let pageNumber = 1; pageNumber <= totalPages; pageNumber++) {
+      const page = await pdf.getPage(pageNumber);
+
+      // Set scale (zoom). Larger scale -> better quality but bigger data URL.
+      const scale = 1.5;
+      const viewport = page.getViewport({ scale });
+
+      // Prepare canvas using PDF page dimensions
+      const canvas = document.createElement('canvas');
+      const context = canvas.getContext('2d');
+      canvas.width = viewport.width;
+      canvas.height = viewport.height;
+
+      // Render PDF page into canvas context
+      const renderContext = {
+        canvasContext: context,
+        viewport: viewport
+      };
+      await page.render(renderContext).promise;
+
+      // Convert canvas to base64 data URL
+      const dataURL = canvas.toDataURL('image/jpeg', 1.0);
+
+      // Create a DIV for this page and set background
+      const pageDiv = document.createElement('div');
+      pageDiv.classList.add('page');
+      // Use background-image with the dataURL
+      pageDiv.style.backgroundImage = `url(${dataURL})`;
+      
+      // Optionally, set an inline style for dimension to match canvas
+      // Turn.js will do some sizing internally, but this can help
+      pageDiv.style.width = viewport.width + 'px';
+      pageDiv.style.height = viewport.height + 'px';
+
+      // Append the page DIV to the flipbook container
+      document.getElementById('flipbook').appendChild(pageDiv);
+    }
+
+    // 4) Create a "back cover" page
+    const backCover = document.createElement('div');
+    backCover.classList.add('hard');
+    backCover.innerHTML = 'Back Cover';
+    document.getElementById('flipbook').appendChild(backCover);
+
+    // 5) Now that all pages are appended, initialize Turn.js
+    $('#flipbook').turn({
+      width: 800,        // Flipbook width
+      height: 500,       // Flipbook height
+      autoCenter: true,  // Center the book
+      elevation: 50,
+      gradients: true,
+      display: 'double'  // or 'single'
+    });
+
+  } catch (err) {
+    console.error('Error loading or rendering PDF:', err);
+  }
+}
+
+// Execute on page load
+document.addEventListener('DOMContentLoaded', () => {
+  loadPDFAndCreateFlipbook();
+});
+</script>
+
+</body>
+</html>
