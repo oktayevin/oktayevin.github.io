@@ -1,168 +1,91 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Loader2 } from 'lucide-react';
-
-const PDFFlipbook = () => {
-  const flipbookRef = useRef(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    const loadPDF = async () => {
-      try {
-        const pdfjsLib = window.pdfjsLib;
-        if (!pdfjsLib) {
-          throw new Error('PDF.js library not loaded');
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flipbook Demo</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #f0f0f0;
+            font-family: Arial, sans-serif;
         }
 
-        // Configure worker
-        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
-
-        // Load the PDF file using window.fs.readFile
-        const pdfData = await window.fs.readFile('IND211_Portfolio.pdf');
-        const pdf = await pdfjsLib.getDocument({ data: pdfData }).promise;
-        const totalPages = pdf.numPages;
-
-        // Create front cover
-        const frontCover = document.createElement('div');
-        frontCover.className = 'bg-gray-800 text-white flex items-center justify-center';
-        frontCover.innerHTML = 'Front Cover';
-        flipbookRef.current.appendChild(frontCover);
-
-        // Render PDF pages
-        for (let pageNum = 1; pageNum <= totalPages; pageNum++) {
-          const page = await pdf.getPage(pageNum);
-          const scale = 1.5;
-          const viewport = page.getViewport({ scale });
-
-          const canvas = document.createElement('canvas');
-          const context = canvas.getContext('2d');
-          canvas.width = viewport.width;
-          canvas.height = viewport.height;
-
-          await page.render({
-            canvasContext: context,
-            viewport: viewport
-          }).promise;
-
-          const dataUrl = canvas.toDataURL('image/jpeg', 0.8);
-          const pageDiv = document.createElement('div');
-          pageDiv.className = 'page bg-white';
-          pageDiv.style.backgroundImage = `url(${dataUrl})`;
-          pageDiv.style.backgroundSize = 'contain';
-          pageDiv.style.backgroundRepeat = 'no-repeat';
-          pageDiv.style.backgroundPosition = 'center';
-          
-          flipbookRef.current.appendChild(pageDiv);
+        #flipbook {
+            margin: 0 auto;
         }
 
-        // Create back cover
-        const backCover = document.createElement('div');
-        backCover.className = 'bg-gray-800 text-white flex items-center justify-center';
-        backCover.innerHTML = 'Back Cover';
-        flipbookRef.current.appendChild(backCover);
+        #flipbook .page {
+            background: #fff;
+            border: 1px solid #c0c0c0;
+            padding: 20px;
+            text-align: center;
+        }
 
-        // Initialize Turn.js
-        window.jQuery(flipbookRef.current).turn({
-          width: 800,
-          height: 600,
-          autoCenter: true,
-          elevation: 50,
-          gradients: true,
-          display: 'double',
-          acceleration: true,
-          when: {
-            turned: function(e, page) {
-              console.log('Current page:', page);
-            }
-          }
-        });
+        .loading {
+            text-align: center;
+            font-size: 1.2em;
+            color: #666;
+        }
 
-        setLoading(false);
-      } catch (err) {
-        console.error('Error loading PDF:', err);
-        setError(err.message);
-        setLoading(false);
-      }
-    };
-
-    // Load required scripts
-    const loadScripts = async () => {
-      try {
-        // Load jQuery
-        const jqueryScript = document.createElement('script');
-        jqueryScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js';
-        await new Promise((resolve, reject) => {
-          jqueryScript.onload = resolve;
-          jqueryScript.onerror = reject;
-          document.head.appendChild(jqueryScript);
-        });
-
-        // Load Turn.js
-        const turnScript = document.createElement('script');
-        turnScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/turn.js/4.1.0/turn.min.js';
-        await new Promise((resolve, reject) => {
-          turnScript.onload = resolve;
-          turnScript.onerror = reject;
-          document.head.appendChild(turnScript);
-        });
-
-        // Load PDF.js
-        const pdfScript = document.createElement('script');
-        pdfScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js';
-        await new Promise((resolve, reject) => {
-          pdfScript.onload = resolve;
-          pdfScript.onerror = reject;
-          document.head.appendChild(pdfScript);
-        });
-
-        // Now that scripts are loaded, initialize the PDF
-        await loadPDF();
-      } catch (err) {
-        console.error('Error loading scripts:', err);
-        setError('Failed to load required libraries');
-        setLoading(false);
-      }
-    };
-
-    loadScripts();
-
-    // Cleanup
-    return () => {
-      if (flipbookRef.current) {
-        window.jQuery(flipbookRef.current).turn('destroy');
-      }
-    };
-  }, []);
-
-  if (error) {
-    return (
-      <div className="flex items-center justify-center h-96 text-red-500">
-        Error: {error}
-      </div>
-    );
-  }
-
-  return (
-    <div className="w-full max-w-4xl mx-auto p-4">
-      {loading ? (
-        <div className="flex items-center justify-center h-96">
-          <Loader2 className="w-8 h-8 animate-spin" />
+        .error {
+            color: red;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="flipbook-container">
+        <div id="flipbook">
+            <!-- Pages will be added here -->
         </div>
-      ) : (
-        <div className="relative bg-gray-100 p-4 rounded-lg shadow-lg">
-          <div 
-            ref={flipbookRef}
-            className="flipbook bg-white"
-            style={{
-              width: '800px',
-              height: '600px',
-              margin: '0 auto'
-            }}
-          />
-        </div>
-      )}
     </div>
-  );
-};
 
-export default PDFFlipbook;
+    <!-- Load scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/turn.js/4.1.0/turn.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add some pages
+            const flipbook = document.getElementById('flipbook');
+            
+            // Add front cover
+            const cover = document.createElement('div');
+            cover.className = 'page';
+            cover.innerHTML = '<h1>Front Cover</h1>';
+            flipbook.appendChild(cover);
+            
+            // Add content pages
+            for (let i = 1; i <= 6; i++) {
+                const page = document.createElement('div');
+                page.className = 'page';
+                page.innerHTML = `<h2>Page ${i}</h2><p>This is page ${i} content.</p>`;
+                flipbook.appendChild(page);
+            }
+            
+            // Add back cover
+            const backCover = document.createElement('div');
+            backCover.className = 'page';
+            backCover.innerHTML = '<h1>Back Cover</h1>';
+            flipbook.appendChild(backCover);
+
+            // Initialize turn.js
+            $(flipbook).turn({
+                width: 800,
+                height: 600,
+                autoCenter: true,
+                display: 'double',
+                acceleration: true,
+                gradients: true,
+                elevation: 50
+            });
+        });
+    </script>
+</body>
+</html>
