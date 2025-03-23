@@ -1,28 +1,10 @@
 {
   "magazines": [
     {
-      "id": "2024-02",
-      "coverUrl": "https://goldenhas.com.tr/wp-content/uploads/2024/02/TR-KAPAK.png",
-      "pdfUrl": "https://goldenhas.com.tr/wp-content/uploads/2024/02/ataturk-issue-tr.pdf",
-      "title": "Mustafa Kemal Atatürk Sayısı"
-    },
-    {
-      "id": "2024-05",
-      "coverUrl": "https://goldenhas.com.tr/wp-content/uploads/2024/05/kapak-tr.png",
-      "pdfUrl": "https://goldenhas.com.tr/wp-content/uploads/2024/05/gh2-TR.pdf",
-      "title": "Bahar Sayısı"
-    },
-    {
-      "id": "2024-09",
-      "coverUrl": "https://goldenhas.com.tr/wp-content/uploads/2024/09/GOLDENSAYI.png",
-      "pdfUrl": "https://goldenhas.com.tr/wp-content/uploads/2024/09/GOLDENSAYI.pdf",
-      "title": "Golden Sayı"
-    },
-    {
-      "id": "2024-10",
-      "coverUrl": "https://goldenhas.com.tr/wp-content/uploads/2024/09/Sonbahar-Sayisi-Cover.png",
-      "pdfUrl": "https://goldenhas.com.tr/wp-content/uploads/2024/10/Sonbahar-Sayisi.pdf",
-      "title": "Sonbahar Sayısı"
+      "id": "2025-03",
+      "coverUrl": "https://goldenhas.com.tr/wp-content/uploads/2025/03/love-issue-tr-kapak.png",
+      "pdfUrl": "https://goldenhas.com.tr/wp-content/uploads/2025/03/GoldenHas-Love-TR.pdf",
+      "title": "Aşk Sayısı"
     },
     {
       "id": "2024-12",
@@ -31,10 +13,28 @@
       "title": "Golden Yıl Sayısı"
     },
     {
-      "id": "2025-03",
-      "coverUrl": "https://goldenhas.com.tr/wp-content/uploads/2025/03/love-issue-tr-kapak.png",
-      "pdfUrl": "https://goldenhas.com.tr/wp-content/uploads/2025/03/GoldenHas-Love-TR.pdf",
-      "title": "Aşk Sayısı"
+      "id": "2024-10",
+      "coverUrl": "https://goldenhas.com.tr/wp-content/uploads/2024/09/Sonbahar-Sayisi-Cover.png",
+      "pdfUrl": "https://goldenhas.com.tr/wp-content/uploads/2024/10/Sonbahar-Sayisi.pdf",
+      "title": "Sonbahar Sayısı"
+    },
+    {
+      "id": "2024-09",
+      "coverUrl": "https://goldenhas.com.tr/wp-content/uploads/2024/09/GOLDENSAYI.png",
+      "pdfUrl": "https://goldenhas.com.tr/wp-content/uploads/2024/09/GOLDENSAYI.pdf",
+      "title": "Golden Sayı"
+    },
+    {
+      "id": "2024-05",
+      "coverUrl": "https://goldenhas.com.tr/wp-content/uploads/2024/05/kapak-tr.png",
+      "pdfUrl": "https://goldenhas.com.tr/wp-content/uploads/2024/05/gh2-TR.pdf",
+      "title": "Bahar Sayısı"
+    },
+    {
+      "id": "2024-02",
+      "coverUrl": "https://goldenhas.com.tr/wp-content/uploads/2024/02/TR-KAPAK.png",
+      "pdfUrl": "https://goldenhas.com.tr/wp-content/uploads/2024/02/ataturk-issue-tr.pdf",
+      "title": "Mustafa Kemal Atatürk Sayısı"
     }
   ]
 }
