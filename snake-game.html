@@ -9,19 +9,23 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        body {
+        html, body {
             overscroll-behavior: contain;
             touch-action: none;
             position: fixed;
             width: 100%;
             height: 100%;
             overflow: hidden;
-            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #1a1a2e, #16213e) fixed;
         }
         .game-container {
             touch-action: none;
             max-height: 100vh;
             overflow: hidden;
+            position: relative;
+            z-index: 1;
         }
     </style>
 </head>
