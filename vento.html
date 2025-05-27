@@ -1,28 +1,3136 @@
-
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vento | Take a Step, Create Value</title>
-    <meta name="description" content="Vento - An all-in-one fintech super-app for creators and freelancers to earn coins by walking, receive global payments, support crowdfunding campaigns, and issue invoices — all without needing a foreign business entity." />
-    <meta name="author" content="Vento" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <meta property="og:title" content="Vento | Take a Step, Create Value" />
-    <meta property="og:description" content="Vento - An all-in-one fintech super-app for creators and freelancers to earn coins by walking, receive global payments, support crowdfunding campaigns, and issue invoices." />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+    <style>
+        /* Base Styles */
+        :root {
+            /* Main color palette */
+            --primary-color: #5469d4;
+            --primary-light: #7b93e8;
+            --primary-dark: #3f51b5;
+            --secondary-color: #00bfa5;
+            --accent-color: #ff5252;
+            --dark-bg: #111827;
+            --light-bg: #ffffff;
+            --light-gray: #f3f4f6;
+            --medium-gray: #9ca3af;
+            --dark-gray: #4b5563;
+            --text-light: #f9fafb;
+            --text-dark: #1f2937;
+            
+            /* Additional fintech colors */
+            --success-color: #0cce6b;
+            --warning-color: #ffb74d;
+            --error-color: #ff5252;
+            --info-color: #2196f3;
+            --chart-green: #00c853;
+            --chart-red: #ff1744;
+            
+            /* Spacing */
+            --spacing-xs: 0.25rem;
+            --spacing-sm: 0.5rem;
+            --spacing-md: 1rem;
+            --spacing-lg: 2rem;
+            --spacing-xl: 4rem;
+            
+            /* Fonts */
+            --font-primary: 'Manrope', sans-serif;
+            
+            /* Border Radius */
+            --radius-sm: 0.25rem;
+            --radius-md: 0.5rem;
+            --radius-lg: 1rem;
+            --radius-full: 9999px;
+            
+            /* Transitions */
+            --transition-fast: 0.2s ease;
+            --transition-normal: 0.3s ease;
+            --transition-slow: 0.5s ease;
+            
+            /* Shadows */
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-card: 0 10px 20px rgba(84, 105, 212, 0.1);
+        }
 
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@lovable_dev" />
-    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
-  </head>
+        .dark-mode {
+            --light-bg: #111827;
+            --dark-bg: #1f2937;
+            --light-gray: #374151;
+            --medium-gray: #6b7280;
+            --dark-gray: #9ca3af;
+            --text-light: #f9fafb;
+            --text-dark: #f3f4f6;
+        }
 
-  <body>
-    <div id="root"></div>
-    <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS VERY COMMENT! -->
-    <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-primary);
+            background-color: var(--light-bg);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: background-color var(--transition-normal), color var(--transition-normal);
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--primary-color);
+            transition: color var(--transition-fast);
+        }
+
+        a:hover {
+            color: var(--primary-dark);
+        }
+
+        button {
+            cursor: pointer;
+            font-family: var(--font-primary);
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: var(--spacing-md);
+        }
+
+        p {
+            margin-bottom: var(--spacing-md);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-lg);
+        }
+
+        section {
+            padding: var(--spacing-xl) 0;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: var(--spacing-xl);
+            color: var(--text-dark);
+            position: relative;
+            z-index: 1;
+        }
+        
+        body.dark-mode .section-title {
+            color: var(--text-light);
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            position: fixed;
+            top: var(--spacing-md);
+            right: var(--spacing-md);
+            z-index: 1000;
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-full);
+            background-color: var(--primary-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: var(--shadow-md);
+            cursor: pointer;
+            transition: background-color var(--transition-fast);
+        }
+
+        .theme-toggle i {
+            color: var(--text-light);
+            font-size: 1.2rem;
+        }
+
+        .theme-toggle .fa-sun {
+            display: none;
+        }
+
+        .dark-mode .theme-toggle .fa-moon {
+            display: none;
+        }
+
+        .dark-mode .theme-toggle .fa-sun {
+            display: block;
+        }
+
+        /* Header & Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+            background-color: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow-sm);
+            transition: background-color var(--transition-normal);
+        }
+
+        .dark-mode header {
+            background-color: rgba(17, 24, 39, 0.9);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--spacing-md) var(--spacing-xl);
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin: 0;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: var(--spacing-lg);
+        }
+
+        .nav-links a {
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color var(--transition-fast);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Button Styles */
+        .cta-button {
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            border: none;
+            padding: var(--spacing-sm) var(--spacing-lg);
+            border-radius: var(--radius-full);
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: background-color var(--transition-fast), transform var(--transition-fast);
+            box-shadow: var(--shadow-md);
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        }
+        
+        .cta-button:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .cta-button.primary {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        }
+
+        .cta-button.secondary {
+            background: white;
+            color: var(--primary-color);
+            position: relative;
+            box-shadow: none;
+            border: 2px solid transparent;
+            background-clip: padding-box;
+        }
+        
+        .cta-button.secondary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index: -1;
+            margin: -2px;
+            border-radius: inherit;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        }
+
+        .cta-button.secondary:hover {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--text-light);
+        }
+
+        .cta-button.tertiary {
+            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+        }
+
+        .cta-button.tertiary:hover {
+            background: linear-gradient(135deg, #0d9488, var(--primary-color));
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 24px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            display: block;
+            height: 2px;
+            width: 100%;
+            background-color: var(--text-dark);
+            transition: all var(--transition-fast);
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 100vh;
+            padding: var(--spacing-xl) var(--spacing-xl);
+            margin-top: 60px;
+            background: linear-gradient(135deg, rgba(84, 105, 212, 0.05) 0%, rgba(0, 191, 165, 0.05) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(84, 105, 212, 0.1) 0%, rgba(0, 191, 165, 0.05) 100%);
+            top: -300px;
+            left: -200px;
+            z-index: 0;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0, 191, 165, 0.1) 0%, rgba(84, 105, 212, 0.05) 100%);
+            bottom: -200px;
+            right: -100px;
+            z-index: 0;
+        }
+
+        .hero-content, .hero-image {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content {
+            flex: 1;
+            max-width: 600px;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: var(--spacing-md);
+            line-height: 1.1;
+            color: var(--text-dark);
+        }
+
+        body.dark-mode .hero-title {
+            color: var(--text-light);
+        }
+
+        .hero-title .highlight {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--dark-gray);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: var(--spacing-md);
+            flex-wrap: wrap;
+        }
+
+        .hero-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .phone-mockup {
+            width: 300px;
+            height: 610px;
+            background-color: #000;
+            border-radius: 40px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            padding: 10px;
+            position: relative;
+            overflow: hidden;
+            border: none;
+            transform: rotate(-5deg);
+        }
+
+        .phone-mockup::before {
+            content: '';
+            position: absolute;
+            width: 150px;
+            height: 30px;
+            background-color: #000;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+            z-index: 10;
+        }
+
+        .phone-mockup::after {
+            content: '';
+            position: absolute;
+            width: 5px;
+            height: 50px;
+            background-color: #222;
+            top: 120px;
+            right: 0;
+            border-top-left-radius: 5px;
+            border-bottom-left-radius: 5px;
+            z-index: 11;
+        }
+
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #0a1625, #1e293b);
+            border-radius: 30px;
+            overflow: hidden;
+            position: relative;
+            padding: 20px;
+            transition: background var(--transition-normal);
+        }
+
+        .phone-screen::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 35%;
+            background: linear-gradient(180deg, rgba(124, 58, 237, 0.15) 0%, rgba(124, 58, 237, 0) 100%);
+            z-index: 0;
+        }
+
+        body:not(.dark-mode) .phone-screen {
+            background: linear-gradient(135deg, #f0f9ff, #ffffff);
+        }
+
+        .app-ui {
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-md);
+            height: 100%;
+            color: white;
+            position: relative;
+            z-index: 1;
+            transition: color var(--transition-normal);
+        }
+
+        body:not(.dark-mode) .app-ui {
+            color: var(--text-dark);
+        }
+
+        .app-logo {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .app-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        .app-logo span {
+            font-weight: 800;
+            color: white;
+            font-size: 18px;
+            transition: color var(--transition-normal);
+        }
+
+        body:not(.dark-mode) .app-logo span {
+            color: var(--primary-color);
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        body:not(.dark-mode) .user-avatar {
+            border: 2px solid rgba(99, 102, 241, 0.2);
+        }
+
+        .balance-card {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            border-radius: 20px;
+            padding: 20px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            margin-top: 5px;
+            box-shadow: 0 10px 25px -5px rgba(124, 58, 237, 0.3);
+        }
+
+        .card-label {
+            font-size: 13px;
+            opacity: 0.9;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 2px;
+        }
+
+        .card-amount {
+            font-size: 32px;
+            font-weight: 800;
+            margin: 5px 0 15px 0;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+            display: flex;
+            align-items: center;
+        }
+
+        .card-amount::before {
+            content: '$';
+            font-size: 20px;
+            opacity: 0.8;
+            margin-right: 4px;
+            margin-top: -5px;
+        }
+
+        .card-details {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+            font-size: 12px;
+        }
+
+        .card-chip {
+            width: 30px;
+            height: 24px;
+            background: linear-gradient(to bottom, #ffb74d, #f59e0b);
+            border-radius: 4px;
+            margin-right: 8px;
+            position: relative;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-chip::before, .card-chip::after {
+            content: '';
+            position: absolute;
+            background-color: rgba(0,0,0,0.2);
+        }
+
+        .card-chip::before {
+            width: 100%;
+            height: 6px;
+            top: 9px;
+            left: 0;
+        }
+
+        .card-chip::after {
+            width: 6px;
+            height: 100%;
+            left: 12px;
+            top: 0;
+        }
+
+        .card-info {
+            display: flex;
+            align-items: center;
+        }
+
+        .card-number {
+            letter-spacing: 2px;
+            opacity: 0.8;
+        }
+
+        .steps-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 18px;
+            padding: 12px;
+            transition: background var(--transition-normal);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        body:not(.dark-mode) .steps-section {
+            background: rgba(99, 102, 241, 0.05);
+            border: 1px solid rgba(99, 102, 241, 0.1);
+        }
+
+        .steps-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .steps-title {
+            font-size: 10px;
+            opacity: 0.8;
+            margin-bottom: 2px;
+        }
+
+        body:not(.dark-mode) .steps-title {
+            color: var(--dark-gray);
+            opacity: 1;
+        }
+
+        .steps-value {
+            font-size: 16px;
+            font-weight: 700;
+            background: linear-gradient(90deg, #4ade80, #10b981);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        body:not(.dark-mode) .steps-value {
+            color: var(--text-dark);
+        }
+
+        .steps-progress {
+            width: 40px;
+            height: 40px;
+            position: relative;
+        }
+
+        .progress-ring {
+            width: 100%;
+            height: 100%;
+            transform: rotate(-90deg);
+        }
+
+        .progress-circle {
+            fill: none;
+            stroke-width: 6;
+            stroke-linecap: round;
+        }
+
+        .progress-circle-bg {
+            stroke: rgba(255, 255, 255, 0.1);
+            transition: stroke var(--transition-normal);
+        }
+
+        body:not(.dark-mode) .progress-circle-bg {
+            stroke: rgba(84, 105, 212, 0.1);
+        }
+
+        .progress-circle-fg {
+            stroke: #10b981;
+            stroke-dasharray: 100;
+            stroke-dashoffset: 25; /* 25% progress */
+            filter: drop-shadow(0px 0px 2px rgba(16, 185, 129, 0.5));
+        }
+
+        .action-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .action-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .action-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            transition: transform var(--transition-fast);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .action-icon:hover {
+            transform: translateY(-2px);
+        }
+
+        .action-item:nth-child(1) .action-icon {
+            background: linear-gradient(135deg, #60a5fa, #3b82f6);
+            color: white;
+        }
+
+        .action-item:nth-child(2) .action-icon {
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            color: white;
+        }
+
+        .action-item:nth-child(3) .action-icon {
+            background: linear-gradient(135deg, #f87171, #ef4444);
+            color: white;
+        }
+
+        .action-item:nth-child(4) .action-icon {
+            background: linear-gradient(135deg, #a78bfa, #8b5cf6);
+            color: white;
+        }
+
+        body:not(.dark-mode) .action-item .action-icon {
+            /* Keep the gradients in light mode too */
+            color: white;
+        }
+
+        .action-label {
+            font-size: 12px;
+            font-weight: 500;
+            opacity: 0.9;
+        }
+
+        .transactions-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 5px;
+        }
+
+        .transactions-title {
+            font-size: 16px;
+            font-weight: 600;
+            background: linear-gradient(90deg, #f0f9ff, #ffffff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            transition: background var(--transition-normal);
+        }
+
+        body:not(.dark-mode) .transactions-title {
+            background: linear-gradient(90deg, #6366f1, #8b5cf6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .see-all-link {
+            font-size: 12px;
+            color: #4ade80;
+            font-weight: 600;
+        }
+
+        .transaction-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            transition: background var(--transition-fast), transform var(--transition-fast);
+            border-radius: 12px;
+            margin: 0 -5px;
+        }
+
+        .transaction-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateX(3px);
+        }
+
+        body:not(.dark-mode) .transaction-item {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        body:not(.dark-mode) .transaction-item:hover {
+            background: rgba(99, 102, 241, 0.03);
+        }
+
+        .transaction-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .transaction-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 16px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .transaction-info:nth-child(1) .transaction-icon {
+            background: linear-gradient(135deg, #4ade80, #10b981);
+            color: white;
+        }
+
+        .transaction-item:nth-child(2) .transaction-icon {
+            background: linear-gradient(135deg, #f87171, #ef4444);
+            color: white;
+        }
+
+        body:not(.dark-mode) .transaction-icon {
+            /* Keep the colorful icons in light mode */
+            color: white;
+        }
+
+        .transaction-details {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .transaction-name {
+            font-size: 14px;
+            font-weight: 500;
+            transition: color var(--transition-normal);
+        }
+
+        body:not(.dark-mode) .transaction-name {
+            color: var(--text-dark);
+        }
+
+        .transaction-date {
+            font-size: 12px;
+            opacity: 0.6;
+            transition: color var(--transition-normal);
+        }
+
+        body:not(.dark-mode) .transaction-date {
+            color: var(--dark-gray);
+            opacity: 1;
+        }
+
+        .transaction-amount {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .transaction-amount.incoming {
+            color: #4ade80;
+        }
+
+        .transaction-amount.outgoing {
+            color: #f87171;
+        }
+
+        .app-navbar {
+            display: flex;
+            justify-content: space-between;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 16px;
+            padding: 8px 15px;
+            margin-top: 10px;
+            position: absolute;
+            bottom: 10px;
+            left: 15px;
+            right: 15px;
+            transition: background var(--transition-normal);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        body:not(.dark-mode) .app-navbar {
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(99, 102, 241, 0.1);
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3px;
+        }
+
+        .nav-icon {
+            font-size: 18px;
+            opacity: 0.6;
+            transition: color var(--transition-normal), opacity var(--transition-normal);
+        }
+
+        body:not(.dark-mode) .nav-icon {
+            color: var(--dark-gray);
+        }
+
+        .nav-item.active .nav-icon {
+            opacity: 1;
+            color: #4ade80;
+            text-shadow: 0 0 10px rgba(74, 222, 128, 0.5);
+        }
+
+        body:not(.dark-mode) .nav-item.active .nav-icon {
+            color: #6366f1;
+            text-shadow: 0 0 10px rgba(99, 102, 241, 0.5);
+        }
+
+        .nav-label {
+            font-size: 9px;
+            opacity: 0.6;
+            transition: color var(--transition-normal), opacity var(--transition-normal);
+        }
+
+        body:not(.dark-mode) .nav-label {
+            color: var(--dark-gray);
+        }
+
+        .nav-item.active .nav-label {
+            opacity: 1;
+        }
+
+        body:not(.dark-mode) .nav-item.active .nav-label {
+            color: var(--primary-color);
+        }
+
+        .hero-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .hero-image::before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(79, 70, 229, 0.2) 0%, rgba(124, 58, 237, 0.1) 50%, transparent 70%);
+            z-index: -1;
+        }
+
+        /* How It Works Section */
+        .how-it-works {
+            background-color: var(--light-bg);
+            padding: var(--spacing-xl) var(--spacing-xl);
+        }
+
+        .steps-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-lg);
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .step {
+            background-color: var(--light-gray);
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            transition: transform var(--transition-fast);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .step:hover {
+            transform: translateY(-5px);
+        }
+
+        .step-number {
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            width: 80px;
+            height: 80px;
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            font-weight: 800;
+            opacity: 0.2;
+        }
+
+        .step h3 {
+            font-size: 1.5rem;
+            margin-bottom: var(--spacing-sm);
+            position: relative;
+        }
+
+        .step p {
+            color: var(--dark-gray);
+            position: relative;
+        }
+
+        /* Modules Section - Picker Style */
+        .modules {
+            padding: var(--spacing-xl) 0;
+            background-color: var(--light-bg);
+            overflow-x: hidden;
+        }
+        
+        body.dark-mode .modules {
+            background-color: var(--dark-bg);
+        }
+        
+        .modules .container {
+            max-width: 1100px;
+            padding: 0 1.5rem;
+        }
+        
+        .modules .section-title {
+            margin-bottom: 2rem;
+            font-size: 2rem;
+            text-align: center;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+        
+        body.dark-mode .modules .section-title {
+            color: var(--text-light);
+        }
+        
+        /* Module Picker/Tabs */
+        .module-picker {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2.5rem;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .module-tab {
+            padding: 0.75rem 1.5rem;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            border: 1px solid #e2e8f0;
+            background-color: transparent;
+            color: var(--dark-gray);
+            -webkit-user-select: none;
+            user-select: none;
+            outline: none;
+            position: relative;
+            z-index: 20;
+        }
+        
+        body.dark-mode .module-tab {
+            border-color: #374151;
+            color: #9ca3af;
+        }
+        
+        .module-tab.active {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+            box-shadow: 0 4px 6px -1px rgba(99, 102, 241, 0.1), 0 2px 4px -1px rgba(99, 102, 241, 0.06);
+        }
+        
+        /* Make module tabs more obviously clickable */
+        .module-tab:hover {
+            background-color: rgba(84, 105, 212, 0.1);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-sm);
+            cursor: pointer;
+        }
+        
+        /* Module Content */
+        .module-slides {
+            position: relative;
+            min-height: 580px; /* Ensure consistent height */
+        }
+        
+        .module-slide {
+            display: none;
+            flex-direction: column;
+            gap: 2rem;
+            opacity: 0;
+            position: absolute;
+            width: 100%;
+            transition: opacity 0.5s ease;
+            z-index: 1;
+        }
+        
+        .module-slide.active {
+            display: flex;
+            opacity: 1;
+            position: relative;
+            z-index: 2;
+        }
+        
+        @media (min-width: 768px) {
+            .module-slide {
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+            }
+            
+            .module-content, .module-mockup {
+                flex: 1;
+            }
+        }
+        
+        @media (max-width: 767px) {
+            .module-slides {
+                min-height: 1000px; /* Taller for mobile layout */
+            }
+            
+            .module-slide {
+                flex-direction: column;
+            }
+            
+            .module-content {
+                order: 1;
+                text-align: center;
+                margin-bottom: 2rem;
+            }
+            
+            .module-mockup {
+                order: 2;
+                display: flex;
+                justify-content: center;
+            }
+        }
+        
+        .module-content {
+            flex: 1;
+        }
+        
+        .module-mockup {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .module-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.25rem;
+            color: white;
+            margin-bottom: 1.5rem;
+        }
+        
+        .module-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+        
+        body.dark-mode .module-title {
+            color: var(--text-light);
+        }
+        
+        .module-description {
+            font-size: 1rem;
+            color: #64748b;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+        
+        .module-mockup img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .module-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .module-btn:hover {
+            background: linear-gradient(135deg, var(--primary-dark), var(--secondary-color));
+            transform: translateY(-2px);
+        }
+
+        /* Why Vento Section */
+        .why-vento {
+            padding: var(--spacing-xl) var(--spacing-xl);
+            background-color: var(--light-bg);
+        }
+
+        .values-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-lg);
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .value-card {
+            background-color: var(--light-gray);
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            transition: transform var(--transition-fast);
+        }
+
+        .value-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .value-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            margin-bottom: var(--spacing-md);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            position: relative;
+        }
+
+        .value-icon::before {
+            content: '';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .global {
+            background: linear-gradient(135deg, #22d3ee, #0ea5e9);
+        }
+
+        .global::before {
+            content: '\f0ac'; /* globe icon */
+        }
+
+        .monetize {
+            background: linear-gradient(135deg, #a78bfa, #8b5cf6);
+        }
+
+        .monetize::before {
+            content: '\f3d1'; /* money bill wave icon */
+        }
+
+        .wallet {
+            background: linear-gradient(135deg, #f43f5e, #e11d48);
+        }
+
+        .wallet::before {
+            content: '\f555'; /* wallet icon */
+        }
+
+        .business {
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+        }
+
+        .business::before {
+            content: '\f0b1'; /* briefcase icon */
+        }
+
+        .value-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .value-card p {
+            color: var(--dark-gray);
+            font-size: 0.95rem;
+        }
+
+        /* Social Proof Section */
+        .social-proof {
+            padding: var(--spacing-xl) var(--spacing-xl);
+            background: linear-gradient(135deg, rgba(84, 105, 212, 0.05) 0%, rgba(0, 191, 165, 0.05) 100%);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-proof::before {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(84, 105, 212, 0.08) 0%, rgba(0, 191, 165, 0.04) 100%);
+            top: -200px;
+            right: -200px;
+            z-index: 0;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--dark-gray);
+            margin-bottom: var(--spacing-xl);
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .testimonials {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-lg);
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .testimonial {
+            background-color: var(--light-bg);
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-card);
+            text-align: left;
+            position: relative;
+            transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+            border: 1px solid rgba(84, 105, 212, 0.1);
+            overflow: hidden;
+        }
+
+        .testimonial::before {
+            content: '\201C';
+            position: absolute;
+            top: -20px;
+            left: 20px;
+            font-size: 120px;
+            color: rgba(84, 105, 212, 0.1);
+            font-family: Georgia, serif;
+            z-index: 0;
+        }
+
+        .testimonial:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-light), var(--primary-color));
+            margin-bottom: var(--spacing-md);
+            position: relative;
+            z-index: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+
+        /* Hide broken images and display initials instead */
+        .avatar img {
+            display: none;
+        }
+        
+        .testimonial:nth-child(1) .avatar::after {
+            content: 'JD';
+        }
+        
+        .testimonial:nth-child(2) .avatar::after {
+            content: 'JS';
+        }
+        
+        .testimonial:nth-child(3) .avatar::after {
+            content: 'BJ';
+        }
+
+        .quote {
+            font-style: italic;
+            color: var(--text-dark);
+            margin-bottom: var(--spacing-md);
+            line-height: 1.6;
+            position: relative;
+            z-index: 1;
+        }
+
+        .author {
+            font-weight: 600;
+            color: var(--primary-color);
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .author::before {
+            content: '';
+            width: 20px;
+            height: 2px;
+            background-color: var(--primary-color);
+            display: block;
+        }
+
+        /* FAQ Section */
+        .faq {
+            padding: var(--spacing-xl) var(--spacing-xl);
+            background-color: var(--light-bg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .faq::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(84, 105, 212, 0.03) 0%, rgba(0, 191, 165, 0.02) 100%);
+            bottom: -250px;
+            left: -250px;
+            z-index: 0;
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .faq-item {
+            margin-bottom: var(--spacing-md);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: box-shadow var(--transition-normal);
+            border: 1px solid rgba(84, 105, 212, 0.1);
+        }
+
+        .faq-item:hover {
+            box-shadow: var(--shadow-card);
+        }
+
+        .faq-question {
+            background-color: var(--light-gray);
+            padding: var(--spacing-md) var(--spacing-lg);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: background-color var(--transition-fast);
+        }
+
+        .faq-question:hover {
+            background-color: rgba(84, 105, 212, 0.05);
+        }
+
+        .faq-question h3 {
+            margin: 0;
+            font-size: 1.1rem;
+            color: var(--primary-dark);
+        }
+
+        .toggle-icon {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            transition: transform var(--transition-normal);
+            width: 24px;
+            height: 24px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(84, 105, 212, 0.1);
+            border-radius: 50%;
+        }
+
+        .faq-answer {
+            background-color: var(--light-bg);
+            padding: 0 var(--spacing-lg);
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height var(--transition-normal), padding var(--transition-normal);
+        }
+
+        .faq-item.active {
+            box-shadow: var(--shadow-card);
+        }
+
+        .faq-item.active .faq-question {
+            background-color: rgba(84, 105, 212, 0.05);
+        }
+
+        .faq-item.active .faq-answer {
+            padding: var(--spacing-md) var(--spacing-lg);
+            max-height: 1000px;
+        }
+
+        .faq-item.active .toggle-icon {
+            transform: rotate(45deg);
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        /* Final CTA Section */
+        .final-cta {
+            padding: var(--spacing-xl) var(--spacing-xl);
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            text-align: center;
+            color: var(--text-light);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .final-cta::before,
+        .final-cta::after {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .final-cta::before {
+            top: -150px;
+            left: -150px;
+        }
+
+        .final-cta::after {
+            bottom: -150px;
+            right: -150px;
+        }
+
+        .final-cta h2 {
+            color: var(--text-light);
+            font-size: 2.5rem;
+            margin-bottom: var(--spacing-lg);
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .final-cta .cta-buttons {
+            justify-content: center;
+            margin-bottom: var(--spacing-lg);
+            position: relative;
+            z-index: 1;
+        }
+
+        .final-cta .cta-button.primary {
+            background: linear-gradient(135deg, #ffffff, #f3f4f6);
+            color: var(--primary-color);
+            border: none;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .final-cta .cta-button.primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+        }
+
+        .final-cta .cta-button.secondary {
+            background-color: transparent;
+            border: 2px solid white;
+            color: white;
+        }
+
+        .final-cta .cta-button.secondary:hover {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.2));
+        }
+
+        .final-cta .cta-button.tertiary {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.3));
+            color: white;
+            border: none;
+        }
+
+        .final-cta .cta-button.tertiary:hover {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.4));
+        }
+
+        .trust-badges {
+            display: flex;
+            justify-content: center;
+            gap: var(--spacing-lg);
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
+        }
+
+        .badge {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: var(--radius-full);
+            font-size: 0.9rem;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            transition: transform var(--transition-fast), background-color var(--transition-fast);
+        }
+
+        .badge:hover {
+            transform: translateY(-2px);
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .badge i {
+            font-size: 1.1rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            padding: var(--spacing-xl) var(--spacing-xl) var(--spacing-md);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: var(--spacing-xl);
+            max-width: 1200px;
+            margin: 0 auto;
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .footer-logo h2 {
+            font-size: 2rem;
+            margin-bottom: var(--spacing-sm);
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .footer-logo p {
+            color: var(--medium-gray);
+        }
+
+        .footer-links {
+            display: flex;
+            gap: var(--spacing-xl);
+            flex-wrap: wrap;
+        }
+
+        .footer-section h3 {
+            color: var(--text-light);
+            margin-bottom: var(--spacing-md);
+            font-size: 1.2rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .footer-section ul li a {
+            color: var(--medium-gray);
+            transition: color var(--transition-fast);
+        }
+
+        .footer-section ul li a:hover {
+            color: var(--primary-light);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: var(--spacing-sm);
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--text-light);
+            transition: background-color var(--transition-fast), transform var(--transition-fast);
+        }
+
+        .social-icon:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        .newsletter-form {
+            display: flex;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .newsletter-form input {
+            padding: var(--spacing-sm) var(--spacing-md);
+            border: none;
+            border-radius: var(--radius-full) 0 0 var(--radius-full);
+            outline: none;
+            font-family: var(--font-primary);
+        }
+
+        .newsletter-form button {
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            border: none;
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: 0 var(--radius-full) var(--radius-full) 0;
+            font-weight: 600;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: var(--spacing-lg);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-bottom p {
+            color: var(--medium-gray);
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fadeIn {
+            animation: fadeIn 1s ease forwards;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .hero {
+                flex-direction: column;
+                gap: var(--spacing-xl);
+                text-align: center;
+                padding-top: 120px;
+            }
+            
+            .hero-content {
+                max-width: 100%;
+            }
+            
+            .cta-buttons {
+                justify-content: center;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .hero-title {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links, nav .cta-button {
+                display: none;
+            }
+            
+            .menu-toggle {
+                display: flex;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .hero-title {
+                font-size: 2.2rem;
+            }
+            
+            .steps-container, .modules-container, .values-container, .testimonials {
+                grid-template-columns: 1fr;
+            }
+            
+            .trust-badges {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                gap: var(--spacing-lg);
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                gap: var(--spacing-lg);
+            }
+        }
+
+        /* Mobile Navigation Menu */
+        .mobile-nav {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 80%;
+            height: 100%;
+            background-color: var(--light-bg);
+            z-index: 1000;
+            padding: var(--spacing-xl);
+            display: flex;
+            flex-direction: column;
+            transition: right var(--transition-normal);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .mobile-nav.active {
+            right: 0;
+        }
+
+        .mobile-nav-close {
+            position: absolute;
+            top: var(--spacing-md);
+            right: var(--spacing-md);
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-dark);
+            cursor: pointer;
+        }
+
+        .mobile-nav-links {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-lg);
+            margin-top: var(--spacing-xl);
+        }
+
+        .mobile-nav-links a {
+            color: var(--text-dark);
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .mobile-nav .cta-button {
+            margin-top: var(--spacing-xl);
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            display: none;
+        }
+
+        .overlay.active {
+            display: block;
+        } 
+
+        .module-card::before {
+            content: '';
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.1) 0%, rgba(99, 102, 241, 0.05) 60%, transparent 70%);
+            border-radius: 50%;
+            top: -75px;
+            right: -75px;
+            z-index: 0;
+            opacity: 0;
+            transition: opacity var(--transition-normal);
+        }
+
+        .module-card:hover::before {
+            opacity: 1;
+        }
+
+        /* App Mockup Styles */
+        .app-mockup {
+            width: 280px;
+            height: 580px;
+            background: #f8fafc;
+            border-radius: 36px;
+            position: relative;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            overflow: hidden;
+            border: 10px solid #1e293b;
+            padding: 12px;
+        }
+        
+        body.dark-mode .app-mockup {
+            border-color: #0f172a;
+        }
+        
+        .app-mockup::before {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 25px;
+            background-color: #1e293b;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+            z-index: 10;
+        }
+        
+        body.dark-mode .app-mockup::before {
+            background-color: #0f172a;
+        }
+        
+        .app-mockup-content {
+            background: white;
+            border-radius: 24px;
+            height: 100%;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        body.dark-mode .app-mockup-content {
+            background: #111827;
+        }
+        
+        .app-mockup-header {
+            padding: 16px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        body.dark-mode .app-mockup-header {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .app-mockup-title {
+            font-weight: 700;
+            font-size: 16px;
+            color: #1e293b;
+        }
+        
+        body.dark-mode .app-mockup-title {
+            color: white;
+        }
+        
+        .app-mockup-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .app-mockup-body {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        
+        .app-mockup-card {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            padding: 20px;
+            border-radius: 16px;
+            color: white;
+            margin-bottom: 16px;
+        }
+        
+        .app-mockup-card.secondary {
+            background: linear-gradient(135deg, #f59e0b, #f97316);
+        }
+        
+        .app-mockup-card.success {
+            background: linear-gradient(135deg, #10b981, #059669);
+        }
+        
+        .app-mockup-card.danger {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+        }
+        
+        .card-label {
+            font-size: 12px;
+            opacity: 0.8;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .card-value {
+            font-size: 24px;
+            font-weight: 700;
+            margin-top: 4px;
+            margin-bottom: 16px;
+        }
+        
+        .card-value.large {
+            font-size: 36px;
+        }
+        
+        .card-value.medium {
+            font-size: 28px;
+        }
+        
+        .card-details {
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .app-mockup-list {
+            margin-top: 16px;
+        }
+        
+        .list-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        body.dark-mode .list-item {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .list-item:last-child {
+            border-bottom: none;
+        }
+        
+        .list-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 16px;
+            color: white;
+            margin-right: 12px;
+        }
+        
+        .list-primary {
+            background: linear-gradient(135deg, #6366f1, #4f46e5);
+        }
+        
+        .list-secondary {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+        }
+        
+        .list-success {
+            background: linear-gradient(135deg, #10b981, #059669);
+        }
+        
+        .list-danger {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+        }
+        
+        .list-content {
+            flex: 1;
+        }
+        
+        .list-title {
+            font-weight: 600;
+            font-size: 14px;
+            color: #1e293b;
+            margin-bottom: 2px;
+        }
+        
+        body.dark-mode .list-title {
+            color: #e2e8f0;
+        }
+        
+        .list-subtitle {
+            font-size: 12px;
+            color: #64748b;
+        }
+        
+        body.dark-mode .list-subtitle {
+            color: #94a3b8;
+        }
+        
+        .list-amount {
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        .amount-positive {
+            color: #10b981;
+        }
+        
+        .amount-negative {
+            color: #ef4444;
+        }
+        
+        .app-mockup-footer {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 20px;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+            background: #f8fafc;
+        }
+        
+        body.dark-mode .app-mockup-footer {
+            background: #1e293b;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .footer-icon {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #64748b;
+            font-size: 12px;
+        }
+        
+        .footer-icon i {
+            font-size: 18px;
+            margin-bottom: 4px;
+        }
+        
+        .footer-icon.active {
+            color: #6366f1;
+        }
+        
+        body.dark-mode .footer-icon.active {
+            color: #818cf8;
+        }
+        
+        .app-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 16px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            margin-top: 16px;
+            width: 100%;
+            border: none;
+        }
+        
+        .app-button i {
+            margin-right: 8px;
+        }
+        
+        .app-stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        
+        .stat-card {
+            background: #f1f5f9;
+            border-radius: 12px;
+            padding: 16px;
+        }
+        
+        body.dark-mode .stat-card {
+            background: #1e293b;
+        }
+        
+        .stat-title {
+            font-size: 12px;
+            color: #64748b;
+            margin-bottom: 8px;
+        }
+        
+        .stat-value {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1e293b;
+        }
+        
+        body.dark-mode .stat-value {
+            color: white;
+        }
+        
+        .progress-bar {
+            height: 6px;
+            background: #e2e8f0;
+            border-radius: 3px;
+            margin-top: 8px;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            border-radius: 3px;
+            background: #6366f1;
+        }
+        
+        .progress-fill.w-25 {
+            width: 25%;
+        }
+        
+        .progress-fill.w-50 {
+            width: 50%;
+        }
+        
+        .progress-fill.w-75 {
+            width: 75%;
+        }
+        
+        .progress-fill.w-85 {
+            width: 85%;
+        }
+
+        /* Hide Font Awesome icons to prevent doubling */
+        .value-icon i {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="theme-toggle">
+        <i class="fas fa-moon"></i>
+        <i class="fas fa-sun"></i>
+    </div>
+
+    <header>
+        <nav>
+            <div class="logo">
+                <h1>Vento</h1>
+            </div>
+            <div class="nav-links">
+                <a href="#how-it-works">How It Works</a>
+                <a href="#modules">Modules</a>
+                <a href="#why-vento">Why Vento</a>
+                <a href="#faq">FAQ</a>
+            </div>
+            <button class="cta-button">Join Waitlist</button>
+            <div class="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1 class="hero-title">Take a Step, <span class="highlight">Create Value</span></h1>
+                <p class="hero-subtitle">Vento turns your steps into coins, your hustle into income, and your ideas into campaigns.</p>
+                <div class="cta-buttons">
+                    <button class="cta-button primary">Get Early Access</button>
+                    <button class="cta-button secondary">Join Waitlist</button>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="phone-mockup">
+                    <div class="phone-screen">
+                        <div class="app-ui">
+                            <div class="app-header">
+                                <div class="app-logo">
+                                    <span>Vento</span>
+                                </div>
+                                <div class="user-avatar">JD</div>
+                            </div>
+                            
+                            <div class="balance-card">
+                                <div class="card-label">Total Balance</div>
+                                <div class="card-amount">1,284.50</div>
+                                <div class="card-details">
+                                    <div class="card-info">
+                                        <div class="card-chip"></div>
+                                        <div class="card-number">**** 4832</div>
+                                    </div>
+                                    <div class="card-type"><i class="fab fa-cc-visa"></i></div>
+                                </div>
+                            </div>
+                            
+                            <div class="steps-section">
+                                <div class="steps-text">
+                                    <div class="steps-title">Today's Steps</div>
+                                    <div class="steps-value">7,842</div>
+                                </div>
+                                <div class="steps-progress">
+                                    <svg class="progress-ring" width="40" height="40">
+                                        <circle class="progress-circle progress-circle-bg" cx="20" cy="20" r="16" />
+                                        <circle class="progress-circle progress-circle-fg" cx="20" cy="20" r="16" />
+                                    </svg>
+                                </div>
+                            </div>
+                            
+                            <div class="action-grid">
+                                <div class="action-item">
+                                    <div class="action-icon">
+                                        <i class="fas fa-exchange-alt"></i>
+                                    </div>
+                                    <div class="action-label">Transfer</div>
+                                </div>
+                                <div class="action-item">
+                                    <div class="action-icon">
+                                        <i class="fas fa-coins"></i>
+                                    </div>
+                                    <div class="action-label">Coins</div>
+                                </div>
+                                <div class="action-item">
+                                    <div class="action-icon">
+                                        <i class="fas fa-hand-holding-heart"></i>
+                                    </div>
+                                    <div class="action-label">Donate</div>
+                                </div>
+                                <div class="action-item">
+                                    <div class="action-icon">
+                                        <i class="fas fa-chart-line"></i>
+                                    </div>
+                                    <div class="action-label">Stats</div>
+                                </div>
+                            </div>
+                            
+                            <div class="transactions-list">
+                                <div class="transactions-header">
+                                    <div class="transactions-title">Recent Activity</div>
+                                    <div class="see-all-link">See All</div>
+                                </div>
+                                
+                                <div class="transaction-item">
+                                    <div class="transaction-info">
+                                        <div class="transaction-icon">
+                                            <i class="fas fa-running"></i>
+                                        </div>
+                                        <div class="transaction-details">
+                                            <div class="transaction-name">Step Rewards</div>
+                                            <div class="transaction-date">Today, 2:30 PM</div>
+                                        </div>
+                                    </div>
+                                    <div class="transaction-amount incoming">+$3.42</div>
+                                </div>
+                                
+                                <div class="transaction-item">
+                                    <div class="transaction-info">
+                                        <div class="transaction-icon">
+                                            <i class="fas fa-coffee"></i>
+                                        </div>
+                                        <div class="transaction-details">
+                                            <div class="transaction-name">Coffee Shop</div>
+                                            <div class="transaction-date">Today, 10:15 AM</div>
+                                        </div>
+                                    </div>
+                                    <div class="transaction-amount outgoing">-$4.50</div>
+                                </div>
+                            </div>
+                            
+                            <div class="app-navbar">
+                                <div class="nav-item active">
+                                    <div class="nav-icon">
+                                        <i class="fas fa-home"></i>
+                                    </div>
+                                    <div class="nav-label">Home</div>
+                                </div>
+                                <div class="nav-item">
+                                    <div class="nav-icon">
+                                        <i class="fas fa-search"></i>
+                                    </div>
+                                    <div class="nav-label">Explore</div>
+                                </div>
+                                <div class="nav-item">
+                                    <div class="nav-icon">
+                                        <i class="fas fa-wallet"></i>
+                                    </div>
+                                    <div class="nav-label">Wallet</div>
+                                </div>
+                                <div class="nav-item">
+                                    <div class="nav-icon">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    <div class="nav-label">Profile</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works Section -->
+        <section id="how-it-works" class="how-it-works">
+            <h2 class="section-title">How It Works</h2>
+            <div class="steps-container">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Walk & Earn Coins</h3>
+                    <p>Turn your daily movement into value with VentoGo and earn coins with every step.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Fund Dreams or Cash Out</h3>
+                    <p>Use your coins to support campaigns or convert them directly to cash.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Receive Global Payments</h3>
+                    <p>Accept international payments via PayPal, Stripe, or POS without a foreign entity.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Launch Campaigns & Invoice</h3>
+                    <p>Create crowdfunding campaigns and issue professional invoices through VentoPro.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Modules Section -->
+        <section id="modules" class="modules">
+            <div class="container">
+                <h2 class="section-title">Vento Modules</h2>
+                
+                <!-- Module Picker Tabs -->
+                <div class="module-picker">
+                    <button class="module-tab active" data-module="ventogo">VentoGo</button>
+                    <button class="module-tab" data-module="ventofund">VentoFund</button>
+                    <button class="module-tab" data-module="ventopro">VentoPro</button>
+                    <button class="module-tab" data-module="ventocoin">VentoCoin</button>
+                </div>
+                
+                <!-- Module Content -->
+                <div class="module-slides">
+                    <!-- VentoGo Module -->
+                    <div class="module-slide active" id="ventogo">
+                        <div class="module-content">
+                            <div class="module-icon" style="background: linear-gradient(135deg, #22c1dd, #0ea5e9);">
+                                <i class="fas fa-walking"></i>
+                            </div>
+                            <h3 class="module-title">VentoGo</h3>
+                            <p class="module-description">Step-based reward engine that converts your daily movement into valuable in-app coins. Track your steps, distance, and calories burned while earning rewards you can convert to real value.</p>
+                            <button class="module-btn">Learn More</button>
+                        </div>
+                        <div class="module-mockup">
+                            <!-- VentoGo App Mockup -->
+                            <div class="app-mockup">
+                                <div class="app-mockup-content">
+                                    <div class="app-mockup-header">
+                                        <div class="app-mockup-title">VentoGo</div>
+                                        <div class="app-mockup-avatar">JD</div>
+                                    </div>
+                                    <div class="app-mockup-body">
+                                        <div class="app-mockup-card">
+                                            <div class="card-label">Today's Steps</div>
+                                            <div class="card-value large">7,842</div>
+                                            <div class="card-details">
+                                                <span>Goal: 10,000</span>
+                                                <span>78% Complete</span>
+                                            </div>
+                                            <div class="progress-bar">
+                                                <div class="progress-fill w-75"></div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="app-stats-grid">
+                                            <div class="stat-card">
+                                                <div class="stat-title">Distance</div>
+                                                <div class="stat-value">5.2 km</div>
+                                            </div>
+                                            <div class="stat-card">
+                                                <div class="stat-title">Calories</div>
+                                                <div class="stat-value">348</div>
+                                            </div>
+                                            <div class="stat-card">
+                                                <div class="stat-title">Coins Earned</div>
+                                                <div class="stat-value">156</div>
+                                            </div>
+                                            <div class="stat-card">
+                                                <div class="stat-title">Time Active</div>
+                                                <div class="stat-value">1h 24m</div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="app-mockup-list">
+                                            <div class="list-item">
+                                                <div style="display: flex; align-items: center;">
+                                                    <div class="list-icon list-success">
+                                                        <i class="fas fa-walking"></i>
+                                                    </div>
+                                                    <div class="list-content">
+                                                        <div class="list-title">Morning Walk</div>
+                                                        <div class="list-subtitle">Today, 8:30 AM</div>
+                                                    </div>
+                                                </div>
+                                                <div class="list-amount amount-positive">+35 coins</div>
+                                            </div>
+                                            <div class="list-item">
+                                                <div style="display: flex; align-items: center;">
+                                                    <div class="list-icon list-primary">
+                                                        <i class="fas fa-running"></i>
+                                                    </div>
+                                                    <div class="list-content">
+                                                        <div class="list-title">Afternoon Run</div>
+                                                        <div class="list-subtitle">Today, 2:15 PM</div>
+                                                    </div>
+                                                </div>
+                                                <div class="list-amount amount-positive">+82 coins</div>
+                                            </div>
+                                        </div>
+                                        
+                                        <button class="app-button">
+                                            <i class="fas fa-sync-alt"></i> Sync Activity
+                                        </button>
+                                    </div>
+                                    <div class="app-mockup-footer">
+                                        <div class="footer-icon active">
+                                            <i class="fas fa-home"></i>
+                                            <span>Home</span>
+                                        </div>
+                                        <div class="footer-icon">
+                                            <i class="fas fa-chart-bar"></i>
+                                            <span>Stats</span>
+                                        </div>
+                                        <div class="footer-icon">
+                                            <i class="fas fa-trophy"></i>
+                                            <span>Goals</span>
+                                        </div>
+                                        <div class="footer-icon">
+                                            <i class="fas fa-user"></i>
+                                            <span>Profile</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- VentoFund Module -->
+                    <div class="module-slide" id="ventofund">
+                        <div class="module-content">
+                            <div class="module-icon" style="background: linear-gradient(135deg, #a78bfa, #8b5cf6);">
+                                <i class="fas fa-hand-holding-usd"></i>
+                            </div>
+                            <h3 class="module-title">VentoFund</h3>
+                            <p class="module-description">Launch crowdfunding campaigns for education, startups, or personal goals without barriers. Create, promote, and manage fundraising campaigns with built-in social sharing and supporter management tools.</p>
+                            <button class="module-btn">Learn More</button>
+                        </div>
+                        <div class="module-mockup">
+                            <!-- VentoFund App Mockup -->
+                            <div class="app-mockup">
+                                <div class="app-mockup-content">
+                                    <div class="app-mockup-header">
+                                        <div class="app-mockup-title">VentoFund</div>
+                                        <div class="app-mockup-avatar">JD</div>
+                                    </div>
+                                    <div class="app-mockup-body">
+                                        <div class="app-mockup-card secondary">
+                                            <div class="card-label">Campaign Progress</div>
+                                            <div class="card-value">$3,450 / $5,000</div>
+                                            <div class="card-details">
+                                                <span>29 supporters</span>
+                                                <span>69% Funded</span>
+                                            </div>
+                                            <div class="progress-bar">
+                                                <div class="progress-fill w-50" style="background: #f59e0b"></div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div style="font-weight: 600; margin: 16px 0 8px 0;">Popular Campaigns</div>
+                                        
+                                        <div class="app-mockup-list">
+                                            <div class="list-item">
+                                                <div style="display: flex; align-items: center;">
+                                                    <div class="list-icon list-secondary">
+                                                        <i class="fas fa-graduation-cap"></i>
+                                                    </div>
+                                                    <div class="list-content">
+                                                        <div class="list-title">College Tuition Fund</div>
+                                                        <div class="list-subtitle">by Sarah M. • 75% funded</div>
+                                                    </div>
+                                                </div>
+                                                <div style="color: #64748b">$7,500</div>
+                                            </div>
+                                            <div class="list-item">
+                                                <div style="display: flex; align-items: center;">
+                                                    <div class="list-icon list-success">
+                                                        <i class="fas fa-seedling"></i>
+                                                    </div>
+                                                    <div class="list-content">
+                                                        <div class="list-title">Eco Startup</div>
+                                                        <div class="list-subtitle">by Green Future • 42% funded</div>
+                                                    </div>
+                                                </div>
+                                                <div style="color: #64748b">$12,200</div>
+                                            </div>
+                                            <div class="list-item">
+                                                <div style="display: flex; align-items: center;">
+                                                    <div class="list-icon list-primary">
+                                                        <i class="fas fa-laptop-code"></i>
+                                                    </div>
+                                                    <div class="list-content">
+                                                        <div class="list-title">Dev Workshop</div>
+                                                        <div class="list-subtitle">by Tech Community • 88% funded</div>
+                                                    </div>
+                                                </div>
+                                                <div style="color: #64748b">$3,850</div>
+                                            </div>
+                                        </div>
+                                        
+                                        <button class="app-button" style="background: #8b5cf6">
+                                            <i class="fas fa-plus"></i> Create Campaign
+                                        </button>
+                                    </div>
+                                    <div class="app-mockup-footer">
+                                        <div class="footer-icon active">
+                                            <i class="fas fa-home"></i>
+                                            <span>Home</span>
+                                        </div>
+                                        <div class="footer-icon">
+                                            <i class="fas fa-search"></i>
+                                            <span>Explore</span>
+                                        </div>
+                                        <div class="footer-icon">
+                                            <i class="fas fa-heart"></i>
+                                            <span>My Fund</span>
+                                        </div>
+                                        <div class="footer-icon">
+                                            <i class="fas fa-user"></i>
+                                            <span>Profile</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- VentoPro Module -->
+                    <div class="module-slide" id="ventopro">
+                        <div class="module-content">
+                            <div class="module-icon" style="background: linear-gradient(135deg, #f43f5e, #e11d48);">
+                                <i class="fas fa-credit-card"></i>
+                            </div>
+                            <h3 class="module-title">VentoPro</h3>
+                            <p class="module-description">Professional payment suite that lets you issue invoices and receive payments globally without a foreign entity. Accept international payments via PayPal, Stripe, or POS and manage your financial workflow in one place.</p>
+                            <button class="module-btn">Learn More</button>
+                        </div>
+                        <div class="module-mockup">
+                            <!-- VentoPro App Mockup -->
+                            <div class="app-mockup">
+                                <div class="app-mockup-content">
+                                    <div class="app-mockup-header">
+                                        <div class="app-mockup-title">VentoPro</div>
+                                        <div class="app-mockup-avatar">JD</div>
+                                    </div>
+                                    <div class="app-mockup-body">
+                                        <div class="app-mockup-card danger">
+                                            <div class="card-label">Total Revenue</div>
+                                            <div class="card-value">$8,452.75</div>
+                                            <div class="card-details">
+                                                <span>This Month</span>
+                                                <span>+12.4% vs Last Month</span>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="app-stats-grid">
+                                            <div class="stat-card">
+                                                <div class="stat-title">Pending</div>
+                                                <div class="stat-value">$1,240</div>
+                                            </div>
+                                            <div class="stat-card">
+                                                <div class="stat-title">Paid</div>
+                                                <div class="stat-value">$7,212</div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div style="font-weight: 600; margin: 16px 0 8px 0;">Recent Invoices</div>
+                                        
+                                        <div class="app-mockup-list">
+                                            <div class="list-item">
+                                                <div style="display: flex; align-items: center;">
+                                                    <div class="list-icon list-danger">
+                                                        <i class="fas fa-file-invoice-dollar"></i>
+                                                    </div>
+                                                    <div class="list-content">
+                                                        <div class="list-title">INV-2023-045</div>
+                                                        <div class="list-subtitle">Acme Corp • Due in 15 days</div>
+                                                    </div>
+                                                </div>
+                                                <div style="color: #64748b">$2,500.00</div>
+                                            </div>
+                                            <div class="list-item">
+                                                <div style="display: flex; align-items: center;">
+                                                    <div class="list-icon list-success">
+                                                        <i class="fas fa-file-invoice-dollar"></i>
+                                                    </div>
+                                                    <div class="list-content">
+                                                        <div class="list-title">INV-2023-044</div>
+                                                        <div class="list-subtitle">Globex • Paid</div>
+                                                    </div>
+                                                </div>
+                                                <div class="amount-positive">$1,875.50</div>
+                                            </div>
+                                            <div class="list-item">
+                                                <div style="display: flex; align-items: center;">
+                                                    <div class="list-icon list-success">
+                                                        <i class="fas fa-file-invoice-dollar"></i>
+                                                    </div>
+                                                    <div class="list-content">
+                                                        <div class="list-title">INV-2023-043</div>
+                                                        <div class="list-subtitle">Initech • Paid</div>
+                                                    </div>
+                                                </div>
+                                                <div class="amount-positive">$3,420.25</div>
+                                            </div>
+                                        </div>
+                                        
+                                        <button class="app-button" style="background: #e11d48">
+                                            <i class="fas fa-plus"></i> Create Invoice
+                                        </button>
+                                    </div>
+                                    <div class="app-mockup-footer">
+                                        <div class="footer-icon active">
+                                            <i class="fas fa-home"></i>
+                                            <span>Home</span>
+                                        </div>
+                                        <div class="footer-icon">
+                                            <i class="fas fa-file-invoice"></i>
+                                            <span>Invoices</span>
+                                        </div>
+                                        <div class="footer-icon">
+                                            <i class="fas fa-chart-line"></i>
+                                            <span>Reports</span>
+                                        </div>
+                                        <div class="footer-icon">
+                                            <i class="fas fa-user"></i>
+                                            <span>Profile</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- VentoCoin Module -->
+                    <div class="module-slide" id="ventocoin">
+                        <div class="module-content">
+                            <div class="module-icon" style="background: linear-gradient(135deg, #f59e0b, #eab308);">
+                                <i class="fas fa-coins"></i>
+                            </div>
+                            <h3 class="module-title">VentoCoin</h3>
+                            <p class="module-description">In-app reward currency that integrates across all Vento modules. Earn coins through steps, spend them on campaigns, convert them to cash, or use them for invoice payments in a seamless financial ecosystem.</p>
+                            <button class="module-btn">Learn More</button>
+                        </div>
+                        <div class="module-mockup">
+                            <!-- VentoCoin App Mockup -->
+                            <div class="app-mockup">
+                                <div class="app-mockup-content">
+                                    <div class="app-mockup-header">
+                                        <div class="app-mockup-title">VentoCoin</div>
+                                        <div class="app-mockup-avatar">JD</div>
+                                    </div>
+                                    <div class="app-mockup-body">
+                                        <div class="app-mockup-card">
+                                            <div class="card-label">Total Balance</div>
+                                            <div class="card-value large">$1,284.50</div>
+                                            <div class="card-details">
+                                                <span>Available Balance</span>
+                                                <span>$1,284.50</span>
+                                            </div>
+                                            <div class="progress-bar">
+                                                <div class="progress-fill w-75"></div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="app-stats-grid">
+                                            <div class="stat-card">
+                                                <div class="stat-title">Pending Transactions</div>
+                                                <div class="stat-value">$0</div>
+                                            </div>
+                                            <div class="stat-card">
+                                                <div class="stat-title">Total Transactions</div>
+                                                <div class="stat-value">12</div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div style="font-weight: 600; margin: 16px 0 8px 0;">Recent Transactions</div>
+                                        
+                                        <div class="app-mockup-list">
+                                            <div class="list-item">
+                                                <div style="display: flex; align-items: center;">
+                                                    <div class="list-icon list-success">
+                                                        <i class="fas fa-dollar-sign"></i>
+                                                    </div>
+                                                    <div class="list-content">
+                                                        <div class="list-title">Coffee Shop</div>
+                                                        <div class="list-subtitle">Today, 10:15 AM</div>
+                                                    </div>
+                                                </div>
+                                                <div class="list-amount amount-negative">-$4.50</div>
+                                            </div>
+                                            <div class="list-item">
+                                                <div style="display: flex; align-items: center;">
+                                                    <div class="list-icon list-success">
+                                                        <i class="fas fa-dollar-sign"></i>
+                                                    </div>
+                                                    <div class="list-content">
+                                                        <div class="list-title">Step Rewards</div>
+                                                        <div class="list-subtitle">Today, 2:30 PM</div>
+                                                    </div>
+                                                </div>
+                                                <div class="list-amount amount-positive">+$3.42</div>
+                                            </div>
+                                        </div>
+                                        
+                                        <button class="app-button">
+                                            <i class="fas fa-sync-alt"></i> Sync Transactions
+                                        </button>
+                                    </div>
+                                    <div class="app-mockup-footer">
+                                        <div class="footer-icon active">
+                                            <i class="fas fa-home"></i>
+                                            <span>Home</span>
+                                        </div>
+                                        <div class="footer-icon">
+                                            <i class="fas fa-wallet"></i>
+                                            <span>Wallet</span>
+                                        </div>
+                                        <div class="footer-icon">
+                                            <i class="fas fa-chart-line"></i>
+                                            <span>Stats</span>
+                                        </div>
+                                        <div class="footer-icon">
+                                            <i class="fas fa-user"></i>
+                                            <span>Profile</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Vento Section -->
+        <section id="why-vento" class="why-vento">
+            <div class="container">
+                <h2 class="section-title">Why Vento?</h2>
+                <div class="values-container">
+                    <div class="value-card">
+                        <div class="value-icon global">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <h3 class="value-title">Global Reach</h3>
+                        <p class="value-description">Accept payments from anywhere in the world with our global payment solutions.</p>
+                    </div>
+                    <div class="value-card">
+                        <div class="value-icon monetize">
+                            <i class="fas fa-money-bill-wave"></i>
+                        </div>
+                        <h3 class="value-title">Monetize Your Ideas</h3>
+                        <p class="value-description">Turn your ideas into campaigns and earn money while making a positive impact.</p>
+                    </div>
+                    <div class="value-card">
+                        <div class="value-icon wallet">
+                            <i class="fas fa-wallet"></i>
+                        </div>
+                        <h3 class="value-title">Secure Wallet</h3>
+                        <p class="value-description">Your funds are safe and secure with our advanced security measures.</p>
+                    </div>
+                    <div class="value-card">
+                        <div class="value-icon business">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <h3 class="value-title">Business Friendly</h3>
+                        <p class="value-description">We offer a seamless experience for both businesses and individuals.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Social Proof Section -->
+        <section id="social-proof" class="social-proof">
+            <div class="container">
+                <h2 class="section-title">What Our Users Say</h2>
+                <div class="testimonials">
+                    <div class="testimonial">
+                        <div class="testimonial-content">
+                            <div class="testimonial-text">
+                                <p>"Vento has been a game-changer for me. I've been able to turn my daily walks into a source of income and support campaigns that matter to me."</p>
+                            </div>
+                            <div class="testimonial-author">
+                                <div class="avatar">
+                                    <img src="path-to-avatar1.jpg" alt="Avatar">
+                                </div>
+                                <div class="author">
+                                    <div class="name">John Doe</div>
+                                    <div class="position">Software Engineer</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial">
+                        <div class="testimonial-content">
+                            <div class="testimonial-text">
+                                <p>"I've been using Vento for a few months now, and it's been fantastic. The platform is user-friendly and the support team is incredibly helpful."</p>
+                            </div>
+                            <div class="testimonial-author">
+                                <div class="avatar">
+                                    <img src="path-to-avatar2.jpg" alt="Avatar">
+                                </div>
+                                <div class="author">
+                                    <div class="name">Jane Smith</div>
+                                    <div class="position">Marketing Manager</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial">
+                        <div class="testimonial-content">
+                            <div class="testimonial-text">
+                                <p>"Vento has made it incredibly easy for me to monetize my ideas. The platform's features are top-notch and the community is supportive."</p>
+                            </div>
+                            <div class="testimonial-author">
+                                <div class="avatar">
+                                    <img src="path-to-avatar3.jpg" alt="Avatar">
+                                </div>
+                                <div class="author">
+                                    <div class="name">Bob Johnson</div>
+                                    <div class="position">Entrepreneur</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section id="faq" class="faq">
+            <div class="container">
+                <h2 class="section-title">Frequently Asked Questions</h2>
+                <div class="faq-container">
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>How does Vento work?</h3>
+                            <div class="toggle-icon">
+                                <i class="fas fa-plus"></i>
+                            </div>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Vento uses a step-based reward engine to convert your daily movement into valuable in-app coins. You can use these coins to support campaigns, donate to causes, or convert them directly to cash.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>Is Vento safe to use?</h3>
+                            <div class="toggle-icon">
+                                <i class="fas fa-plus"></i>
+                            </div>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Yes, Vento is a secure platform. We use advanced security measures to protect your data and transactions. Your funds are also held in a secure escrow account until the campaign is complete.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>How long does it take to receive payments?</h3>
+                            <div class="toggle-icon">
+                                <i class="fas fa-plus"></i>
+                            </div>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Payments are processed quickly and securely. The exact time it takes depends on the payment method you choose. For credit card payments, it usually takes 1-3 business days for the funds to appear in your account.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>Can I use Vento for both personal and business purposes?</h3>
+                            <div class="toggle-icon">
+                                <i class="fas fa-plus"></i>
+                            </div>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Yes, Vento is designed to be business-friendly. You can use it for both personal and business purposes. Whether you're supporting a cause you care about or earning money for your startup, Vento has you covered.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final CTA Section -->
+        <section class="final-cta">
+            <div class="container">
+                <h2 class="section-title">Ready to Start?</h2>
+                <div class="cta-buttons">
+                    <button class="cta-button primary">Get Early Access</button>
+                    <button class="cta-button secondary">Join Waitlist</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h2>Vento</h2>
+                    <p>Turning Steps into Value</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-section">
+                        <h3>About Us</h3>
+                        <ul>
+                            <li><a href="#">About Vento</a></li>
+                            <li><a href="#">Our Team</a></li>
+                            <li><a href="#">Careers</a></li>
+                            <li><a href="#">Contact Us</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h3>Products</h3>
+                        <ul>
+                            <li><a href="#">VentoGo</a></li>
+                            <li><a href="#">VentoFund</a></li>
+                            <li><a href="#">VentoPro</a></li>
+                            <li><a href="#">VentoCoin</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h3>Support</h3>
+                        <ul>
+                            <li><a href="#">FAQ</a></li>
+                            <li><a href="#">Support Center</a></li>
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="#">Terms of Service</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h3>Follow Us</h3>
+                        <div class="social-icons">
+                            <a href="https://facebook.com/oktayevn" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                            <a href="https://x.com/Oktay_Evin" target="_blank"><i class="fab fa-twitter"></i></a>
+                            <a href="https://instagram.com/oktayevin" target="_blank"><i class="fab fa-instagram"></i></a>
+                            <a href="https://linkedin.com/in/oktayevin" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Vento. A Product of <a href="https://oktayevin.com" target="_blank">Oktay Evin</a>.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log("DOM fully loaded");
+            
+            // Module tabs implementation
+            document.querySelectorAll('.module-tab').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const targetId = this.getAttribute('data-module');
+                    console.log('Tab clicked:', targetId);
+                    
+                    // Update active tab
+                    document.querySelectorAll('.module-tab').forEach(t => {
+                        t.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                    
+                    // Show corresponding slide
+                    document.querySelectorAll('.module-slide').forEach(slide => {
+                        if (slide.id === targetId) {
+                            slide.classList.add('active');
+                        } else {
+                            slide.classList.remove('active');
+                        }
+                    });
+                });
+            });
+            
+            // Theme toggle functionality
+            const themeToggle = document.querySelector('.theme-toggle');
+            if (themeToggle) {
+                themeToggle.addEventListener('click', () => {
+                    document.body.classList.toggle('dark-mode');
+                });
+            }
+            
+            // FAQ functionality
+            const faqItems = document.querySelectorAll('.faq-item');
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                question.addEventListener('click', () => {
+                    item.classList.toggle('active');
+                });
+            });
+        });
+    </script>
+</body>
 </html>
