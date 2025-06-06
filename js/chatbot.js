@@ -3,7 +3,7 @@ const CONFIG = {
     // Production backend URL'ini buraya yazın (Railway deploy sonrası)
     API_BASE: window.location.hostname === 'localhost' 
         ? 'http://localhost:3000' 
-        : 'https://your-app.railway.app', // Railway URL'inizi buraya yazın
+        : 'https://oktayevin-github-io.railway.internal', // Railway URL'inizi buraya yazın
     ENDPOINTS: {
         AUTH: '/api/auth',
         CHAT: '/api/chat',
