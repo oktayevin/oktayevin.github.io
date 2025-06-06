@@ -3,6 +3,10 @@ const cors = require('cors');
 const path = require('path');
 require('dotenv').config();
 
+// SSL sertifikası sorunları için Node.js ayarları
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'; // Self-signed certificates için
+process.env.UV_THREADPOOL_SIZE = '128'; // EventSource performance için
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -140,29 +144,86 @@ app.get('/api/mcp-events', (req, res) => {
     // MCP SSE connection'ı proxy'le
     try {
         const EventSource = require('eventsource');
-        const eventSource = new EventSource(mcpUrl);
+        
+        // SSL sertifikası sorunları için eventsource options
+        const eventSourceOptions = {
+            https: {
+                rejectUnauthorized: false, // Self-signed certificates için
+                secureProtocol: 'TLSv1_2_method', // TLS version
+                servername: '', // SNI deaktif
+            },
+            headers: {
+                'Cache-Control': 'no-cache',
+                'Accept': 'text/event-stream',
+                'User-Agent': 'Node.js EventSource Client'
+            },
+            proxy: undefined, // Proxy deaktif
+            withCredentials: false,
+            heartbeatTimeout: 20000,
+            retry: {
+                retries: 3,
+                factor: 2,
+                minTimeout: 1000,
+                maxTimeout: 5000
+            }
+        };
+        
+        console.log('Attempting MCP connection to:', mcpUrl.replace(/\/\/.*@/, '//***:***@')); // URL'i güvenli log
+        const eventSource = new EventSource(mcpUrl, eventSourceOptions);
         
         eventSource.onopen = () => {
-            console.log('MCP SSE connection established');
-            res.write(`data: ${JSON.stringify({ status: 'connected' })}\n\n`);
+            console.log('MCP SSE connection established successfully');
+            res.write(`data: ${JSON.stringify({ status: 'connected', timestamp: Date.now() })}\n\n`);
         };
         
         eventSource.onmessage = (event) => {
+            console.log('MCP message received:', event.data?.substring(0, 100) + '...'); // İlk 100 karakter log
             res.write(`data: ${event.data}\n\n`);
         };
         
         eventSource.onerror = (error) => {
-            console.error('MCP SSE error:', error);
-            res.write(`data: ${JSON.stringify({ error: 'MCP connection error', details: error.message })}\n\n`);
+            console.error('MCP SSE error details:', {
+                type: error.type,
+                message: error.message,
+                status: error.status,
+                readyState: eventSource.readyState
+            });
+            
+            // Hata detayları ile birlikte client'a bildir
+            res.write(`data: ${JSON.stringify({ 
+                error: 'MCP connection error', 
+                details: error.message,
+                type: error.type,
+                timestamp: Date.now()
+            })}\n\n`);
         };
+        
+        // Connection timeout
+        const connectionTimeout = setTimeout(() => {
+            if (eventSource.readyState !== EventSource.OPEN) {
+                console.log('MCP connection timeout, closing...');
+                eventSource.close();
+                res.write(`data: ${JSON.stringify({ error: 'Connection timeout' })}\n\n`);
+            }
+        }, 15000);
         
         // Client disconnect'te temizlik
         req.on('close', () => {
+            clearTimeout(connectionTimeout);
             eventSource.close();
+            console.log('MCP EventSource closed due to client disconnect');
         });
+        
     } catch (error) {
-        console.error('Failed to create MCP EventSource:', error);
-        res.write(`data: ${JSON.stringify({ error: 'Failed to connect to MCP', details: error.message })}\n\n`);
+        console.error('Failed to create MCP EventSource:', {
+            message: error.message,
+            stack: error.stack?.substring(0, 300)
+        });
+        res.write(`data: ${JSON.stringify({ 
+            error: 'Failed to connect to MCP', 
+            details: error.message,
+            timestamp: Date.now()
+        })}\n\n`);
     }
 });
 
