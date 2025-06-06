@@ -1,6 +1,9 @@
 // Chatbot Configuration - Artık backend API'leri kullanıyor
 const CONFIG = {
-    API_BASE: window.location.origin, // Backend server base URL
+    // Production backend URL'ini buraya yazın (Railway deploy sonrası)
+    API_BASE: window.location.hostname === 'localhost' 
+        ? 'http://localhost:3000' 
+        : 'https://your-app.railway.app', // Railway URL'inizi buraya yazın
     ENDPOINTS: {
         AUTH: '/api/auth',
         CHAT: '/api/chat',

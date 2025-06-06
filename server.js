@@ -7,7 +7,14 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Middleware
-app.use(cors());
+app.use(cors({
+    origin: [
+        'http://localhost:3000',
+        'https://oktayevin.github.io',
+        'https://oktayevin-github-io.railway.internal' // Railway URL'inizi buraya da ekleyin
+    ],
+    credentials: true
+}));
 app.use(express.json());
 app.use(express.static('.'));
 
