@@ -56,7 +56,7 @@ app.post('/api/chat', async (req, res) => {
             return res.status(500).json({ error: 'API key yapılandırılmamış' });
         }
         
-        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${apiKey}`;
+        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
         
         const requestBody = {
             contents: [{
