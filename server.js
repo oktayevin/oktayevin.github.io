@@ -11,6 +11,8 @@ app.use(cors({
     origin: [
         'http://localhost:3000',
         'https://oktayevin.github.io',
+        'https://oktayevin.com', // Custom domain
+        'http://oktayevin.com', // HTTP version (just in case)
         'https://oktayevingithubio-production.up.railway.app' // Railway URL'inizi buraya da ekleyin
     ],
     credentials: true
