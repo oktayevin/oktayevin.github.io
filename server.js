@@ -105,8 +105,27 @@ Lütfen:
 app.get('/api/mcp-events', (req, res) => {
     const mcpUrl = process.env.MCP_SSE_URL;
     
-    if (!mcpUrl) {
-        return res.status(500).json({ error: 'MCP URL yapılandırılmamış' });
+    if (!mcpUrl || mcpUrl === 'YOUR_MCP_SSE_URL_HERE') {
+        // MCP yapılandırılmamışsa dummy SSE response gönder
+        res.writeHead(200, {
+            'Content-Type': 'text/event-stream',
+            'Cache-Control': 'no-cache',
+            'Connection': 'keep-alive',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Headers': 'Cache-Control'
+        });
+        
+        res.write(`data: ${JSON.stringify({ status: 'MCP not configured' })}\n\n`);
+        
+        // Keep-alive için periyodik ping gönder
+        const pingInterval = setInterval(() => {
+            res.write(`data: ${JSON.stringify({ ping: Date.now() })}\n\n`);
+        }, 30000);
+        
+        req.on('close', () => {
+            clearInterval(pingInterval);
+        });
+        return;
     }
     
     // SSE headers
@@ -119,22 +138,32 @@ app.get('/api/mcp-events', (req, res) => {
     });
     
     // MCP SSE connection'ı proxy'le
-    const EventSource = require('eventsource');
-    const eventSource = new EventSource(mcpUrl);
-    
-    eventSource.onmessage = (event) => {
-        res.write(`data: ${event.data}\n\n`);
-    };
-    
-    eventSource.onerror = (error) => {
-        console.error('MCP SSE error:', error);
-        res.write(`data: ${JSON.stringify({ error: 'MCP connection error' })}\n\n`);
-    };
-    
-    // Client disconnect'te temizlik
-    req.on('close', () => {
-        eventSource.close();
-    });
+    try {
+        const EventSource = require('eventsource');
+        const eventSource = new EventSource(mcpUrl);
+        
+        eventSource.onopen = () => {
+            console.log('MCP SSE connection established');
+            res.write(`data: ${JSON.stringify({ status: 'connected' })}\n\n`);
+        };
+        
+        eventSource.onmessage = (event) => {
+            res.write(`data: ${event.data}\n\n`);
+        };
+        
+        eventSource.onerror = (error) => {
+            console.error('MCP SSE error:', error);
+            res.write(`data: ${JSON.stringify({ error: 'MCP connection error', details: error.message })}\n\n`);
+        };
+        
+        // Client disconnect'te temizlik
+        req.on('close', () => {
+            eventSource.close();
+        });
+    } catch (error) {
+        console.error('Failed to create MCP EventSource:', error);
+        res.write(`data: ${JSON.stringify({ error: 'Failed to connect to MCP', details: error.message })}\n\n`);
+    }
 });
 
 app.listen(PORT, () => {

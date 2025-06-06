@@ -156,7 +156,16 @@ class ChatbotApp {
             const mcpUrl = `${CONFIG.API_BASE}${CONFIG.ENDPOINTS.MCP_EVENTS}`;
             this.mcpEventSource = new EventSource(mcpUrl);
             
+            // 10 saniye timeout ekle
+            const timeoutId = setTimeout(() => {
+                if (this.mcpEventSource.readyState !== EventSource.OPEN) {
+                    this.updateBotStatus('MCP İsteğe Bağlı', true);
+                    console.log('MCP connection timeout - continuing without MCP');
+                }
+            }, 10000);
+            
             this.mcpEventSource.onopen = () => {
+                clearTimeout(timeoutId);
                 this.updateBotStatus('MCP Bağlı', true);
                 console.log('MCP connection established');
             };
@@ -165,8 +174,16 @@ class ChatbotApp {
                 console.log('MCP message received:', event.data);
                 try {
                     const data = JSON.parse(event.data);
-                    if (data.error) {
-                        this.updateBotStatus('MCP Hatası', false);
+                    if (data.status === 'MCP not configured') {
+                        clearTimeout(timeoutId);
+                        this.updateBotStatus('MCP Kapalı', true);
+                        console.log('MCP not configured - chatbot will work without MCP');
+                    } else if (data.status === 'connected') {
+                        clearTimeout(timeoutId);
+                        this.updateBotStatus('MCP Bağlı', true);
+                    } else if (data.error) {
+                        this.updateBotStatus('MCP Hatası (İsteğe Bağlı)', true);
+                        console.warn('MCP error (optional):', data.error);
                     }
                     // MCP mesajlarını burada işleyebilirsiniz
                 } catch (e) {
@@ -175,13 +192,16 @@ class ChatbotApp {
             };
             
             this.mcpEventSource.onerror = (error) => {
-                console.error('MCP connection error:', error);
-                this.updateBotStatus('MCP Bağlantı Hatası', false);
+                clearTimeout(timeoutId);
+                console.warn('MCP connection error (non-critical):', error);
+                this.updateBotStatus('MCP İsteğe Bağlı', true);
+                // MCP hatası chatbot'u engellemez
             };
             
         } catch (error) {
-            console.error('Failed to initialize MCP connection:', error);
-            this.updateBotStatus('MCP Başlatılamadı', false);
+            console.warn('Failed to initialize MCP connection (non-critical):', error);
+            this.updateBotStatus('MCP İsteğe Bağlı', true);
+            // MCP hatası chatbot'u engellemez
         }
     }
 
