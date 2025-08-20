@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>🎉 Düğün Anılarımız – Yükleme</title>
+  <meta name="description" content="Düğün fotoğraf ve videolarınızı paylaşın – Dropbox'a güvenli yükleme" />
+  <style>
+    :root { --bg: #fff5f5; --fg:#121212; --muted:#6b7280; --brand:#e11d48; --card:#ffffff; --ring:#fecdd3; }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;font:16px/1.5 ui-sans-serif, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji"; color:var(--fg); background:linear-gradient(180deg,#fff 0%, var(--bg) 60%, #fff 100%);}    
+    .container{max-width:820px;margin:0 auto;padding:24px}
+    .hero{padding:48px 20px;text-align:center}
+    .title{font-weight:800;font-size:clamp(28px,4vw,44px);letter-spacing:-.02em;margin:0}
+    .subtitle{color:var(--muted);margin:8px 0 0}
+    .card{background:var(--card);border:1px solid #ffe4e6;border-radius:18px;box-shadow:0 10px 30px rgba(0,0,0,.06);padding:22px}
+    .row{display:grid;grid-template-columns:1fr;gap:14px}
+    @media (min-width:720px){ .row{grid-template-columns: 1fr 1fr} }
+    .btn{appearance:none;border:0;display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 16px;border-radius:14px;font-weight:700;cursor:pointer;transition:.2s background,.2s transform}
+    .btn:active{transform:translateY(1px)}
+    .btn-primary{background:var(--fg);color:#fff}
+    .btn-primary:hover{background:#000}
+    .btn-ghost{background:#f3f4f6;color:#111}
+    .btn-ghost:hover{background:#e5e7eb}
+    .note{font-size:13px;color:var(--muted)}
+    .footer{padding:40px 20px;text-align:center;color:var(--muted);font-size:13px}
+    .badge{display:inline-block;background:#fef2f2;color:#991b1b;border:1px solid #fee2e2;padding:4px 8px;border-radius:999px;font-size:12px}
+    .divider{height:1px;background:#fee2e2;margin:16px 0}
+    .copy{font-family:monospace;background:#f9fafb;border:1px dashed #e5e7eb;border-radius:10px;padding:8px 10px;overflow:auto}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <section class="hero">
+      <h1 class="title">Buse & Ediz</h1>
+      <p class="subtitle">Fotoğraf ve videolarınızı bizimle paylaşın.</p>
+    </section>
+
+    <section class="card">
+      <div class="row" style="align-items:center">
+        <div>
+          <h2 style="margin:0 0 8px;font-size:22px">Yüklemeye Başla</h2>
+          <p class="note">Aşağıdaki butona tıklayın. Açılan pencerede dosyalarınızı sürükleyip bırakın veya telefonunuzdan seçin. (Dropbox hesabı gerekmiyor.)</p>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px">
+            <button id="open" class="btn btn-primary">📤 Fotoğraf/Video Yükle</button>
+            <button id="copy" class="btn btn-ghost">🔗 Bağlantıyı Kopyala</button>
+            <button id="share" class="btn btn-ghost" style="display:none">✨ Paylaş…</button>
+          </div>
+          <div class="divider"></div>
+          <div class="note">İpucu: Büyük videolarda yükleme süresi internet hızınıza göre değişir. Pencereyi kapatmadan yüklemenin bitmesini bekleyin.</div>
+        </div>
+        <div>
+          <div class="badge">Güvenli</div>
+          <p style="margin:10px 0 6px"><strong>Hedef klasör:</strong> Dropbox (yalnızca bize ait)</p>
+          <p class="note">Gönderenler dosyaları <em>yalnızca yükler</em>; klasördeki içerikleri göremez veya silemez.</p>
+          <div class="divider"></div>
+          <p style="margin:0 0 6px"><strong>Boyut limiti</strong></p>
+          <p class="note">Dropbox planına bağlıdır. Ücretsiz/Plus/Family: tek dosya <strong>2 GB</strong>. Professional/Business: tek dosya <strong>250 GB</strong>.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="card" style="margin-top:14px">
+      <h3 style="margin:0 0 8px;font-size:18px">SSS</h3>
+      <details>
+        <summary>Dropbox hesabı gerekiyor mu?</summary>
+        <p class="note">Hayır. Dosya isteği (file request) bağlantısıyla herkes yükleyebilir.</p>
+      </details>
+      <details>
+        <summary>Yüklerim nereye gidiyor?</summary>
+        <p class="note">Yüklemeler doğrudan bizim seçtiğimiz Dropbox klasörüne kaydedilir. Bağlantı yalnızca yükleme içindir; içerikleri görüntüleme yetkisi vermez.</p>
+      </details>
+      <details>
+        <summary>Çok büyük videolar?</summary>
+        <p class="note">2 GB üzeri videolar için Professional/Business plan gerekir. Alternatif olarak videoyu sıkıştırabilir ya da bilgisayardan yükleyebilirsiniz.</p>
+      </details>
+      <p class="note">Sorun yaşarsanız Instagram/WhatsApp ile de paylaşabilirsiniz. Teşekkürler! 💌</p>
+    </section>
+
+    <p class="footer">© 2025 • Sevgiyle paylaşıldı</p>
+  </div>
+
+  <script>
+    // 🔧 BU SATIRI KENDİ LİNKİNİZLE DEĞİŞTİRİN
+    // Örn: https://www.dropbox.com/request/abcdEFGHijklMNOP
+    const FILE_REQUEST_URL = "https://www.dropbox.com/request/DEGIS-TIR";
+
+    const openBtn = document.getElementById('open');
+    const copyBtn = document.getElementById('copy');
+    const shareBtn = document.getElementById('share');
+
+    function openRequest(){
+      if(!FILE_REQUEST_URL || FILE_REQUEST_URL.includes('DEGIS-TIR')){
+        alert('Önce HTML içindeki FILE_REQUEST_URL değerini kendi dosya isteği linkinizle değiştirin.');
+        return;
+      }
+      window.open(FILE_REQUEST_URL, '_blank', 'noopener');
+    }
+
+    async function copyLink(){
+      if(!FILE_REQUEST_URL || FILE_REQUEST_URL.includes('DEGIS-TIR')){ return alert('Önce FILE_REQUEST_URL değerini girin.'); }
+      try{ await navigator.clipboard.writeText(FILE_REQUEST_URL); alert('Bağlantı kopyalandı.'); }
+      catch(e){ prompt('Kopyalayın:', FILE_REQUEST_URL); }
+    }
+
+    function tryShare(){
+      if(navigator.share){ shareBtn.style.display='inline-flex'; }
+      shareBtn.addEventListener('click', async () => {
+        if(!FILE_REQUEST_URL || FILE_REQUEST_URL.includes('DEGIS-TIR')){ return alert('Önce FILE_REQUEST_URL değerini girin.'); }
+        try{ await navigator.share({ title:'Düğün Yükleme Bağlantısı', text:'Fotoğraf ve videolarını yükleyebilir misin?', url: FILE_REQUEST_URL }); }
+        catch(e){ /* kullanıcı iptal edebilir */ }
+      });
+    }
+
+    openBtn.addEventListener('click', openRequest);
+    copyBtn.addEventListener('click', copyLink);
+    tryShare();
+  </script>
+</body>
+</html>
