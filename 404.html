@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - File Not Found</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=VT323&family=Inter:wght@400;700&display=swap');
+
+        /* System Color Palette */
+        :root {
+            --mac-bg: #404040; /* Dither dark pixel */
+            --mac-window-bg: #ececec;
+            --mac-highlight: #ffffff;
+            --mac-shadow: #808080;
+            --mac-black: #000000;
+            --desktop-teal: #55aaaa;
+        }
+
+        body {
+            background-color: var(--desktop-teal);
+            /* Classic 1px Checkerboard Dither Pattern */
+            background-image: 
+                linear-gradient(45deg, #448888 25%, transparent 25%, transparent 75%, #448888 75%, #448888), 
+                linear-gradient(45deg, #448888 25%, transparent 25%, transparent 75%, #448888 75%, #448888);
+            background-size: 2px 2px;
+            background-position: 0 0, 1px 1px;
+            font-family: 'Geneva', 'Verdana', sans-serif;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            cursor: default;
+            user-select: none;
+        }
+
+        /* --- Window Chrome --- */
+        .mac-window {
+            background: var(--mac-window-bg);
+            /* Outer border */
+            border: 1px solid var(--mac-black);
+            /* Hard drop shadow (no blur) */
+            box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.2);
+            width: 400px;
+            position: relative;
+            /* Inner Bevel */
+            outline: 1px solid transparent; 
+        }
+
+        /* Inner white highlight/gray shadow wrapper */
+        .window-inner {
+            border-top: 1px solid var(--mac-highlight);
+            border-left: 1px solid var(--mac-highlight);
+            border-right: 1px solid var(--mac-shadow);
+            border-bottom: 1px solid var(--mac-shadow);
+            padding: 2px;
+        }
+
+        .mac-title-bar {
+            height: 20px;
+            background: #dddddd;
+            border-bottom: 1px solid var(--mac-black);
+            display: flex;
+            align-items: center;
+            padding: 0 8px;
+            position: relative;
+        }
+
+        /* The Close Box */
+        .close-box {
+            width: 12px;
+            height: 12px;
+            background: white;
+            border: 1px solid var(--mac-black);
+            box-shadow: inset 1px 1px 0 var(--mac-shadow);
+            position: relative;
+        }
+        .close-box:active {
+             background: var(--mac-black);
+        }
+
+        /* Horizontal Stripes (Authentic System 7 style) */
+        .title-stripes {
+            flex-grow: 1;
+            height: 100%;
+            margin: 0 10px;
+            background-image: linear-gradient(
+                to bottom,
+                var(--mac-black) 50%,
+                transparent 50%
+            );
+            background-size: 100% 2px; /* 1px line, 1px gap */
+            background-position: 0 2px;
+            opacity: 0.15;
+        }
+
+        .title-text {
+            background: var(--mac-window-bg);
+            padding: 0 8px;
+            font-size: 11px;
+            font-weight: bold;
+            color: var(--mac-black);
+            position: relative;
+            z-index: 10;
+        }
+
+        /* --- Content Area --- */
+        .content {
+            padding: 30px 20px 20px;
+            display: flex;
+            flex-direction: row; /* Horizontal layout like real alerts */
+            align-items: flex-start;
+        }
+
+        .icon-area {
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+
+        .text-area {
+            flex-grow: 1;
+        }
+
+        .error-title {
+            font-size: 14px;
+            font-weight: bold;
+            margin: 0 0 8px 0;
+            color: var(--mac-black);
+        }
+
+        .error-message {
+            font-size: 12px;
+            color: #000;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        /* --- Buttons --- */
+        .button-row {
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+            margin-top: 10px;
+        }
+
+        .mac-button {
+            background: white;
+            border: 1px solid var(--mac-black);
+            border-radius: 4px; /* Slight roundness for System 7 buttons */
+            padding: 4px 18px;
+            font-family: 'Geneva', sans-serif;
+            font-size: 12px;
+            color: black;
+            cursor: pointer;
+            box-shadow: 1px 1px 0 var(--mac-black); /* Hard shadow */
+            position: relative;
+        }
+
+        .mac-button:active {
+            background: var(--mac-black);
+            color: white;
+            box-shadow: none;
+            transform: translate(1px, 1px);
+        }
+
+        .mac-button-primary {
+            border: 2px solid var(--mac-black); /* Thick border for default */
+            padding: 3px 17px; /* Adjust padding to account for thicker border */
+            font-weight: bold;
+        }
+
+        /* --- Menu Bar --- */
+        .menu-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 22px;
+            background: white;
+            border-bottom: 1px solid var(--mac-black);
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            font-size: 12px;
+            z-index: 100;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .menu-item {
+            margin-right: 18px;
+            font-weight: 500;
+            cursor: default;
+        }
+        
+        .menu-item:active {
+            background: black;
+            color: white;
+            padding: 0 4px;
+            margin-right: 10px; /* Adjust for padding */
+        }
+
+        .apple-logo {
+            width: 14px;
+            margin-right: 20px;
+        }
+
+        /* SVG Sharpness */
+        svg {
+            shape-rendering: crispEdges; /* Important for retro look */
+        }
+
+        /* Desktop Icon */
+        .desktop-icon {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 60px;
+            cursor: pointer;
+        }
+        
+        .icon-image {
+            width: 32px;
+            height: 40px;
+            border: 1px solid black;
+            background: white;
+            margin-bottom: 4px;
+            position: relative;
+            box-shadow: 1px 1px 0 black;
+        }
+        
+        /* Little lines on trash can */
+        .trash-lines {
+            position: absolute;
+            top: 10px; left: 4px; right: 4px; bottom: 4px;
+            border-left: 2px solid black;
+            border-right: 2px solid black;
+        }
+        .trash-lines::after {
+            content: '';
+            position: absolute;
+            left: 5px; right: 5px; top: 0; bottom: 0;
+            border-left: 2px solid black;
+            border-right: 2px solid black;
+        }
+
+        .icon-label {
+            background: white;
+            padding: 0 4px;
+            font-size: 11px;
+            border: 1px dotted black; /* Selected look */
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Menu Bar -->
+    <div class="menu-bar">
+        <svg class="apple-logo" viewBox="0 0 14 17" fill="black">
+           <path d="M4.6,1.4C5.4,0.4,6.6,0,7.3,0C8.1,0,8.1,0.5,7.3,1.4C6.5,2.4,5.4,2.9,4.6,2.9C3.8,2.9,3.8,2.4,4.6,1.4z M10.4,4.4
+		c0.6,0,1,0.2,1.3,0.7c-1,0.6-1.5,1.5-1.5,2.5c0,1.2,0.7,2,1.7,2.4c-0.3,1-1,2.1-1.9,2.1c-0.6,0-1.1-0.3-1.6-0.3
+		c-0.6,0-1.2,0.3-1.8,0.3c-0.8,0-1.7-1.3-2.2-2.7C4,8.1,4.3,6.8,5.3,6.2c0.5-0.3,1-0.4,1.4-0.4C7.4,5.8,7.9,6.1,8.3,6.1
+		C8.7,6.1,9.4,5.8,10.4,4.4z"/>
+        </svg>
+        <div class="menu-item" style="font-weight: bold;">File</div>
+        <div class="menu-item">Edit</div>
+        <div class="menu-item">View</div>
+        <div class="menu-item">Special</div>
+        <div class="menu-item">Help</div>
+        <div id="clock" class="ml-auto font-bold" style="min-width: 60px; text-align: right;">--:-- PM</div>
+    </div>
+
+    <!-- The Window -->
+    <div class="mac-window">
+        <div class="window-inner">
+            <div class="mac-title-bar">
+                <div class="close-box" onclick="window.history.back()"></div>
+                <div class="title-stripes"></div>
+                <div class="title-text">System Error</div>
+                <div class="title-stripes"></div>
+            </div>
+            
+            <div class="content">
+                <div class="icon-area">
+                    <!-- Retro "Bomb" Icon or Sad Mac - keeping Sad Mac but pixelated -->
+                    <svg width="48" height="60" viewBox="0 0 32 40">
+                         <!-- Outline -->
+                         <path d="M4,2 h24 v36 h-24 z" fill="white" stroke="black" stroke-width="2" />
+                         <!-- Screen -->
+                         <rect x="7" y="6" width="18" height="14" fill="none" stroke="black" stroke-width="1"/>
+                         <!-- Eyes (Dead) -->
+                         <path d="M10,9 l4,4 M14,9 l-4,4" stroke="black" stroke-width="1"/>
+                         <path d="M18,9 l4,4 M22,9 l-4,4" stroke="black" stroke-width="1"/>
+                         <!-- Mouth (Frown) -->
+                         <path d="M11,16 q5,-4 10,0" fill="none" stroke="black" stroke-width="1"/>
+                         <!-- Floppy Slot -->
+                         <rect x="8" y="30" width="16" height="4" fill="white" stroke="black" stroke-width="1"/>
+                    </svg>
+                </div>
+
+                <div class="text-area">
+                    <h1 class="error-title">Sorry, a system error occurred.</h1>
+                    <p class="error-message">
+                        The file <span id="path-display" style="font-weight:bold;">unknown</span> could not be found.
+                        <br><br>
+                        Error Code: 404
+                    </p>
+
+                    <div class="button-row">
+                        <button class="mac-button" onclick="window.history.back()">Restart</button>
+                        <button class="mac-button mac-button-primary" onclick="window.location.href='https://oktayevin.com'">OK</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Trash Icon -->
+    <div class="desktop-icon" title="Trash">
+        <div class="icon-image">
+            <div class="trash-lines"></div>
+            <!-- Lid -->
+            <div style="position: absolute; top: -4px; left: -2px; width: 36px; height: 6px; border: 1px solid black; background: white; border-radius: 2px;">
+                <div style="position: absolute; top: -3px; left: 12px; width: 10px; height: 3px; border: 1px solid black; background: white;"></div>
+            </div>
+        </div>
+        <span class="icon-label">Trash</span>
+    </div>
+
+    <script>
+        // --- 1. Real Clock Functionality ---
+        function updateClock() {
+            const now = new Date();
+            let hours = now.getHours();
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            const ampm = hours >= 12 ? 'PM' : 'AM';
+            
+            hours = hours % 12;
+            hours = hours ? hours : 12; // the hour '0' should be '12'
+            
+            const timeString = `${hours}:${minutes} ${ampm}`;
+            document.getElementById('clock').innerText = timeString;
+        }
+
+        // Run immediately and then every second
+        updateClock();
+        setInterval(updateClock, 1000);
+
+        // --- 2. Path Display ---
+        window.onload = function() {
+            const path = window.location.pathname;
+            const displayEl = document.getElementById('path-display');
+            
+            // Safety check in case element is missing
+            if (displayEl) {
+                if (path && path !== '/') {
+                    displayEl.innerText = '"' + path.substring(1) + '"'; // Remove leading slash for cleaner look
+                } else {
+                    displayEl.innerText = '"unknown"';
+                }
+            }
+        };
+
+        // --- 3. Draggable Window (Simple implementation for fun) ---
+        const windowEl = document.querySelector('.mac-window');
+        const titleBar = document.querySelector('.mac-title-bar');
+        
+        let isDragging = false;
+        let currentX;
+        let currentY;
+        let initialX;
+        let initialY;
+        let xOffset = 0;
+        let yOffset = 0;
+
+        titleBar.addEventListener("mousedown", dragStart);
+        document.addEventListener("mouseup", dragEnd);
+        document.addEventListener("mousemove", drag);
+
+        function dragStart(e) {
+            initialX = e.clientX - xOffset;
+            initialY = e.clientY - yOffset;
+
+            if (e.target === titleBar || e.target.parentNode === titleBar) {
+                isDragging = true;
+            }
+        }
+
+        function dragEnd(e) {
+            initialX = currentX;
+            initialY = currentY;
+            isDragging = false;
+        }
+
+        function drag(e) {
+            if (isDragging) {
+                e.preventDefault();
+                currentX = e.clientX - initialX;
+                currentY = e.clientY - initialY;
+
+                xOffset = currentX;
+                yOffset = currentY;
+
+                setTranslate(currentX, currentY, windowEl);
+            }
+        }
+
+        function setTranslate(xPos, yPos, el) {
+            el.style.transform = "translate3d(" + xPos + "px, " + yPos + "px, 0)";
+        }
+    </script>
+</body>
+</html>
