@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Newsroom Blog</title>
+  <style>
+    :root {
+      --bg: #f5f5f7;
+      --surface: #ffffff;
+      --text: #1d1d1f;
+      --muted: #6e6e73;
+      --link: #0066cc;
+      --border: #d2d2d7;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "SF Pro Text", "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.5;
+    }
+
+    a {
+      color: var(--link);
+      text-decoration: none;
+    }
+
+    a:hover { text-decoration: underline; }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: saturate(180%) blur(20px);
+      background: rgba(255,255,255,0.75);
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+    }
+
+    .topbar-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0.8rem 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .brand {
+      font-size: 1.05rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+
+    .nav {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2.5rem 1.2rem 4rem;
+    }
+
+    .eyebrow {
+      margin: 0;
+      font-size: 0.95rem;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    h1 {
+      margin: 0.3rem 0 1rem;
+      font-size: clamp(2rem, 3.5vw, 3.8rem);
+      line-height: 1.04;
+      letter-spacing: -0.02em;
+    }
+
+    .intro {
+      max-width: 760px;
+      font-size: 1.15rem;
+      color: #424245;
+      margin-bottom: 2.25rem;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 1.2rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .card {
+      background: var(--surface);
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid rgba(0,0,0,0.06);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.05);
+    }
+
+    .card-media {
+      height: 320px;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .card-content {
+      padding: 1.4rem;
+    }
+
+    .label {
+      display: inline-block;
+      color: var(--muted);
+      text-transform: uppercase;
+      font-size: 0.73rem;
+      letter-spacing: 0.08em;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .headline {
+      margin: 0 0 0.7rem;
+      font-size: clamp(1.4rem, 2vw, 2rem);
+      letter-spacing: -0.02em;
+      line-height: 1.12;
+    }
+
+    .summary {
+      margin: 0;
+      color: #424245;
+      font-size: 1rem;
+    }
+
+    .stack {
+      display: grid;
+      grid-template-rows: 1fr 1fr;
+      gap: 1.2rem;
+    }
+
+    .stack .card-media { height: 140px; }
+    .stack .headline { font-size: 1.25rem; }
+
+    .section-title {
+      margin: 2rem 0 1rem;
+      font-size: 1.6rem;
+      letter-spacing: -0.02em;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.2rem;
+    }
+
+    .grid .card-media { height: 180px; }
+
+    .meta {
+      margin-top: 1rem;
+      color: var(--muted);
+      font-size: 0.84rem;
+    }
+
+    footer {
+      margin-top: 3rem;
+      border-top: 1px solid var(--border);
+      padding-top: 1rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 940px) {
+      .hero { grid-template-columns: 1fr; }
+      .stack { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+      .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 620px) {
+      .stack { grid-template-columns: 1fr; }
+      .grid { grid-template-columns: 1fr; }
+      .topbar-inner { align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">Newsroom Blog</div>
+      <nav class="nav" aria-label="Primary">
+        <a href="#latest">Latest</a>
+        <a href="#features">Features</a>
+        <a href="#updates">Updates</a>
+        <a href="#media">Media</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <p class="eyebrow">Blog</p>
+    <h1>Stories that move ideas forward.</h1>
+    <p class="intro">
+      A clean, editorial-style blog inspired by the Apple Newsroom aesthetic—large typography,
+      generous spacing, and image-led storytelling.
+    </p>
+
+    <section class="hero" id="latest">
+      <article class="card">
+        <div class="card-media" style="background-image: linear-gradient(120deg, #0d1f4d 0%, #2f6fe4 45%, #7fd5ff 100%);"></div>
+        <div class="card-content">
+          <span class="label">Featured Story</span>
+          <h2 class="headline">How design systems help teams build products faster and better.</h2>
+          <p class="summary">From typography to interactions, learn how consistency at scale creates better user experiences without sacrificing creativity.</p>
+          <p class="meta">March 2026</p>
+        </div>
+      </article>
+
+      <div class="stack">
+        <article class="card">
+          <div class="card-media" style="background-image: linear-gradient(130deg, #4f1c7d 0%, #d75bef 100%);"></div>
+          <div class="card-content">
+            <span class="label">Update</span>
+            <h3 class="headline">New publishing workflow reduces release time by 40%.</h3>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-media" style="background-image: linear-gradient(130deg, #1f5f4a 0%, #6fd8b5 100%);"></div>
+          <div class="card-content">
+            <span class="label">Behind the scenes</span>
+            <h3 class="headline">Building an editorial voice for a fast-moving product team.</h3>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="features">
+      <h2 class="section-title">Feature Stories</h2>
+      <div class="grid">
+        <article class="card">
+          <div class="card-media" style="background-image: linear-gradient(130deg, #1d3557 0%, #4ea8de 100%);"></div>
+          <div class="card-content">
+            <span class="label">Interview</span>
+            <h3 class="headline">Inside the strategy behind accessible product design.</h3>
+            <p class="meta">February 2026</p>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-media" style="background-image: linear-gradient(130deg, #5f0f40 0%, #fb8b24 100%);"></div>
+          <div class="card-content">
+            <span class="label">Culture</span>
+            <h3 class="headline">What cross-functional teams can learn from newsroom habits.</h3>
+            <p class="meta">January 2026</p>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-media" style="background-image: linear-gradient(130deg, #2a2a72 0%, #009ffd 100%);"></div>
+          <div class="card-content">
+            <span class="label">Engineering</span>
+            <h3 class="headline">Performance-first front-end techniques for modern websites.</h3>
+            <p class="meta">December 2025</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="updates">
+      <h2 class="section-title">Recent Updates</h2>
+      <div class="grid">
+        <article class="card">
+          <div class="card-content">
+            <span class="label">Product</span>
+            <h3 class="headline">Version 2.4 introduces richer media embeds and auto-summaries.</h3>
+            <p class="meta">Nov 20, 2025</p>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-content">
+            <span class="label">Design</span>
+            <h3 class="headline">A fresh set of editorial templates is now available for all teams.</h3>
+            <p class="meta">Oct 12, 2025</p>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-content">
+            <span class="label">Community</span>
+            <h3 class="headline">Creators spotlight: three teams using narrative design brilliantly.</h3>
+            <p class="meta">Sep 5, 2025</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="media">
+      <h2 class="section-title">Media Contact</h2>
+      <p class="summary">For press inquiries, interviews, and media resources, contact <a href="mailto:press@example.com">press@example.com</a>.</p>
+    </section>
+
+    <footer>
+      © 2026 Newsroom Blog. All rights reserved.
+    </footer>
+  </main>
+</body>
+</html>
