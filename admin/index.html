@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Medium-Style Blog Admin</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="left-panel">
+      <div class="brand">Admin Studio</div>
+      <p class="muted">Medium benzeri yazı yönetimi</p>
+
+      <div class="panel-block">
+        <div class="panel-head">
+          <h3>Yazılar</h3>
+          <button id="refreshPostsBtn" type="button" class="small">Yenile</button>
+        </div>
+        <div id="postsList" class="post-list"></div>
+      </div>
+    </aside>
+
+    <main class="editor-panel">
+      <header class="top-actions">
+        <div id="connectionStatus" class="pill">API kontrol ediliyor…</div>
+        <div class="meta-buttons">
+          <button id="newPostBtn" type="button">Yeni Yazı</button>
+          <button id="saveDraftBtn" type="button">Taslak Kaydet</button>
+          <button id="publishBtn" type="button" class="primary">Yayınla</button>
+        </div>
+      </header>
+
+      <section class="meta-grid">
+        <input id="title" class="title-input" type="text" placeholder="Başlık" />
+        <textarea id="excerpt" rows="2" placeholder="Alt başlık / kısa açıklama"></textarea>
+        <div class="meta-row">
+          <input id="category" type="text" placeholder="Kategori" />
+          <select id="section">
+            <option value="featured">featured</option>
+            <option value="latest">latest</option>
+            <option value="features">features</option>
+            <option value="updates">updates</option>
+          </select>
+          <input id="date" type="date" />
+          <input id="readTime" type="text" placeholder="5 min read" />
+          <input id="author" type="text" placeholder="Yazar" />
+        </div>
+        <input id="heroStyle" type="text" placeholder="Hero style (gradient)" />
+      </section>
+
+      <section class="compose">
+        <div class="toolbar" role="toolbar" aria-label="Medium style editor toolbar">
+          <button type="button" data-cmd="bold"><strong>B</strong></button>
+          <button type="button" data-cmd="italic"><em>I</em></button>
+          <button type="button" data-cmd="formatBlock" data-value="h2">H2</button>
+          <button type="button" data-cmd="formatBlock" data-value="blockquote">❝</button>
+          <button type="button" data-cmd="insertUnorderedList">• Liste</button>
+          <button type="button" id="insertImageUrlBtn">Görsel URL</button>
+          <label class="upload-btn">
+            Görsel Yükle
+            <input id="imageUpload" type="file" accept="image/*" hidden />
+          </label>
+          <button type="button" id="previewToggleBtn">Önizleme</button>
+        </div>
+
+        <div id="editor" class="editor" contenteditable="true" data-placeholder="Buraya yazmaya başla…"></div>
+      </section>
+    </main>
+
+    <aside class="right-panel">
+      <h3>Canlı Önizleme</h3>
+      <div id="preview" class="preview"></div>
+      <h3>JSON</h3>
+      <pre id="jsonOutput">{}</pre>
+    </aside>
+  </div>
+
+  <script src="./app.js"></script>
+</body>
+</html>
