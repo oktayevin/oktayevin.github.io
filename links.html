@@ -8,6 +8,7 @@
       name="description"
       content="All my links."
     />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css" />
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap");
 
@@ -137,27 +138,62 @@
       }
 
       .social {
-        margin-top: 34px;
+        margin-top: 40px;
         display: flex;
         justify-content: center;
-        gap: 30px;
+        gap: 22px;
       }
 
       .social a {
-        color: rgba(255, 255, 255, 0.95);
-        text-decoration: none;
-        width: 36px;
-        height: 36px;
-        display: inline-flex;
+        position: relative;
+        width: 54px;
+        height: 54px;
+        border-radius: 18px;
+
+        display: flex;
         align-items: center;
         justify-content: center;
-        text-shadow: 0 1px 5px rgba(0, 0, 0, 0.35);
+
+        text-decoration: none;
+        color: rgba(255, 255, 255, 0.95);
+
+        background: rgba(255, 255, 255, 0.12);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+
+        border: 1px solid rgba(255, 255, 255, 0.18);
+
+        box-shadow:
+          0 6px 20px rgba(0, 0, 0, 0.25),
+          inset 0 1px 0 rgba(255, 255, 255, 0.2);
+
+        transition:
+          transform 180ms ease,
+          box-shadow 180ms ease,
+          background 180ms ease;
       }
 
-      .social svg {
-        width: clamp(1.7rem, 3.5vw, 2.25rem);
-        height: clamp(1.7rem, 3.5vw, 2.25rem);
-        fill: currentColor;
+      .social i {
+        font-size: 1.4rem;
+        transition: transform 180ms ease;
+      }
+
+      /* Hover */
+      .social a:hover {
+        transform: translateY(-4px) scale(1.08);
+        box-shadow:
+          0 12px 28px rgba(0, 0, 0, 0.35),
+          0 0 18px rgba(255, 255, 255, 0.45);
+        background: rgba(255, 255, 255, 0.2);
+      }
+
+      .social a:hover i {
+        transform: scale(1.15);
+      }
+
+      /* Click press effect */
+      .social a:active {
+        transform: translateY(-1px) scale(0.96);
       }
 
       @media (max-width: 560px) {
