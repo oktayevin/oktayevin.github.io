@@ -1,6 +1,6 @@
-# Admin Panel
+# Medium-Style Admin Panel
 
-Bu klasör, mevcut site dosyalarına dokunmadan bağımsız çalışan bir blog admin paneli içerir.
+Bu klasör mevcut site dosyalarına dokunmadan, ayrı çalışan bir admin panel sağlar.
 
 ## Çalıştırma
 
@@ -8,22 +8,33 @@ Bu klasör, mevcut site dosyalarına dokunmadan bağımsız çalışan bir blog 
 node admin/server.js
 ```
 
-Ardından tarayıcıdan açın:
+Açılış URL'i:
 
 - `http://localhost:3030`
 
 ## Özellikler
 
-- WordPress benzeri içerik üretim arayüzü
-- Rich text editör (kalın, italik, liste, başlık, ayraç)
-- JSON önizleme
-- Taslak kaydetme (localStorage)
-- `blog-posts.json` dosyasına otomatik post ekleme
-- Mobil uyumlu (responsive) tasarım
+- Medium benzeri 3 kolonlu yönetim ekranı
+- Sol panelde mevcut post listesi
+- Post seçip önizleme + düzenleme
+- Yeni post oluşturma ve yayınlama
+- Rich-text editör (bold, italic, heading, blockquote, list)
+- Inline görsel ekleme
+  - URL ile ekleme
+  - Yerel dosya yükleyip base64 inline gömme
+- Canlı önizleme + JSON önizleme
+- `blog-posts.json` otomatik güncelleme
+- Responsive tasarım
 
-## Not
+## API
 
-Varsayılan olarak `../blog-posts.json` dosyasını günceller. Gerekirse dosya yolu ve port değiştirilebilir:
+- `GET /api/admin/health`
+- `GET /api/admin/posts`
+- `GET /api/admin/posts/:id`
+- `POST /api/admin/posts`
+- `PUT /api/admin/posts/:id`
+
+## Konfigürasyon
 
 ```bash
 ADMIN_PORT=4040 BLOG_POST_FILE=/path/to/blog-posts.json node admin/server.js

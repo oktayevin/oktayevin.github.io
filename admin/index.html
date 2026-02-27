@@ -3,110 +3,79 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Blog Admin Panel</title>
+  <title>Medium-Style Blog Admin</title>
   <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
-  <div class="layout">
-    <aside class="sidebar">
-      <h1>Admin Panel</h1>
-      <p class="muted">WordPress benzeri içerik oluşturma paneli</p>
-      <div class="status-card">
-        <h2>Durum</h2>
-        <p id="connectionStatus">API kontrol ediliyor...</p>
-      </div>
-      <div class="status-card">
-        <h2>Taslak</h2>
-        <p id="draftStatus">Kaydedilmedi</p>
-        <button id="saveDraftBtn" type="button">Taslak Kaydet</button>
-        <button id="clearDraftBtn" type="button" class="ghost">Taslağı Temizle</button>
-      </div>
-      <div class="status-card">
-        <h2>Hızlı Bilgiler</h2>
-        <ul>
-          <li><strong>Kelime:</strong> <span id="wordCount">0</span></li>
-          <li><strong>Karakter:</strong> <span id="charCount">0</span></li>
-          <li><strong>Bölüm:</strong> <span id="sectionCount">0</span></li>
-        </ul>
+  <div class="app-shell">
+    <aside class="left-panel">
+      <div class="brand">Admin Studio</div>
+      <p class="muted">Medium benzeri yazı yönetimi</p>
+
+      <div class="panel-block">
+        <div class="panel-head">
+          <h3>Yazılar</h3>
+          <button id="refreshPostsBtn" type="button" class="small">Yenile</button>
+        </div>
+        <div id="postsList" class="post-list"></div>
       </div>
     </aside>
 
-    <main class="main">
-      <header class="panel-header">
-        <h2>Yeni Yazı Oluştur</h2>
-        <p class="muted">Yayınla butonuyla yazı doğrudan <code>blog-posts.json</code> dosyasına eklenir.</p>
+    <main class="editor-panel">
+      <header class="top-actions">
+        <div id="connectionStatus" class="pill">API kontrol ediliyor…</div>
+        <div class="meta-buttons">
+          <button id="newPostBtn" type="button">Yeni Yazı</button>
+          <button id="saveDraftBtn" type="button">Taslak Kaydet</button>
+          <button id="publishBtn" type="button" class="primary">Yayınla</button>
+        </div>
       </header>
 
-      <form id="postForm" class="post-form">
-        <section class="grid two-col">
-          <label>
-            Başlık
-            <input type="text" id="title" required placeholder="Yazı başlığı" />
-          </label>
-          <label>
-            Kısa Açıklama (Excerpt)
-            <input type="text" id="excerpt" required placeholder="Yazının kısa özeti" />
-          </label>
-          <label>
-            Kategori
-            <input type="text" id="category" required placeholder="Örn: Featured Story" />
-          </label>
-          <label>
-            Bölüm
-            <select id="section" required>
-              <option value="featured">featured</option>
-              <option value="latest">latest</option>
-              <option value="features">features</option>
-              <option value="updates">updates</option>
-            </select>
-          </label>
-          <label>
-            Tarih
-            <input type="date" id="date" required />
-          </label>
-          <label>
-            Okuma Süresi
-            <input type="text" id="readTime" required placeholder="Örn: 5 min read" />
-          </label>
-          <label>
-            Yazar
-            <input type="text" id="author" required placeholder="Yazar adı" />
-          </label>
-          <label>
-            Hero Style (Gradient)
-            <input type="text" id="heroStyle" placeholder="linear-gradient(...)" />
-          </label>
-        </section>
-
-        <section class="editor-wrapper">
-          <div class="toolbar" role="toolbar" aria-label="Metin düzenleme araçları">
-            <button type="button" data-cmd="bold"><strong>B</strong></button>
-            <button type="button" data-cmd="italic"><em>I</em></button>
-            <button type="button" data-cmd="underline"><u>U</u></button>
-            <button type="button" data-cmd="insertUnorderedList">• Liste</button>
-            <button type="button" data-cmd="insertOrderedList">1. Liste</button>
-            <button type="button" data-cmd="formatBlock" data-value="h3">H3</button>
-            <button type="button" data-cmd="formatBlock" data-value="p">P</button>
-            <button type="button" id="addDividerBtn">Ayraç</button>
-            <button type="button" id="clearEditorBtn" class="danger">Editörü Temizle</button>
-          </div>
-          <div id="editor" class="editor" contenteditable="true" aria-label="Post içeriği"></div>
-          <small class="muted">İpucu: Her bölüm için bir <strong>H3</strong> başlığı ve altına paragraflar yazın.</small>
-        </section>
-
-        <section class="json-preview">
-          <h3>JSON Önizleme</h3>
-          <pre id="jsonOutput">{ }</pre>
-        </section>
-
-        <div class="actions">
-          <button type="submit" class="primary">Yayınla ve JSON'a Ekle</button>
+      <section class="meta-grid">
+        <input id="title" class="title-input" type="text" placeholder="Başlık" />
+        <textarea id="excerpt" rows="2" placeholder="Alt başlık / kısa açıklama"></textarea>
+        <div class="meta-row">
+          <input id="category" type="text" placeholder="Kategori" />
+          <select id="section">
+            <option value="featured">featured</option>
+            <option value="latest">latest</option>
+            <option value="features">features</option>
+            <option value="updates">updates</option>
+          </select>
+          <input id="date" type="date" />
+          <input id="readTime" type="text" placeholder="5 min read" />
+          <input id="author" type="text" placeholder="Yazar" />
         </div>
-      </form>
+        <input id="heroStyle" type="text" placeholder="Hero style (gradient)" />
+      </section>
+
+      <section class="compose">
+        <div class="toolbar" role="toolbar" aria-label="Medium style editor toolbar">
+          <button type="button" data-cmd="bold"><strong>B</strong></button>
+          <button type="button" data-cmd="italic"><em>I</em></button>
+          <button type="button" data-cmd="formatBlock" data-value="h2">H2</button>
+          <button type="button" data-cmd="formatBlock" data-value="blockquote">❝</button>
+          <button type="button" data-cmd="insertUnorderedList">• Liste</button>
+          <button type="button" id="insertImageUrlBtn">Görsel URL</button>
+          <label class="upload-btn">
+            Görsel Yükle
+            <input id="imageUpload" type="file" accept="image/*" hidden />
+          </label>
+          <button type="button" id="previewToggleBtn">Önizleme</button>
+        </div>
+
+        <div id="editor" class="editor" contenteditable="true" data-placeholder="Buraya yazmaya başla…"></div>
+      </section>
     </main>
+
+    <aside class="right-panel">
+      <h3>Canlı Önizleme</h3>
+      <div id="preview" class="preview"></div>
+      <h3>JSON</h3>
+      <pre id="jsonOutput">{}</pre>
+    </aside>
   </div>
 
-  <template id="dividerTemplate"><hr /></template>
   <script src="./app.js"></script>
 </body>
 </html>

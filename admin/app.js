@@ -1,14 +1,5 @@
-const API_BASE = 'http://localhost:3030/api/admin';
-const DRAFT_KEY = 'blog-admin-draft-v1';
-
-const form = document.getElementById('postForm');
-const editor = document.getElementById('editor');
-const jsonOutput = document.getElementById('jsonOutput');
-const wordCount = document.getElementById('wordCount');
-const charCount = document.getElementById('charCount');
-const sectionCount = document.getElementById('sectionCount');
-const connectionStatus = document.getElementById('connectionStatus');
-const draftStatus = document.getElementById('draftStatus');
+const API_BASE = `${window.location.origin}/api/admin`;
+const DRAFT_KEY = 'medium-admin-draft-v2';
 
 const fields = {
   title: document.getElementById('title'),
@@ -21,66 +12,56 @@ const fields = {
   heroStyle: document.getElementById('heroStyle')
 };
 
-const slugify = (value) =>
-  value
-    .toLowerCase()
-    .trim()
-    .replace(/[^a-z0-9\s-]/g, '')
-    .replace(/\s+/g, '-')
-    .replace(/-+/g, '-');
+const editor = document.getElementById('editor');
+const postsList = document.getElementById('postsList');
+const jsonOutput = document.getElementById('jsonOutput');
+const preview = document.getElementById('preview');
+const connectionStatus = document.getElementById('connectionStatus');
+let editingPostId = null;
+let previewOpen = true;
 
-const extractContentSections = () => {
-  const blocks = Array.from(editor.childNodes);
+const slugify = (value) => value.toLowerCase().trim().replace(/[^a-z0-9\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-');
+
+const editorBlocksToSections = () => {
   const sections = [];
   let current = { heading: 'Giriş', paragraphs: [] };
 
-  blocks.forEach((node) => {
+  Array.from(editor.childNodes).forEach((node) => {
     if (node.nodeType === Node.TEXT_NODE) {
-      const text = node.textContent.trim();
-      if (text) current.paragraphs.push(text);
+      const t = node.textContent.trim();
+      if (t) current.paragraphs.push(t);
       return;
     }
 
-    const tag = node.tagName?.toLowerCase();
+    const tag = (node.tagName || '').toLowerCase();
+    const html = node.outerHTML || '';
     const text = node.textContent.trim();
-    if (!text) return;
 
     if (tag === 'h1' || tag === 'h2' || tag === 'h3') {
-      if (current.paragraphs.length || current.heading !== 'Giriş') {
-        sections.push(current);
-      }
-      current = { heading: text, paragraphs: [] };
+      if (current.paragraphs.length || current.heading !== 'Giriş') sections.push(current);
+      current = { heading: text || 'Bölüm', paragraphs: [] };
       return;
     }
 
-    if (tag === 'ul' || tag === 'ol') {
-      Array.from(node.querySelectorAll('li')).forEach((li) => {
-        const liText = li.textContent.trim();
-        if (liText) current.paragraphs.push(`• ${liText}`);
-      });
+    if (tag === 'img') {
+      current.paragraphs.push(html);
       return;
     }
 
-    if (tag === 'hr') {
-      if (current.paragraphs.length || current.heading !== 'Giriş') {
-        sections.push(current);
-      }
-      current = { heading: 'Yeni Bölüm', paragraphs: [] };
+    if (['p', 'blockquote', 'ul', 'ol', 'figure', 'div'].includes(tag)) {
+      if (text || tag === 'figure') current.paragraphs.push(node.innerHTML ? `<${tag}>${node.innerHTML}</${tag}>` : html);
       return;
     }
 
-    current.paragraphs.push(text);
+    if (text) current.paragraphs.push(text);
   });
 
-  if (current.paragraphs.length || current.heading !== 'Giriş') {
-    sections.push(current);
-  }
-
-  return sections.filter((item) => item.paragraphs.length > 0);
+  if (current.paragraphs.length || current.heading !== 'Giriş') sections.push(current);
+  return sections.filter((s) => s.paragraphs.length);
 };
 
-const collectPayload = () => ({
-  id: slugify(fields.title.value),
+const getPayload = () => ({
+  id: editingPostId || slugify(fields.title.value),
   title: fields.title.value.trim(),
   excerpt: fields.excerpt.value.trim(),
   category: fields.category.value.trim(),
@@ -89,26 +70,52 @@ const collectPayload = () => ({
   readTime: fields.readTime.value.trim(),
   author: fields.author.value.trim(),
   heroStyle: fields.heroStyle.value.trim() || undefined,
-  content: extractContentSections()
+  content: editorBlocksToSections()
 });
 
-const updateStats = () => {
-  const text = editor.innerText.trim();
-  const words = text ? text.split(/\s+/).length : 0;
-  wordCount.textContent = words;
-  charCount.textContent = text.length;
-  sectionCount.textContent = extractContentSections().length;
-  jsonOutput.textContent = JSON.stringify(collectPayload(), null, 2);
+const renderPreview = () => {
+  const post = getPayload();
+  const body = (post.content || []).map((s) => `
+    <section>
+      <h4>${s.heading}</h4>
+      ${s.paragraphs.map((p) => `<div class="pv-p">${p}</div>`).join('')}
+    </section>
+  `).join('');
+
+  preview.innerHTML = `
+    <h2>${post.title || 'Başlık'}</h2>
+    <p class="muted">${post.excerpt || 'Alt başlık'}</p>
+    ${body}
+  `;
+
+  jsonOutput.textContent = JSON.stringify(post, null, 2);
+};
+
+const setForm = (post = null) => {
+  editingPostId = post?.id || null;
+  Object.entries(fields).forEach(([k, el]) => { el.value = post?.[k] || ''; });
+  fields.date.value ||= new Date().toISOString().slice(0, 10);
+
+  if (post?.content?.length) {
+    editor.innerHTML = post.content.map((section) => {
+      const chunks = [`<h2>${section.heading || 'Bölüm'}</h2>`];
+      (section.paragraphs || []).forEach((p) => {
+        const clean = String(p || '').trim();
+        if (!clean) return;
+        if (clean.startsWith('<')) chunks.push(clean);
+        else chunks.push(`<p>${clean}</p>`);
+      });
+      return chunks.join('');
+    }).join('');
+  } else {
+    editor.innerHTML = '';
+  }
+
+  renderPreview();
 };
 
 const saveDraft = () => {
-  const draft = {
-    fields: Object.fromEntries(Object.entries(fields).map(([key, input]) => [key, input.value])),
-    html: editor.innerHTML,
-    updatedAt: new Date().toISOString()
-  };
-  localStorage.setItem(DRAFT_KEY, JSON.stringify(draft));
-  draftStatus.textContent = `Kaydedildi: ${new Date(draft.updatedAt).toLocaleString('tr-TR')}`;
+  localStorage.setItem(DRAFT_KEY, JSON.stringify({ fields: Object.fromEntries(Object.entries(fields).map(([k, el]) => [k, el.value])), html: editor.innerHTML, editingPostId }));
 };
 
 const loadDraft = () => {
@@ -116,82 +123,130 @@ const loadDraft = () => {
   if (!raw) return;
   try {
     const draft = JSON.parse(raw);
-    Object.entries(fields).forEach(([key, input]) => {
-      input.value = draft.fields?.[key] || '';
-    });
+    Object.entries(fields).forEach(([k, el]) => { el.value = draft.fields?.[k] || ''; });
     editor.innerHTML = draft.html || '';
-    draftStatus.textContent = `Yüklendi: ${new Date(draft.updatedAt).toLocaleString('tr-TR')}`;
+    editingPostId = draft.editingPostId || null;
+  } catch {}
+};
+
+const fetchPosts = async () => {
+  const res = await fetch(`${API_BASE}/posts`);
+  if (!res.ok) throw new Error('Post listesi alınamadı');
+  const data = await res.json();
+  return data.posts || [];
+};
+
+const renderPostsList = async () => {
+  try {
+    const posts = await fetchPosts();
+    postsList.innerHTML = posts.map((post) => `
+      <button class="post-item ${editingPostId === post.id ? 'active' : ''}" data-id="${post.id}">
+        <h4>${post.title}</h4>
+        <p>${post.date} · ${post.author || ''}</p>
+      </button>
+    `).join('');
+
+    Array.from(postsList.querySelectorAll('.post-item')).forEach((btn) => {
+      btn.addEventListener('click', async () => {
+        const id = btn.dataset.id;
+        const detail = await fetch(`${API_BASE}/posts/${encodeURIComponent(id)}`).then((r) => r.json());
+        setForm(detail.post);
+        renderPostsList();
+      });
+    });
   } catch (err) {
-    draftStatus.textContent = 'Taslak okunamadı';
+    postsList.innerHTML = `<p class="muted">${err.message}</p>`;
   }
 };
 
-const pingApi = async () => {
-  try {
-    const res = await fetch(`${API_BASE}/health`);
-    if (!res.ok) throw new Error('Bağlantı hatası');
-    connectionStatus.textContent = 'API bağlı (localhost:3030)';
-  } catch {
-    connectionStatus.textContent = 'API kapalı. node admin/server.js ile başlatın.';
+const savePost = async () => {
+  const payload = getPayload();
+  if (!payload.title || !payload.content.length) {
+    alert('Başlık ve içerik zorunlu.');
+    return;
   }
+
+  const method = editingPostId ? 'PUT' : 'POST';
+  const url = editingPostId ? `${API_BASE}/posts/${encodeURIComponent(editingPostId)}` : `${API_BASE}/posts`;
+
+  const res = await fetch(url, {
+    method,
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  });
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.message || 'Kaydedilemedi');
+  return data;
 };
 
 Array.from(document.querySelectorAll('[data-cmd]')).forEach((button) => {
   button.addEventListener('click', () => {
-    const cmd = button.dataset.cmd;
-    const value = button.dataset.value;
-    document.execCommand(cmd, false, value || null);
-    updateStats();
+    document.execCommand(button.dataset.cmd, false, button.dataset.value || null);
+    renderPreview();
     editor.focus();
   });
 });
 
-document.getElementById('addDividerBtn').addEventListener('click', () => {
-  document.execCommand('insertHorizontalRule');
-  updateStats();
+document.getElementById('insertImageUrlBtn').addEventListener('click', () => {
+  const url = prompt('Görsel URL girin');
+  if (!url) return;
+  document.execCommand('insertHTML', false, `<img src="${url}" alt="inline-image" />`);
+  renderPreview();
 });
 
-document.getElementById('clearEditorBtn').addEventListener('click', () => {
-  editor.innerHTML = '';
-  updateStats();
+document.getElementById('imageUpload').addEventListener('change', (event) => {
+  const file = event.target.files?.[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = () => {
+    document.execCommand('insertHTML', false, `<img src="${reader.result}" alt="${file.name}" />`);
+    renderPreview();
+  };
+  reader.readAsDataURL(file);
+  event.target.value = '';
 });
 
-document.getElementById('saveDraftBtn').addEventListener('click', saveDraft);
-document.getElementById('clearDraftBtn').addEventListener('click', () => {
-  localStorage.removeItem(DRAFT_KEY);
-  draftStatus.textContent = 'Taslak temizlendi';
+document.getElementById('previewToggleBtn').addEventListener('click', () => {
+  previewOpen = !previewOpen;
+  document.querySelector('.right-panel').style.display = previewOpen ? '' : 'none';
 });
 
-form.addEventListener('input', updateStats);
-editor.addEventListener('input', updateStats);
+document.getElementById('newPostBtn').addEventListener('click', () => {
+  setForm();
+  renderPostsList();
+});
 
-form.addEventListener('submit', async (event) => {
-  event.preventDefault();
-  const payload = collectPayload();
+document.getElementById('saveDraftBtn').addEventListener('click', () => {
+  saveDraft();
+  alert('Taslak kaydedildi');
+});
 
-  if (!payload.content.length) {
-    alert('Lütfen editöre en az bir içerik bölümü ekleyin.');
-    return;
-  }
+document.getElementById('refreshPostsBtn').addEventListener('click', renderPostsList);
 
+document.getElementById('publishBtn').addEventListener('click', async () => {
   try {
-    const response = await fetch(`${API_BASE}/posts`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
-    });
-
-    const data = await response.json();
-    if (!response.ok) throw new Error(data.message || 'Kayıt başarısız');
-
-    alert(`Yayınlandı! Toplam post sayısı: ${data.totalPosts}`);
+    const data = await savePost();
+    alert(editingPostId ? 'Post güncellendi' : `Post eklendi. Toplam: ${data.totalPosts}`);
+    if (!editingPostId) editingPostId = data.post.id;
     saveDraft();
-  } catch (error) {
-    alert(`Hata: ${error.message}`);
+    renderPostsList();
+  } catch (err) {
+    alert(err.message);
   }
 });
 
-fields.date.value = new Date().toISOString().slice(0, 10);
-loadDraft();
-pingApi();
-updateStats();
+Object.values(fields).forEach((el) => el.addEventListener('input', renderPreview));
+editor.addEventListener('input', renderPreview);
+
+(async () => {
+  try {
+    const health = await fetch(`${API_BASE}/health`).then((r) => r.json());
+    connectionStatus.textContent = `API bağlı · ${health.file}`;
+  } catch {
+    connectionStatus.textContent = 'API bağlantısı yok. node admin/server.js çalıştırın.';
+  }
+  loadDraft();
+  if (!fields.date.value) fields.date.value = new Date().toISOString().slice(0, 10);
+  renderPreview();
+  renderPostsList();
+})();
