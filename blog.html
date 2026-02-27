@@ -178,12 +178,12 @@
         const featureStories = posts.filter((post) => post.section === 'features');
         const updates = posts.filter((post) => post.section === 'updates');
 
-        document.getElementById('siteTitle').textContent = data.site?.title || 'Newsroom Blog';
+        document.getElementById('siteTitle').textContent = data.site?.title || 'Oktay Evin';
         document.getElementById('heroTitle').textContent = data.site?.tagline || 'Stories that move ideas forward.';
         document.getElementById('heroIntro').textContent = data.site?.intro || 'Latest stories from our newsroom.';
         document.getElementById('contactLink').textContent = data.site?.contactEmail || 'press@example.com';
         document.getElementById('contactLink').href = `mailto:${data.site?.contactEmail || 'press@example.com'}`;
-        document.getElementById('footerCopy').textContent = `© ${new Date().getFullYear()} ${data.site?.title || 'Newsroom Blog'}. All rights reserved.`;
+        document.getElementById('footerCopy').textContent = `© ${new Date().getFullYear()} ${data.site?.title || 'Oktay Evin'}. All rights reserved.`;
 
         const heroContainer = document.getElementById('latest');
         heroContainer.innerHTML = `
