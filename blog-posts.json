@@ -1,0 +1,194 @@
+{
+  "site": {
+    "title": "Newsroom Blog",
+    "tagline": "Stories that move ideas forward.",
+    "intro": "A clean, editorial-style blog inspired by the Apple Newsroom aesthetic—large typography, generous spacing, and image-led storytelling.",
+    "contactEmail": "press@example.com"
+  },
+  "posts": [
+    {
+      "id": "design-systems-speed",
+      "title": "How design systems help teams build products faster and better",
+      "excerpt": "From typography to interactions, learn how consistency at scale creates better user experiences without sacrificing creativity.",
+      "category": "Featured Story",
+      "section": "featured",
+      "date": "2026-03-10",
+      "readTime": "6 min read",
+      "author": "Oktay Evin",
+      "heroStyle": "linear-gradient(120deg, #0d1f4d 0%, #2f6fe4 45%, #7fd5ff 100%)",
+      "content": [
+        {
+          "heading": "Consistency gives teams more room for creativity",
+          "paragraphs": [
+            "A design system is not about locking everyone into rigid templates. It is about removing repetitive decisions so teams can focus on solving user problems.",
+            "When product, design, and engineering share the same visual and interaction language, ideas move from concept to release much faster."
+          ]
+        },
+        {
+          "heading": "A shared language improves quality",
+          "paragraphs": [
+            "Reusable components reduce visual regressions and eliminate contradictory UI patterns.",
+            "Documentation plus clear governance lets contributors improve the system while keeping the experience coherent for users."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "publishing-workflow",
+      "title": "New publishing workflow reduces release time by 40%",
+      "excerpt": "A redesigned editorial checklist and automated QA pipeline help writers publish with confidence.",
+      "category": "Update",
+      "section": "latest",
+      "date": "2026-02-25",
+      "readTime": "4 min read",
+      "author": "Editorial Team",
+      "heroStyle": "linear-gradient(130deg, #4f1c7d 0%, #d75bef 100%)",
+      "content": [
+        {
+          "heading": "From draft to publish in fewer steps",
+          "paragraphs": [
+            "The updated workflow combines linting, metadata validation, and preview checks in one place.",
+            "By reducing tool switching, teams can focus on writing and reviewing high-quality stories."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "editorial-voice",
+      "title": "Building an editorial voice for a fast-moving product team",
+      "excerpt": "Tone guidelines and a practical style guide create consistency across announcements and deep dives.",
+      "category": "Behind the Scenes",
+      "section": "latest",
+      "date": "2026-02-10",
+      "readTime": "5 min read",
+      "author": "Content Strategy",
+      "heroStyle": "linear-gradient(130deg, #1f5f4a 0%, #6fd8b5 100%)",
+      "content": [
+        {
+          "heading": "Editorial clarity starts with principles",
+          "paragraphs": [
+            "We define voice using practical examples instead of abstract adjectives.",
+            "That helps each team member understand what good storytelling looks like for product news."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "accessible-product-design",
+      "title": "Inside the strategy behind accessible product design",
+      "excerpt": "Accessibility-first workflows produce better experiences for everyone from day one.",
+      "category": "Interview",
+      "section": "features",
+      "date": "2026-02-02",
+      "readTime": "7 min read",
+      "author": "UX Research",
+      "heroStyle": "linear-gradient(130deg, #1d3557 0%, #4ea8de 100%)",
+      "content": [
+        {
+          "heading": "Accessibility is a product decision",
+          "paragraphs": [
+            "Teams that include assistive technology testing in early prototypes avoid expensive fixes later.",
+            "Inclusive design reviews lead to cleaner interaction models and stronger product outcomes."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "newsroom-habits",
+      "title": "What cross-functional teams can learn from newsroom habits",
+      "excerpt": "Editorial planning rituals help teams prioritize the right stories and ship with confidence.",
+      "category": "Culture",
+      "section": "features",
+      "date": "2026-01-12",
+      "readTime": "5 min read",
+      "author": "People Ops",
+      "heroStyle": "linear-gradient(130deg, #5f0f40 0%, #fb8b24 100%)",
+      "content": [
+        {
+          "heading": "Strong rituals reduce chaos",
+          "paragraphs": [
+            "A weekly editorial sync creates alignment around launch priorities.",
+            "Clear ownership for each story keeps delivery predictable and reduces last-minute churn."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "performance-first-frontend",
+      "title": "Performance-first front-end techniques for modern websites",
+      "excerpt": "Practical wins for load speed, visual stability, and interaction performance.",
+      "category": "Engineering",
+      "section": "features",
+      "date": "2025-12-18",
+      "readTime": "8 min read",
+      "author": "Web Platform",
+      "heroStyle": "linear-gradient(130deg, #2a2a72 0%, #009ffd 100%)",
+      "content": [
+        {
+          "heading": "Performance is a feature",
+          "paragraphs": [
+            "Fast pages improve engagement, trust, and conversion.",
+            "Optimizing images, reducing JavaScript payloads, and prioritizing above-the-fold content are high-impact steps."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "media-embeds",
+      "title": "Version 2.4 introduces richer media embeds and auto-summaries",
+      "excerpt": "New tooling helps editors produce visually rich stories with less manual effort.",
+      "category": "Product",
+      "section": "updates",
+      "date": "2025-11-20",
+      "readTime": "3 min read",
+      "author": "Product Team",
+      "content": [
+        {
+          "heading": "A lighter workflow",
+          "paragraphs": [
+            "Editors can now drop links and generate clean embeds instantly.",
+            "Auto-summaries create draft intros that speed up publishing without replacing editorial review."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "editorial-templates",
+      "title": "A fresh set of editorial templates is now available for all teams",
+      "excerpt": "Templates standardize quality while keeping room for unique voice and storytelling.",
+      "category": "Design",
+      "section": "updates",
+      "date": "2025-10-12",
+      "readTime": "3 min read",
+      "author": "Design Systems",
+      "content": [
+        {
+          "heading": "Start with structure, finish with voice",
+          "paragraphs": [
+            "Templates reduce setup friction and help teams launch content faster.",
+            "Each template includes guidance for headlines, summaries, and media placement."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "creator-spotlight",
+      "title": "Creators spotlight: three teams using narrative design brilliantly",
+      "excerpt": "A look at teams combining data, visuals, and writing to build memorable launch stories.",
+      "category": "Community",
+      "section": "updates",
+      "date": "2025-09-05",
+      "readTime": "4 min read",
+      "author": "Community",
+      "content": [
+        {
+          "heading": "Great stories are collaborative",
+          "paragraphs": [
+            "The best newsroom outcomes happen when product, design, and writing collaborate early.",
+            "Shared planning and clear metrics help each story deliver impact."
+          ]
+        }
+      ]
+    }
+  ]
+}

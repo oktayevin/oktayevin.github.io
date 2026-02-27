@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Article | Newsroom Blog</title>
+  <style>
+    :root {
+      --bg: #fff;
+      --text: #1d1d1f;
+      --muted: #6e6e73;
+      --link: #0066cc;
+      --border: #d2d2d7;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "SF Pro Text", "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+    }
+    a { color: var(--link); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: saturate(180%) blur(20px);
+      background: rgba(255,255,255,0.8);
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+    }
+    .topbar-inner {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 0.9rem 1.2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .brand { font-weight: 600; color: var(--text); }
+    .article-wrap {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 2rem 1.2rem 4rem;
+    }
+    .category {
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+    }
+    h1 {
+      margin: 0;
+      font-size: clamp(2rem, 5vw, 4rem);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      max-width: 900px;
+    }
+    .subhead {
+      margin-top: 1rem;
+      max-width: 750px;
+      color: #424245;
+      font-size: 1.2rem;
+    }
+    .meta {
+      margin-top: 1.2rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+    .hero {
+      margin: 2rem 0;
+      width: 100%;
+      border-radius: 24px;
+      height: min(48vw, 420px);
+      background: linear-gradient(130deg, #1f1f1f, #606060);
+    }
+    .content {
+      max-width: 760px;
+      margin-top: 2rem;
+    }
+    .content h2 {
+      margin: 2rem 0 0.6rem;
+      font-size: 1.6rem;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+    .content p {
+      margin: 0 0 1rem;
+      font-size: 1.08rem;
+      color: #2b2b2d;
+    }
+    .divider {
+      border: 0;
+      border-top: 1px solid var(--border);
+      margin: 2.5rem 0;
+    }
+    .status { color: var(--muted); }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="blog.html">Newsroom Blog</a>
+      <a href="blog.html">All Stories</a>
+    </div>
+  </header>
+
+  <main class="article-wrap">
+    <div id="articleRoot">
+      <p class="status">Loading article…</p>
+    </div>
+  </main>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const articleId = params.get('id');
+
+    const dateFormat = (isoDate) => new Date(isoDate).toLocaleDateString('en-US', {
+      month: 'long',
+      day: 'numeric',
+      year: 'numeric'
+    });
+
+    const renderNotFound = () => {
+      document.title = 'Article not found | Newsroom Blog';
+      document.getElementById('articleRoot').innerHTML = `
+        <p class="status">This story was not found. <a href="blog.html">Back to blog</a>.</p>
+      `;
+    };
+
+    async function loadArticle() {
+      if (!articleId) {
+        renderNotFound();
+        return;
+      }
+
+      try {
+        const response = await fetch('blog-posts.json');
+        if (!response.ok) {
+          throw new Error('Unable to fetch posts.');
+        }
+
+        const data = await response.json();
+        const post = (data.posts || []).find((item) => item.id === articleId);
+
+        if (!post) {
+          renderNotFound();
+          return;
+        }
+
+        document.title = `${post.title} | ${data.site?.title || 'Newsroom Blog'}`;
+
+        const contentHtml = (post.content || []).map((section) => `
+          <section>
+            <h2>${section.heading}</h2>
+            ${(section.paragraphs || []).map((paragraph) => `<p>${paragraph}</p>`).join('')}
+          </section>
+        `).join('');
+
+        document.getElementById('articleRoot').innerHTML = `
+          <p class="category">${post.category}</p>
+          <h1>${post.title}</h1>
+          <p class="subhead">${post.excerpt || ''}</p>
+          <p class="meta">${dateFormat(post.date)} · ${post.readTime || ''} · By ${post.author || 'Newsroom Team'}</p>
+          <div class="hero" style="background: ${post.heroStyle || 'linear-gradient(130deg, #1f1f1f, #606060)'};"></div>
+          <div class="content">${contentHtml}</div>
+          <hr class="divider" />
+          <a href="blog.html">← Back to all stories</a>
+        `;
+      } catch (error) {
+        document.getElementById('articleRoot').innerHTML = `
+          <p class="status">Could not load this story right now. ${error.message}</p>
+        `;
+      }
+    }
+
+    loadArticle();
+  </script>
+</body>
+</html>
