@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Article | Newsroom Blog</title>
+  <title>Article | Oktay Evin</title>
   <style>
     :root {
       --bg: #fff;
@@ -125,7 +125,7 @@
     });
 
     const renderNotFound = () => {
-      document.title = 'Article not found | Newsroom Blog';
+      document.title = 'Article not found | Oktay Evin';
       document.getElementById('articleRoot').innerHTML = `
         <p class="status">This story was not found. <a href="blog.html">Back to blog</a>.</p>
       `;
@@ -151,7 +151,7 @@
           return;
         }
 
-        document.title = `${post.title} | ${data.site?.title || 'Newsroom Blog'}`;
+        document.title = `${post.title} | ${data.site?.title || 'Oktay Evin'}`;
 
         const contentHtml = (post.content || []).map((section) => `
           <section>
@@ -164,7 +164,7 @@
           <p class="category">${post.category}</p>
           <h1>${post.title}</h1>
           <p class="subhead">${post.excerpt || ''}</p>
-          <p class="meta">${dateFormat(post.date)} · ${post.readTime || ''} · By ${post.author || 'Newsroom Team'}</p>
+          <p class="meta">${dateFormat(post.date)} · ${post.readTime || ''} · By ${post.author || 'Oktay Evin'}</p>
           <div class="hero" style="background: ${post.heroStyle || 'linear-gradient(130deg, #1f1f1f, #606060)'};"></div>
           <div class="content">${contentHtml}</div>
           <hr class="divider" />
