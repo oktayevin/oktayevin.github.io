@@ -150,7 +150,7 @@
 
       return `
         <article class="card">
-          <a class="card-link" href="article.html?id=${encodeURIComponent(post.id)}">
+          <a class="card-link" href="article?id=${encodeURIComponent(post.id)}">
             ${media}
             <div class="card-content">
               <span class="label">${post.category}</span>
@@ -189,7 +189,7 @@
         heroContainer.innerHTML = `
           ${featured ? `
             <article class="card">
-              <a class="card-link" href="article.html?id=${encodeURIComponent(featured.id)}">
+              <a class="card-link" href="article?id=${encodeURIComponent(featured.id)}">
                 <div class="card-media" style="background-image: ${featured.heroStyle};"></div>
                 <div class="card-content">
                   <span class="label">${featured.category}</span>
