@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Link in Bio</title>
+    <meta
+      name="description"
+      content="Modern ve şık bir link in bio sayfası."
+    />
+    <style>
+      :root {
+        --bg: #080b14;
+        --bg-soft: rgba(255, 255, 255, 0.06);
+        --text: #f5f7ff;
+        --muted: #b7bfd6;
+        --accent-1: #5b8cff;
+        --accent-2: #8b5dff;
+        --ring: rgba(139, 93, 255, 0.5);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        font-family: Inter, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        color: var(--text);
+        background:
+          radial-gradient(circle at 15% 20%, rgba(91, 140, 255, 0.35), transparent 40%),
+          radial-gradient(circle at 85% 0%, rgba(139, 93, 255, 0.35), transparent 42%),
+          var(--bg);
+        padding: 24px;
+      }
+
+      .card {
+        width: min(100%, 430px);
+        background: linear-gradient(
+            140deg,
+            rgba(255, 255, 255, 0.08),
+            rgba(255, 255, 255, 0.02)
+          ),
+          rgba(14, 20, 34, 0.82);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 28px;
+        backdrop-filter: blur(10px);
+        padding: 30px 24px 24px;
+        box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+      }
+
+      .profile {
+        text-align: center;
+      }
+
+      .avatar {
+        width: 88px;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        margin-inline: auto;
+        margin-bottom: 14px;
+        display: grid;
+        place-items: center;
+        font-weight: 700;
+        font-size: 1.6rem;
+        letter-spacing: 0.04em;
+        background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+        box-shadow:
+          0 10px 30px rgba(91, 140, 255, 0.35),
+          0 0 0 4px rgba(255, 255, 255, 0.08);
+      }
+
+      h1 {
+        margin: 0;
+        font-size: 1.45rem;
+      }
+
+      .bio {
+        margin: 8px 0 24px;
+        color: var(--muted);
+        font-size: 0.97rem;
+      }
+
+      .links {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: grid;
+        gap: 12px;
+      }
+
+      .links a {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        text-decoration: none;
+        color: var(--text);
+        background: var(--bg-soft);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 14px;
+        padding: 14px 16px;
+        font-weight: 600;
+        transition: transform 180ms ease, border-color 180ms ease, background 180ms ease,
+          box-shadow 180ms ease;
+      }
+
+      .links a:hover,
+      .links a:focus-visible {
+        transform: translateY(-2px);
+        background: rgba(255, 255, 255, 0.12);
+        border-color: var(--ring);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.28);
+        outline: none;
+      }
+
+      .label {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .dot {
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+      }
+
+      .arrow {
+        color: var(--muted);
+      }
+
+      footer {
+        margin-top: 18px;
+        text-align: center;
+        font-size: 0.8rem;
+        color: var(--muted);
+      }
+    </style>
+  </head>
+  <body>
+    <main class="card" aria-label="Link in bio kartı">
+      <section class="profile">
+        <div class="avatar" aria-hidden="true">OE</div>
+        <h1>Oktay Evin</h1>
+        <p class="bio">Dijital üretim, yazılım ve içerik dünyasından hızlı bağlantılar.</p>
+      </section>
+
+      <ul class="links" aria-label="Sosyal ve içerik bağlantıları">
+        <li>
+          <a href="https://github.com" target="_blank" rel="noreferrer noopener">
+            <span class="label"><span class="dot"></span>GitHub</span>
+            <span class="arrow" aria-hidden="true">→</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://linkedin.com" target="_blank" rel="noreferrer noopener">
+            <span class="label"><span class="dot"></span>LinkedIn</span>
+            <span class="arrow" aria-hidden="true">→</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://x.com" target="_blank" rel="noreferrer noopener">
+            <span class="label"><span class="dot"></span>X / Twitter</span>
+            <span class="arrow" aria-hidden="true">→</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://medium.com" target="_blank" rel="noreferrer noopener">
+            <span class="label"><span class="dot"></span>Medium Yazıları</span>
+            <span class="arrow" aria-hidden="true">→</span>
+          </a>
+        </li>
+        <li>
+          <a href="mailto:hello@example.com">
+            <span class="label"><span class="dot"></span>E-posta</span>
+            <span class="arrow" aria-hidden="true">→</span>
+          </a>
+        </li>
+      </ul>
+
+      <footer>© 2026 • Link in Bio</footer>
+    </main>
+  </body>
+</html>
