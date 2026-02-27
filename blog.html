@@ -13,9 +13,7 @@
       --link: #0066cc;
       --border: #d2d2d7;
     }
-
     * { box-sizing: border-box; }
-
     body {
       margin: 0;
       font-family: "SF Pro Text", "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -23,14 +21,8 @@
       background: var(--bg);
       line-height: 1.5;
     }
-
-    a {
-      color: var(--link);
-      text-decoration: none;
-    }
-
+    a { color: var(--link); text-decoration: none; }
     a:hover { text-decoration: underline; }
-
     .topbar {
       position: sticky;
       top: 0;
@@ -39,7 +31,6 @@
       background: rgba(255,255,255,0.75);
       border-bottom: 1px solid rgba(0,0,0,0.08);
     }
-
     .topbar-inner {
       max-width: 1100px;
       margin: 0 auto;
@@ -49,73 +40,25 @@
       justify-content: space-between;
       gap: 1rem;
     }
-
-    .brand {
-      font-size: 1.05rem;
-      font-weight: 600;
-      letter-spacing: -0.01em;
-    }
-
-    .nav {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-      font-size: 0.95rem;
-      color: var(--muted);
-    }
-
-    .container {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 2.5rem 1.2rem 4rem;
-    }
-
-    .eyebrow {
-      margin: 0;
-      font-size: 0.95rem;
-      color: var(--muted);
-      font-weight: 500;
-    }
-
-    h1 {
-      margin: 0.3rem 0 1rem;
-      font-size: clamp(2rem, 3.5vw, 3.8rem);
-      line-height: 1.04;
-      letter-spacing: -0.02em;
-    }
-
-    .intro {
-      max-width: 760px;
-      font-size: 1.15rem;
-      color: #424245;
-      margin-bottom: 2.25rem;
-    }
-
-    .hero {
-      display: grid;
-      grid-template-columns: 1.2fr 1fr;
-      gap: 1.2rem;
-      margin-bottom: 2.5rem;
-    }
-
+    .brand { font-size: 1.05rem; font-weight: 600; letter-spacing: -0.01em; }
+    .nav { display: flex; gap: 1rem; flex-wrap: wrap; font-size: 0.95rem; color: var(--muted); }
+    .container { max-width: 1100px; margin: 0 auto; padding: 2.5rem 1.2rem 4rem; }
+    .eyebrow { margin: 0; font-size: 0.95rem; color: var(--muted); font-weight: 500; }
+    h1 { margin: 0.3rem 0 1rem; font-size: clamp(2rem, 3.5vw, 3.8rem); line-height: 1.04; letter-spacing: -0.02em; }
+    .intro { max-width: 760px; font-size: 1.15rem; color: #424245; margin-bottom: 2.25rem; }
+    .hero { display: grid; grid-template-columns: 1.2fr 1fr; gap: 1.2rem; margin-bottom: 2.5rem; }
     .card {
       background: var(--surface);
       border-radius: 20px;
       overflow: hidden;
       border: 1px solid rgba(0,0,0,0.06);
       box-shadow: 0 8px 30px rgba(0,0,0,0.05);
+      height: 100%;
     }
-
-    .card-media {
-      height: 320px;
-      background-size: cover;
-      background-position: center;
-    }
-
-    .card-content {
-      padding: 1.4rem;
-    }
-
+    .card-link { display: block; height: 100%; color: inherit; }
+    .card-link:hover { text-decoration: none; }
+    .card-media { height: 320px; background-size: cover; background-position: center; }
+    .card-content { padding: 1.4rem; }
     .label {
       display: inline-block;
       color: var(--muted);
@@ -125,63 +68,23 @@
       font-weight: 600;
       margin-bottom: 0.5rem;
     }
-
-    .headline {
-      margin: 0 0 0.7rem;
-      font-size: clamp(1.4rem, 2vw, 2rem);
-      letter-spacing: -0.02em;
-      line-height: 1.12;
-    }
-
-    .summary {
-      margin: 0;
-      color: #424245;
-      font-size: 1rem;
-    }
-
-    .stack {
-      display: grid;
-      grid-template-rows: 1fr 1fr;
-      gap: 1.2rem;
-    }
-
+    .headline { margin: 0 0 0.7rem; font-size: clamp(1.4rem, 2vw, 2rem); letter-spacing: -0.02em; line-height: 1.12; }
+    .summary { margin: 0; color: #424245; font-size: 1rem; }
+    .stack { display: grid; grid-template-rows: 1fr 1fr; gap: 1.2rem; }
     .stack .card-media { height: 140px; }
-    .stack .headline { font-size: 1.25rem; }
-
-    .section-title {
-      margin: 2rem 0 1rem;
-      font-size: 1.6rem;
-      letter-spacing: -0.02em;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 1.2rem;
-    }
-
+    .stack .headline { font-size: 1.25rem; margin-bottom: 0.3rem; }
+    .section-title { margin: 2rem 0 1rem; font-size: 1.6rem; letter-spacing: -0.02em; }
+    .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.2rem; }
     .grid .card-media { height: 180px; }
-
-    .meta {
-      margin-top: 1rem;
-      color: var(--muted);
-      font-size: 0.84rem;
-    }
-
-    footer {
-      margin-top: 3rem;
-      border-top: 1px solid var(--border);
-      padding-top: 1rem;
-      color: var(--muted);
-      font-size: 0.9rem;
-    }
-
+    .meta { margin-top: 1rem; color: var(--muted); font-size: 0.84rem; }
+    footer { margin-top: 3rem; border-top: 1px solid var(--border); padding-top: 1rem; color: var(--muted); font-size: 0.9rem; }
+    .status { margin-top: 2rem; color: var(--muted); }
+    .hidden { display: none; }
     @media (max-width: 940px) {
       .hero { grid-template-columns: 1fr; }
       .stack { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
       .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
-
     @media (max-width: 620px) {
       .stack { grid-template-columns: 1fr; }
       .grid { grid-template-columns: 1fr; }
@@ -192,7 +95,7 @@
 <body>
   <header class="topbar">
     <div class="topbar-inner">
-      <div class="brand">Newsroom Blog</div>
+      <div class="brand" id="siteTitle">Newsroom Blog</div>
       <nav class="nav" aria-label="Primary">
         <a href="#latest">Latest</a>
         <a href="#features">Features</a>
@@ -204,111 +107,114 @@
 
   <main class="container">
     <p class="eyebrow">Blog</p>
-    <h1>Stories that move ideas forward.</h1>
-    <p class="intro">
-      A clean, editorial-style blog inspired by the Apple Newsroom aesthetic—large typography,
-      generous spacing, and image-led storytelling.
-    </p>
+    <h1 id="heroTitle">Stories that move ideas forward.</h1>
+    <p class="intro" id="heroIntro">Loading posts…</p>
 
-    <section class="hero" id="latest">
-      <article class="card">
-        <div class="card-media" style="background-image: linear-gradient(120deg, #0d1f4d 0%, #2f6fe4 45%, #7fd5ff 100%);"></div>
-        <div class="card-content">
-          <span class="label">Featured Story</span>
-          <h2 class="headline">How design systems help teams build products faster and better.</h2>
-          <p class="summary">From typography to interactions, learn how consistency at scale creates better user experiences without sacrificing creativity.</p>
-          <p class="meta">March 2026</p>
-        </div>
-      </article>
-
-      <div class="stack">
-        <article class="card">
-          <div class="card-media" style="background-image: linear-gradient(130deg, #4f1c7d 0%, #d75bef 100%);"></div>
-          <div class="card-content">
-            <span class="label">Update</span>
-            <h3 class="headline">New publishing workflow reduces release time by 40%.</h3>
-          </div>
-        </article>
-
-        <article class="card">
-          <div class="card-media" style="background-image: linear-gradient(130deg, #1f5f4a 0%, #6fd8b5 100%);"></div>
-          <div class="card-content">
-            <span class="label">Behind the scenes</span>
-            <h3 class="headline">Building an editorial voice for a fast-moving product team.</h3>
-          </div>
-        </article>
-      </div>
-    </section>
+    <section class="hero" id="latest"></section>
 
     <section id="features">
       <h2 class="section-title">Feature Stories</h2>
-      <div class="grid">
-        <article class="card">
-          <div class="card-media" style="background-image: linear-gradient(130deg, #1d3557 0%, #4ea8de 100%);"></div>
-          <div class="card-content">
-            <span class="label">Interview</span>
-            <h3 class="headline">Inside the strategy behind accessible product design.</h3>
-            <p class="meta">February 2026</p>
-          </div>
-        </article>
-
-        <article class="card">
-          <div class="card-media" style="background-image: linear-gradient(130deg, #5f0f40 0%, #fb8b24 100%);"></div>
-          <div class="card-content">
-            <span class="label">Culture</span>
-            <h3 class="headline">What cross-functional teams can learn from newsroom habits.</h3>
-            <p class="meta">January 2026</p>
-          </div>
-        </article>
-
-        <article class="card">
-          <div class="card-media" style="background-image: linear-gradient(130deg, #2a2a72 0%, #009ffd 100%);"></div>
-          <div class="card-content">
-            <span class="label">Engineering</span>
-            <h3 class="headline">Performance-first front-end techniques for modern websites.</h3>
-            <p class="meta">December 2025</p>
-          </div>
-        </article>
-      </div>
+      <div class="grid" id="featuresGrid"></div>
     </section>
 
     <section id="updates">
       <h2 class="section-title">Recent Updates</h2>
-      <div class="grid">
-        <article class="card">
-          <div class="card-content">
-            <span class="label">Product</span>
-            <h3 class="headline">Version 2.4 introduces richer media embeds and auto-summaries.</h3>
-            <p class="meta">Nov 20, 2025</p>
-          </div>
-        </article>
-
-        <article class="card">
-          <div class="card-content">
-            <span class="label">Design</span>
-            <h3 class="headline">A fresh set of editorial templates is now available for all teams.</h3>
-            <p class="meta">Oct 12, 2025</p>
-          </div>
-        </article>
-
-        <article class="card">
-          <div class="card-content">
-            <span class="label">Community</span>
-            <h3 class="headline">Creators spotlight: three teams using narrative design brilliantly.</h3>
-            <p class="meta">Sep 5, 2025</p>
-          </div>
-        </article>
-      </div>
+      <div class="grid" id="updatesGrid"></div>
     </section>
 
     <section id="media">
       <h2 class="section-title">Media Contact</h2>
-      <p class="summary">For press inquiries, interviews, and media resources, contact <a href="mailto:press@example.com">press@example.com</a>.</p>
+      <p class="summary">For press inquiries, interviews, and media resources, contact <a id="contactLink" href="mailto:press@example.com">press@example.com</a>.</p>
     </section>
 
+    <p class="status hidden" id="statusMessage"></p>
+
     <footer>
-      © 2026 Newsroom Blog. All rights reserved.
+      <span id="footerCopy"></span>
     </footer>
   </main>
+
+  <script>
+    const formatDate = (isoDate) => new Date(isoDate).toLocaleDateString('en-US', {
+      month: 'long',
+      day: 'numeric',
+      year: 'numeric'
+    });
+
+    const postMeta = (post) => `${formatDate(post.date)} · ${post.readTime}`;
+
+    const postCard = (post, withImage = true) => {
+      const media = withImage
+        ? `<div class="card-media" style="background-image: ${post.heroStyle || 'linear-gradient(130deg, #5f5f5f 0%, #8f8f8f 100%)'};"></div>`
+        : '';
+
+      return `
+        <article class="card">
+          <a class="card-link" href="article.html?id=${encodeURIComponent(post.id)}">
+            ${media}
+            <div class="card-content">
+              <span class="label">${post.category}</span>
+              <h3 class="headline">${post.title}</h3>
+              ${post.excerpt ? `<p class="summary">${post.excerpt}</p>` : ''}
+              <p class="meta">${postMeta(post)}</p>
+            </div>
+          </a>
+        </article>
+      `;
+    };
+
+    async function loadBlog() {
+      const status = document.getElementById('statusMessage');
+      try {
+        const response = await fetch('blog-posts.json');
+        if (!response.ok) {
+          throw new Error(`Request failed: ${response.status}`);
+        }
+
+        const data = await response.json();
+        const posts = data.posts || [];
+        const featured = posts.find((post) => post.section === 'featured');
+        const latest = posts.filter((post) => post.section === 'latest').slice(0, 2);
+        const featureStories = posts.filter((post) => post.section === 'features');
+        const updates = posts.filter((post) => post.section === 'updates');
+
+        document.getElementById('siteTitle').textContent = data.site?.title || 'Newsroom Blog';
+        document.getElementById('heroTitle').textContent = data.site?.tagline || 'Stories that move ideas forward.';
+        document.getElementById('heroIntro').textContent = data.site?.intro || 'Latest stories from our newsroom.';
+        document.getElementById('contactLink').textContent = data.site?.contactEmail || 'press@example.com';
+        document.getElementById('contactLink').href = `mailto:${data.site?.contactEmail || 'press@example.com'}`;
+        document.getElementById('footerCopy').textContent = `© ${new Date().getFullYear()} ${data.site?.title || 'Newsroom Blog'}. All rights reserved.`;
+
+        const heroContainer = document.getElementById('latest');
+        heroContainer.innerHTML = `
+          ${featured ? `
+            <article class="card">
+              <a class="card-link" href="article.html?id=${encodeURIComponent(featured.id)}">
+                <div class="card-media" style="background-image: ${featured.heroStyle};"></div>
+                <div class="card-content">
+                  <span class="label">${featured.category}</span>
+                  <h2 class="headline">${featured.title}</h2>
+                  <p class="summary">${featured.excerpt}</p>
+                  <p class="meta">${postMeta(featured)}</p>
+                </div>
+              </a>
+            </article>
+          ` : ''}
+          <div class="stack">
+            ${latest.map((post) => postCard(post)).join('')}
+          </div>
+        `;
+
+        document.getElementById('featuresGrid').innerHTML = featureStories.map((post) => postCard(post)).join('');
+        document.getElementById('updatesGrid').innerHTML = updates.map((post) => postCard(post, false)).join('');
+      } catch (error) {
+        status.textContent = `Unable to load posts right now. ${error.message}`;
+        status.classList.remove('hidden');
+        document.getElementById('heroIntro').textContent = 'Please try again later.';
+      }
+    }
+
+    loadBlog();
+  </script>
 </body>
 </html>
