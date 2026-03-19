@@ -1,6 +1,6 @@
 globalThis.cv = Object.assign(globalThis.cv || {}, {
   "general": {
-    "profilePhoto": "assets/images/profile.jpg",
+    "profilePhoto": "https://oktayevin.com/assets/images/profile.jpg",
     "username": "oktayevin",
     "displayName": "Oktay Evin",
     "profession": "Student & iOS Developer",
