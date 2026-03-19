@@ -1,530 +1,601 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Daily Briefing — Oktay</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-<style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Daily Briefing — Oktay</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  :root {
-    --bg:          #000000;
-    --surface-1:   #1c1c1e;
-    --surface-2:   #2c2c2e;
-    --sep:         rgba(255,255,255,0.08);
-    --text-p:      rgba(255,255,255,0.92);
-    --text-s:      rgba(255,255,255,0.50);
-    --text-t:      rgba(255,255,255,0.28);
-    --blue:        #0a84ff;
-    --green:       #30d158;
-    --red:         #ff453a;
-    --yellow:      #ffd60a;
-    --purple:      #bf5af2;
-    --orange:      #ff9f0a;
-    --teal:        #5ac8fa;
-    --radius-card: 18px;
-    --radius-inner:12px;
-    --radius-badge:8px;
-  }
+    :root {
+      --bg:        #000000;
+      --s1:        #1c1c1e;
+      --s2:        #2c2c2e;
+      --sep:       rgba(255,255,255,0.08);
+      --tp:        rgba(255,255,255,0.92);
+      --ts:        rgba(255,255,255,0.50);
+      --tt:        rgba(255,255,255,0.28);
+      --blue:      #0a84ff;
+      --green:     #30d158;
+      --red:       #ff453a;
+      --yellow:    #ffd60a;
+      --purple:    #bf5af2;
+      --orange:    #ff9f0a;
+      --r-card:    18px;
+      --r-inner:   12px;
+      --r-badge:   8px;
+    }
 
-  html { background: var(--bg); color: var(--text-p); font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; }
+    html { scroll-behavior: smooth; }
 
-  body { max-width: 1280px; margin: 0 auto; padding: 0 0 60px; }
+    body {
+      background: var(--bg);
+      color: var(--tp);
+      font-family: 'Inter', -apple-system, sans-serif;
+      font-size: 15px;
+      line-height: 1.55;
+      min-height: 100vh;
+      padding: 0 0 60px;
+    }
 
-  /* ── HERO ── */
-  .hero {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 52px 40px 36px;
-    border-bottom: 1px solid var(--sep);
-  }
-  .hero-left .greeting { font-size: 12px; font-weight: 500; color: var(--text-t); letter-spacing: .06em; text-transform: uppercase; margin-bottom: 8px; }
-  .hero-left .date-big { font-family: 'Playfair Display', serif; font-size: 46px; font-weight: 700; color: var(--text-p); line-height: 1.1; margin-bottom: 8px; }
-  .hero-left .location { font-size: 13px; color: var(--text-t); }
-  .hero-right { text-align: right; }
-  .hero-right .clock { font-size: 56px; font-weight: 200; color: var(--text-p); line-height: 1; letter-spacing: -2px; }
-  .hero-right .tz { font-size: 12px; color: var(--text-t); margin-top: 6px; letter-spacing: .04em; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    .grid-7-5  { display: grid; grid-template-columns: 7fr 5fr; gap: 16px; }
+    .grid-6-6  { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .stack     { display: flex; flex-direction: column; gap: 16px; }
 
-  /* ── LAYOUT ── */
-  .main { padding: 28px 40px 0; display: flex; flex-direction: column; gap: 20px; }
+    .card {
+      background: var(--s1);
+      border-radius: var(--r-card);
+      padding: 22px 24px;
+      border: 1px solid var(--sep);
+      transition: opacity 0.18s ease;
+    }
+    .card:hover { opacity: 0.96; }
+    .card-title {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ts);
+      margin-bottom: 16px;
+    }
 
-  /* ── CARDS ── */
-  .card {
-    background: var(--surface-1);
-    border-radius: var(--radius-card);
-    border: 1px solid rgba(255,255,255,0.06);
-    box-shadow: 0 2px 20px rgba(0,0,0,0.4);
-    overflow: hidden;
-    transition: opacity 0.18s;
-  }
-  .card:hover { opacity: 0.96; }
+    /* HERO */
+    .hero {
+      background: linear-gradient(160deg, #0d0d0f 0%, #111113 60%, #0a0a0c 100%);
+      border-bottom: 1px solid var(--sep);
+      padding: 52px 0 44px;
+      margin-bottom: 24px;
+    }
+    .hero-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 24px;
+    }
+    .hero-label { font-size: 14px; font-weight: 500; color: var(--ts); letter-spacing: 0.02em; margin-bottom: 8px; }
+    .hero-date  {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 46px; font-weight: 700; line-height: 1.1; color: var(--tp); margin-bottom: 10px;
+    }
+    .hero-location { font-size: 14px; color: var(--ts); display: flex; align-items: center; gap: 6px; }
+    .hero-right    { text-align: right; flex-shrink: 0; }
+    .hero-clock    {
+      font-size: 42px; font-weight: 300; letter-spacing: -0.02em;
+      color: var(--tp); font-variant-numeric: tabular-nums;
+    }
+    .hero-tz    { font-size: 12px; color: var(--tt); margin-top: 4px; }
+    .hero-holiday {
+      margin-top: 14px;
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255,214,10,0.12);
+      border: 1px solid rgba(255,214,10,0.25);
+      border-radius: 20px; padding: 6px 16px;
+      font-size: 13px; font-weight: 500; color: var(--yellow);
+    }
 
-  .card-header {
-    padding: 16px 20px 14px;
-    border-bottom: 1px solid var(--sep);
-    display: flex; align-items: center; gap: 8px;
-  }
-  .card-header .icon { font-size: 14px; }
-  .card-header h2 { font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--text-s); }
-  .card-header .count { font-size: 11px; color: var(--text-t); margin-left: auto; }
+    /* ALERT */
+    .alert-card {
+      background: rgba(255,69,58,0.10);
+      border: 1px solid rgba(255,69,58,0.30);
+      border-radius: var(--r-card);
+      padding: 16px 22px; margin-bottom: 16px;
+      display: flex; align-items: flex-start; gap: 14px;
+    }
+    .alert-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--red); flex-shrink: 0; margin-top: 4px;
+      animation: pulse 1.8s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%,100% { box-shadow: 0 0 0 0 rgba(255,69,58,0.5); }
+      50%      { box-shadow: 0 0 0 6px rgba(255,69,58,0); }
+    }
+    .alert-title { font-size: 13px; font-weight: 600; color: var(--red); margin-bottom: 3px; }
+    .alert-body  { font-size: 13px; color: rgba(255,255,255,0.70); line-height: 1.5; }
 
-  /* ── ALERT ── */
-  .alert-card {
-    background: rgba(255,69,58,0.08);
-    border: 1px solid rgba(255,69,58,0.2);
-    border-radius: var(--radius-card);
-    padding: 16px 20px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-  .alert-dot {
-    width: 8px; height: 8px; border-radius: 50%;
-    background: var(--red);
-    box-shadow: 0 0 0 0 rgba(255,69,58,0.5);
-    animation: pulse 1.6s ease-in-out infinite;
-    flex-shrink: 0;
-  }
-  @keyframes pulse {
-    0%   { box-shadow: 0 0 0 0 rgba(255,69,58,0.5); }
-    70%  { box-shadow: 0 0 0 8px rgba(255,69,58,0); }
-    100% { box-shadow: 0 0 0 0 rgba(255,69,58,0); }
-  }
-  .alert-text { font-size: 13px; font-weight: 500; color: rgba(255,100,90,0.95); }
+    /* ACTION ITEMS */
+    .action-item {
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 13px 0; border-bottom: 1px solid var(--sep);
+    }
+    .action-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .action-num  { font-size: 12px; font-weight: 700; color: var(--tt); min-width: 20px; padding-top: 2px; }
+    .action-text { flex: 1; font-size: 14px; font-weight: 500; color: var(--tp); }
+    .action-sub  { font-size: 12px; color: var(--ts); margin-top: 2px; font-weight: 400; }
+    .badge {
+      display: inline-block; font-size: 10px; font-weight: 700;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      padding: 3px 8px; border-radius: var(--r-badge); flex-shrink: 0;
+    }
+    .badge-red    { background: rgba(255,69,58,0.18);  color: var(--red);    }
+    .badge-yellow { background: rgba(255,214,10,0.14); color: var(--yellow); }
 
-  /* ── ACTION ITEMS ── */
-  .action-row {
-    display: flex; align-items: flex-start; gap: 14px;
-    padding: 14px 20px;
-    border-bottom: 1px solid var(--sep);
-  }
-  .action-row:last-child { border-bottom: none; }
-  .action-num { font-size: 13px; color: var(--text-t); font-weight: 500; min-width: 18px; padding-top: 1px; }
-  .action-body { flex: 1; }
-  .action-title { font-size: 14px; font-weight: 500; color: var(--text-p); margin-bottom: 3px; }
-  .action-sub { font-size: 12px; color: var(--text-s); }
-  .badge {
-    font-size: 10px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase;
-    padding: 3px 8px; border-radius: var(--radius-badge);
-    flex-shrink: 0; align-self: center;
-  }
-  .badge-red    { background: rgba(255,69,58,0.15);  color: var(--red); }
-  .badge-yellow { background: rgba(255,214,10,0.12); color: var(--yellow); }
-  .badge-blue   { background: rgba(10,132,255,0.15); color: var(--blue); }
-  .badge-green  { background: rgba(48,209,88,0.12);  color: var(--green); }
+    /* EMAILS */
+    .email-item {
+      display: flex; align-items: flex-start;
+      padding: 13px 0; border-bottom: 1px solid var(--sep);
+    }
+    .email-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .email-stripe {
+      width: 3px; border-radius: 2px; min-height: 44px;
+      flex-shrink: 0; margin-right: 14px; align-self: stretch;
+    }
+    .email-body  { flex: 1; min-width: 0; }
+    .email-from  { font-size: 12px; font-weight: 600; color: var(--ts); margin-bottom: 2px; }
+    .email-subj  { font-size: 13px; font-weight: 500; color: var(--tp); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .email-snip  { font-size: 12px; color: var(--tt); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .email-meta  { font-size: 11px; color: var(--tt); text-align: right; flex-shrink: 0; margin-left: 10px; padding-top: 2px; }
 
-  /* ── TWO-COL ROW ── */
-  .two-col { display: grid; grid-template-columns: 7fr 5fr; gap: 20px; }
+    /* CALENDAR */
+    .cal-item {
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 11px 0; border-bottom: 1px solid var(--sep);
+    }
+    .cal-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .cal-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; margin-top: 5px; }
+    .cal-title { font-size: 13px; font-weight: 500; color: var(--tp); }
+    .cal-time  { font-size: 11px; color: var(--ts); margin-top: 2px; }
+    .cal-empty {
+      display: flex; flex-direction: column; align-items: center;
+      justify-content: center; padding: 24px 0; gap: 8px;
+    }
+    .cal-empty-icon { font-size: 28px; }
+    .cal-empty-text { font-size: 13px; color: var(--ts); }
 
-  /* ── EMAILS ── */
-  .email-item {
-    display: flex; gap: 12px;
-    padding: 14px 20px;
-    border-bottom: 1px solid var(--sep);
-  }
-  .email-item:last-child { border-bottom: none; }
-  .email-stripe { width: 3px; border-radius: 2px; flex-shrink: 0; align-self: stretch; min-height: 44px; }
-  .email-stripe.urgent { background: var(--red); }
-  .email-stripe.review { background: var(--yellow); }
-  .email-stripe.low    { background: var(--surface-2); }
-  .email-body { flex: 1; min-width: 0; }
-  .email-sender { font-size: 14px; font-weight: 600; color: var(--text-p); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .email-subject { font-size: 13px; color: var(--text-s); margin: 2px 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .email-snippet { font-size: 12px; color: var(--text-t); overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
-  .email-time { font-size: 11px; color: var(--text-t); white-space: nowrap; align-self: flex-start; padding-top: 2px; }
+    /* READING */
+    .book-spine { display: flex; gap: 16px; margin-bottom: 20px; align-items: flex-start; }
+    .spine-bar {
+      width: 6px; border-radius: 3px;
+      background: linear-gradient(180deg, var(--blue) 0%, var(--purple) 100%);
+      align-self: stretch; min-height: 60px; flex-shrink: 0;
+    }
+    .book-title  {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 20px; font-weight: 700; color: var(--tp); line-height: 1.25; margin-bottom: 3px;
+    }
+    .book-author { font-size: 13px; color: var(--ts); }
+    .book-lang   { font-size: 11px; color: var(--tt); margin-top: 4px; }
 
-  /* ── CALENDAR ── */
-  .calendar-inner { padding: 0 20px; }
-  .timeline-item {
-    display: flex; gap: 12px;
-    padding: 14px 0;
-    border-bottom: 1px solid var(--sep);
-    position: relative;
-  }
-  .timeline-item:last-child { border-bottom: none; }
-  .timeline-left { display: flex; flex-direction: column; align-items: center; width: 10px; flex-shrink: 0; margin-top: 4px; }
-  .t-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
-  .t-line { flex: 1; width: 1px; background: var(--sep); margin-top: 4px; }
-  .t-time { font-size: 11px; color: var(--text-t); width: 40px; flex-shrink: 0; padding-top: 2px; }
-  .t-body { flex: 1; }
-  .t-title { font-size: 13px; font-weight: 500; color: var(--text-p); }
-  .t-title.cancelled { text-decoration: line-through; color: var(--text-t); }
-  .t-cal { font-size: 11px; color: var(--text-t); margin-top: 2px; }
-  .clear-day { padding: 28px 20px; text-align: center; font-size: 13px; color: var(--text-t); }
+    .progress-track {
+      height: 6px; background: var(--s2); border-radius: 3px;
+      overflow: hidden; margin-bottom: 14px;
+    }
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--blue), var(--purple));
+      border-radius: 3px; width: 0%;
+      transition: width 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
 
-  /* ── READING ── */
-  .reading-inner { padding: 20px; }
-  .reading-main { display: flex; gap: 20px; align-items: flex-start; margin-bottom: 20px; }
-  .book-spine {
-    width: 56px; height: 80px; border-radius: 6px;
-    background: linear-gradient(160deg, #1a2a4a 0%, #0d1b30 60%, #091520 100%);
-    box-shadow: inset -3px 0 6px rgba(0,0,0,0.4), inset 3px 0 4px rgba(255,255,255,0.05), 0 4px 12px rgba(0,0,0,0.5);
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
-    position: relative; overflow: hidden;
-  }
-  .book-spine::after { content:''; position:absolute; top:0; left:6px; width:2px; height:100%; background:rgba(255,255,255,0.06); }
-  .book-spine-text { font-size: 7px; font-weight: 700; color: rgba(255,255,255,0.5); text-align: center; writing-mode: vertical-rl; letter-spacing: .08em; }
-  .reading-info { flex: 1; }
-  .reading-title { font-size: 17px; font-weight: 600; color: var(--text-p); margin-bottom: 4px; }
-  .reading-author { font-size: 13px; color: var(--text-s); margin-bottom: 6px; }
-  .reading-lang { font-size: 11px; color: var(--blue); font-weight: 500; margin-bottom: 14px; }
-  .progress-bar-wrap { background: var(--surface-2); border-radius: 4px; height: 4px; overflow: hidden; margin-bottom: 10px; }
-  .progress-bar-fill { height: 100%; background: var(--blue); border-radius: 4px; width: 0%; transition: width 1.2s cubic-bezier(0.25,0.46,0.45,0.94); }
-  .progress-pct { font-size: 11px; color: var(--text-s); margin-bottom: 16px; }
-  .reading-stats { display: flex; gap: 24px; }
-  .stat { text-align: left; }
-  .stat-value { font-size: 18px; font-weight: 600; color: var(--text-p); }
-  .stat-label { font-size: 11px; color: var(--text-t); margin-top: 2px; }
-  .reading-divider { height: 1px; background: var(--sep); margin: 16px 0; }
-  .finished-label { font-size: 11px; color: var(--text-t); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 10px; }
-  .finished-item { display: flex; align-items: center; gap: 10px; }
-  .finished-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); flex-shrink: 0; }
-  .finished-title { font-size: 13px; color: var(--text-s); }
-  .finished-meta { font-size: 11px; color: var(--text-t); margin-left: auto; }
+    .book-stats {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 22px;
+    }
+    .stat-box {
+      background: var(--s2); border-radius: var(--r-inner);
+      padding: 10px 12px; text-align: center;
+    }
+    .stat-val { font-size: 18px; font-weight: 700; color: var(--tp); }
+    .stat-lbl { font-size: 10px; color: var(--tt); text-transform: uppercase; letter-spacing: 0.05em; margin-top: 2px; }
 
-  /* ── NEWS ── */
-  .news-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-  .news-section-title { font-size: 11px; font-weight: 600; color: var(--text-s); text-transform: uppercase; letter-spacing: .06em; padding: 16px 20px 12px; }
-  .news-item {
-    padding: 12px 20px;
-    border-bottom: 1px solid var(--sep);
-  }
-  .news-item:last-child { border-bottom: none; }
-  .news-tag {
-    font-size: 10px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase;
-    padding: 2px 7px; border-radius: 5px; display: inline-block; margin-bottom: 6px;
-  }
-  .tag-world   { background: rgba(255,159,10,0.12); color: var(--orange); }
-  .tag-tech    { background: rgba(10,132,255,0.12);  color: var(--blue); }
-  .tag-biz     { background: rgba(48,209,88,0.12);  color: var(--green); }
-  .tag-turkey  { background: rgba(255,69,58,0.12);  color: var(--red); }
-  .news-headline { font-size: 14px; font-weight: 500; color: var(--text-p); margin-bottom: 5px; line-height: 1.4; }
-  .news-summary  { font-size: 12px; color: var(--text-s); line-height: 1.5; }
+    .divider { height: 1px; background: var(--sep); margin: 18px 0; }
 
-  /* ── FOOTER ── */
-  .footer { text-align: center; padding: 36px 40px 0; }
-  .footer-updated { font-size: 12px; color: var(--text-t); margin-bottom: 10px; }
-  .source-pills { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
-  .source-pill {
-    font-size: 11px; color: var(--text-t);
-    background: var(--surface-1); border: 1px solid var(--sep);
-    border-radius: 20px; padding: 4px 12px;
-  }
+    .recent-book {
+      display: flex; align-items: center; gap: 12px;
+      padding: 9px 0; border-bottom: 1px solid var(--sep);
+    }
+    .recent-book:last-child { border-bottom: none; }
+    .recent-icon  { font-size: 18px; }
+    .recent-title { font-size: 13px; font-weight: 500; color: var(--tp); }
+    .recent-meta  { font-size: 11px; color: var(--tt); margin-top: 1px; }
+    .recent-badge {
+      margin-left: auto; font-size: 11px; padding: 2px 8px; border-radius: 6px;
+      background: rgba(48,209,88,0.14); color: var(--green);
+      font-weight: 600; white-space: nowrap;
+    }
 
-  @media (max-width: 900px) {
-    .hero { flex-direction: column; align-items: flex-start; gap: 16px; padding: 32px 20px 24px; }
-    .hero-right { text-align: left; }
-    .main { padding: 20px 20px 0; }
-    .two-col { grid-template-columns: 1fr; }
-    .news-grid { grid-template-columns: 1fr; }
-  }
-</style>
+    /* NEWS */
+    .news-item { padding: 12px 0; border-bottom: 1px solid var(--sep); }
+    .news-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .news-source {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.07em;
+      text-transform: uppercase; color: var(--ts); margin-bottom: 4px;
+    }
+    .news-title { font-size: 13px; font-weight: 500; color: var(--tp); line-height: 1.45; }
+    .news-blurb { font-size: 12px; color: var(--tt); margin-top: 3px; line-height: 1.45; }
+
+    /* TURKEY */
+    .turkey-card {
+      background: linear-gradient(135deg, rgba(28,28,30,1) 0%, rgba(20,20,22,1) 100%);
+      border: 1px solid rgba(255,255,255,0.10);
+    }
+    .turkey-header { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; }
+    .turkey-flag   { font-size: 26px; }
+    .turkey-title  { font-size: 16px; font-weight: 600; color: var(--tp); }
+
+    /* FOOTER */
+    .footer {
+      margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--sep);
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 16px; flex-wrap: wrap;
+    }
+    .footer-time { font-size: 12px; color: var(--tt); }
+    .source-pills { display: flex; gap: 8px; flex-wrap: wrap; }
+    .pill {
+      font-size: 11px; font-weight: 500; color: var(--ts);
+      background: var(--s1); border: 1px solid var(--sep);
+      border-radius: 20px; padding: 4px 12px;
+    }
+
+    @media (max-width: 900px) {
+      .grid-7-5, .grid-6-6 { grid-template-columns: 1fr; }
+      .hero-inner { flex-direction: column; }
+      .hero-right { text-align: left; }
+      .hero-date  { font-size: 34px; }
+      .hero-clock { font-size: 32px; }
+      .book-stats { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
 </head>
 <body>
 
-<!-- ══════════════════════════════════════════
-     HERO HEADER
-══════════════════════════════════════════ -->
-<header class="hero">
-  <div class="hero-left">
-    <div class="greeting">Good morning, Oktay ☀️</div>
-    <div class="date-big" id="heroDate">Friday, March 20, 2026</div>
-    <div class="location">📍 Istanbul, Turkey</div>
-  </div>
-  <div class="hero-right">
-    <div class="clock" id="liveClock">--:--</div>
-    <div class="tz">Istanbul · UTC+3</div>
-  </div>
-</header>
-
-<div class="main">
-
-<!-- ══════════════════════════════════════════
-     ALERT — Ramazan Bayramı
-══════════════════════════════════════════ -->
-<div class="alert-card">
-  <div class="alert-dot"></div>
-  <div class="alert-text">🌙 Bugün <strong>Ramazan Bayramı</strong> (tahmini) — Türkiye'de resmi tatil. Hayırlı bayramlar!</div>
-</div>
-
-<!-- ══════════════════════════════════════════
-     ACTION ITEMS
-══════════════════════════════════════════ -->
-<div class="card">
-  <div class="card-header">
-    <span class="icon">⚡</span>
-    <h2>Action Items</h2>
-    <span class="count">2 items</span>
-  </div>
-  <div class="action-row">
-    <div class="action-num">1</div>
-    <div class="action-body">
-      <div class="action-title">Turkcell GNÇYTNK 2026 — Online Değerlendirme</div>
-      <div class="action-sub">Değerlendirme süreciniz başlatıldı · hrpeak.com · 18 Mar 2026</div>
-    </div>
-    <div class="badge badge-red">Urgent</div>
-  </div>
-  <div class="action-row">
-    <div class="action-num">2</div>
-    <div class="action-body">
-      <div class="action-title">Eczacıbaşı — Kavramsal Beceri Testi &amp; Kişilik Envanteri</div>
-      <div class="action-sub">Değerlendirme daveti · podium365.com · 16 Mar 2026</div>
-    </div>
-    <div class="badge badge-red">Urgent</div>
-  </div>
-</div>
-
-<!-- ══════════════════════════════════════════
-     EMAIL + CALENDAR (7/12 + 5/12)
-══════════════════════════════════════════ -->
-<div class="two-col">
-
-  <!-- EMAILS -->
-  <div class="card">
-    <div class="card-header">
-      <span class="icon">✉️</span>
-      <h2>Inbox</h2>
-      <span class="count">2 unread</span>
-    </div>
-
-    <div class="email-item">
-      <div class="email-stripe urgent"></div>
-      <div class="email-body">
-        <div class="email-sender">Turkcell</div>
-        <div class="email-subject">Online Değerlendirme Süreci</div>
-        <div class="email-snippet">Turkcell GNÇYTNK 2026 tarafından değerlendirme süreciniz başlatıldı. Aşağıdaki giriş kodunu kullanarak ya da linki takip ederek değerlendirme sürecine dahil olabilirsiniz.</div>
-      </div>
-      <div class="email-time">18 Mar</div>
-    </div>
-
-    <div class="email-item">
-      <div class="email-stripe urgent"></div>
-      <div class="email-body">
-        <div class="email-sender">Eczacıbaşı</div>
-        <div class="email-subject">Kavramsal Beceri Testi ve Kişilik Envanteri Daveti</div>
-        <div class="email-snippet">Bu e-posta davetinde, Kavramsal Beceri Testi ve Kişilik Envanteri için gerekli çevrim içi değerlendirmelere erişebileceğiniz bilgiler yer almaktadır.</div>
-      </div>
-      <div class="email-time">16 Mar</div>
-    </div>
-
-  </div>
-
-  <!-- CALENDAR -->
-  <div class="card">
-    <div class="card-header">
-      <span class="icon">📅</span>
-      <h2>Today's Schedule</h2>
-      <span class="count">Fri 20 Mar</span>
-    </div>
-    <div class="calendar-inner">
-      <div class="timeline-item">
-        <div class="timeline-left">
-          <div class="t-dot" style="background:var(--yellow)"></div>
+  <!-- HERO -->
+  <div class="hero">
+    <div class="container">
+      <div class="hero-inner">
+        <div>
+          <div class="hero-label">Good morning, Oktay ☀️</div>
+          <div class="hero-date">Friday, 20 March 2026</div>
+          <div class="hero-location">📍 Istanbul, Turkey</div>
+          <div>
+            <span class="hero-holiday">🌙 Ramazan Bayramı — Bayramınız Kutlu Olsun!</span>
+          </div>
         </div>
-        <div class="t-time">All day</div>
-        <div class="t-body">
-          <div class="t-title">🌙 Ramazan Bayramı (kesin değil)</div>
-          <div class="t-cal">Türkiye'deki Tatiller · Resmi tatil</div>
+        <div class="hero-right">
+          <div class="hero-clock" id="clock">--:--</div>
+          <div class="hero-tz">Istanbul · UTC+3</div>
         </div>
       </div>
     </div>
-    <div class="clear-day" style="border-top:1px solid var(--sep); padding:16px 20px; text-align:left;">
-      <span style="font-size:12px; color:var(--text-t);">No other events across Personal, Study, Work, Beşiktaş, Aile, or GoldenHas calendars.</span>
+  </div>
+
+  <div class="container">
+
+    <!-- ALERT -->
+    <div class="alert-card">
+      <div class="alert-dot"></div>
+      <div>
+        <div class="alert-title">⚡ Bölgesel Güvenlik Uyarısı — Orta Doğu Tırmanması</div>
+        <div class="alert-body">İran'ın Körfez'deki saldırıları tırmanıyor: Dubai Havalimanı ve Katar LNG tesisi (küresel arzın %20'si) hedef alındı. Türkiye'nin NATO hava savunması daha önce iki İran füzesini düşürdü. Brent petrol <strong style="color:var(--orange)">$115.38</strong> ile zirveye ulaştı — Hürmüz Boğazı kapatma riski sürüyor.</div>
+      </div>
     </div>
-  </div>
 
-</div>
+    <!-- ACTION ITEMS -->
+    <div class="card" style="margin-bottom:16px;">
+      <div class="card-title">⚡ Action Items</div>
 
-<!-- ══════════════════════════════════════════
-     CURRENTLY READING
-══════════════════════════════════════════ -->
-<div class="card">
-  <div class="card-header">
-    <span class="icon">📖</span>
-    <h2>The Library</h2>
-    <span class="count">Currently Reading</span>
-  </div>
-  <div class="reading-inner">
-    <div class="reading-main">
+      <div class="action-item">
+        <div class="action-num">1</div>
+        <div class="action-text">
+          Turkcell GNÇYTNK 2026 Değerlendirmesini Tamamla
+          <div class="action-sub">Online değerlendirme süreci 18 Mart'ta başlatıldı — giriş kodunu kullan, son tarihi kaçırma.</div>
+        </div>
+        <span class="badge badge-red">Urgent</span>
+      </div>
+
+      <div class="action-item">
+        <div class="action-num">2</div>
+        <div class="action-text">
+          Eczacıbaşı — Kavramsal Beceri Testi &amp; Kişilik Envanteri
+          <div class="action-sub">16 Mart'ta davet geldi. Değerlendirme linkine gir ve tamamla.</div>
+        </div>
+        <span class="badge badge-red">Urgent</span>
+      </div>
+
+      <div class="action-item">
+        <div class="action-num">3</div>
+        <div class="action-text">
+          GitHub Token Güvenlik Kontrolü
+          <div class="action-sub">"Claude Cowork" adlı yeni token eklendi. github.com/settings/tokens adresini kontrol et.</div>
+        </div>
+        <span class="badge badge-yellow">Review</span>
+      </div>
+    </div>
+
+    <!-- EMAILS + CALENDAR -->
+    <div class="grid-7-5" style="margin-bottom:16px;">
+
+      <div class="card">
+        <div class="card-title">📬 Inbox — 3 Okunmamış</div>
+
+        <div class="email-item">
+          <div class="email-stripe" style="background:var(--red);"></div>
+          <div class="email-body">
+            <div class="email-from">Turkcell · noreply@hrpeak.com</div>
+            <div class="email-subj">Online Değerlendirme Süreci</div>
+            <div class="email-snip">Turkcell GNÇYTNK 2026 tarafından değerlendirme süreciniz başlatıldı. Giriş kodunu kullanarak...</div>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;flex-shrink:0;margin-left:10px;">
+            <div class="email-meta">18 Mar</div>
+            <span class="badge badge-red">Urgent</span>
+          </div>
+        </div>
+
+        <div class="email-item">
+          <div class="email-stripe" style="background:var(--red);"></div>
+          <div class="email-body">
+            <div class="email-from">Eczacibasi · no-reply@podium365.com</div>
+            <div class="email-subj">Eczacıbaşı I Kavramsal Beceri Testi ve Kişilik Envanteri Daveti</div>
+            <div class="email-snip">Kavramsal Beceri Testi ve Kişilik Envanteri için gerekli çevrim içi değerlendirmelere erişebileceğiniz...</div>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;flex-shrink:0;margin-left:10px;">
+            <div class="email-meta">16 Mar</div>
+            <span class="badge badge-red">Urgent</span>
+          </div>
+        </div>
+
+        <div class="email-item">
+          <div class="email-stripe" style="background:var(--yellow);"></div>
+          <div class="email-body">
+            <div class="email-from">GitHub · noreply@github.com</div>
+            <div class="email-subj">[GitHub] A personal access token (classic) has been added to your account</div>
+            <div class="email-snip">A personal access token "Claude Cowork" with repo scope was recently added to your account...</div>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;flex-shrink:0;margin-left:10px;">
+            <div class="email-meta">19 Mar</div>
+            <span class="badge badge-yellow">Review</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">📅 Bugünkü Program</div>
+
+        <div class="cal-item">
+          <div class="cal-dot" style="background:var(--yellow);"></div>
+          <div>
+            <div class="cal-title">🌙 Ramazan Bayramı <span style="font-size:11px;color:var(--tt);">(kesin değil)</span></div>
+            <div class="cal-time">Tüm Gün · Resmi Tatil</div>
+          </div>
+        </div>
+
+        <div class="cal-empty">
+          <div class="cal-empty-icon">✨</div>
+          <div class="cal-empty-text">Bayram günü — başka etkinlik yok</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CURRENTLY READING -->
+    <div class="card" style="margin-bottom:16px;">
+      <div class="card-title">📖 Currently Reading</div>
+
       <div class="book-spine">
-        <div class="book-spine-text">Zero to One</div>
-      </div>
-      <div class="reading-info">
-        <div class="reading-title">Zero to One</div>
-        <div class="reading-author">Peter Thiel</div>
-        <div class="reading-lang">🇹🇷 Turkish Edition · How to get a disruptive idea</div>
-        <div class="progress-bar-wrap">
-          <div class="progress-bar-fill" id="progressBar" data-target="70.85"></div>
-        </div>
-        <div class="progress-pct">70.85% complete</div>
-        <div class="reading-stats">
-          <div class="stat">
-            <div class="stat-value">158</div>
-            <div class="stat-label">Pages Read</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">65</div>
-            <div class="stat-label">Pages Left</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">223</div>
-            <div class="stat-label">Total Pages</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">Mar 4</div>
-            <div class="stat-label">Started</div>
-          </div>
+        <div class="spine-bar"></div>
+        <div>
+          <div class="book-title">Zero to One</div>
+          <div class="book-author">Peter Thiel</div>
+          <div class="book-lang">🇹🇷 Türkçe · Başlangıç: 4 Mart 2026</div>
         </div>
       </div>
+
+      <div style="display:flex;justify-content:space-between;margin-bottom:8px;">
+        <span style="font-size:12px;color:var(--ts);">Sayfa 158 / 223</span>
+        <span style="font-size:12px;font-weight:600;color:var(--blue);">70.9%</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" id="prog-fill" data-target="70.85"></div>
+      </div>
+
+      <div class="book-stats">
+        <div class="stat-box">
+          <div class="stat-val" style="color:var(--blue);">158</div>
+          <div class="stat-lbl">Okunan</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-val" style="color:var(--orange);">65</div>
+          <div class="stat-lbl">Kalan</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-val">223</div>
+          <div class="stat-lbl">Toplam</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-val" style="color:var(--green);">16g</div>
+          <div class="stat-lbl">Süredir</div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+      <div style="font-size:11px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;color:var(--tt);margin-bottom:12px;">Son Okunanlar</div>
+
+      <div class="recent-book">
+        <div class="recent-icon">📗</div>
+        <div>
+          <div class="recent-title">On Kişiydiler</div>
+          <div class="recent-meta">Agatha Christie · 223 sayfa · Bitti: 3 Mar 2026</div>
+        </div>
+        <span class="recent-badge">Done ✓</span>
+      </div>
+
+      <div class="recent-book">
+        <div class="recent-icon">⛳</div>
+        <div>
+          <div class="recent-title">Atomic Habits</div>
+          <div class="recent-meta">James Clear · 306 sayfa · Bitti: 25 Şub 2026</div>
+        </div>
+        <span class="recent-badge" style="color:var(--yellow);background:rgba(255,214,10,0.12);">⭐⭐⭐⭐⭐</span>
+      </div>
     </div>
 
-    <div class="reading-divider"></div>
+    <!-- NEWS TOP ROW -->
+    <div class="grid-6-6" style="margin-bottom:16px;">
 
-    <div class="finished-label">Recently Finished</div>
-    <div class="finished-item">
-      <div class="finished-dot"></div>
-      <div class="finished-title">On Kişiydiler — Agatha Christie &nbsp;<span style="color:var(--text-t); font-size:11px;">223/223 pages</span></div>
-      <div class="finished-meta">Finished Mar 3, 2026</div>
+      <!-- World News -->
+      <div class="card">
+        <div class="card-title">🌍 Breaking World News</div>
+
+        <div class="news-item">
+          <div class="news-source">Al Jazeera · Washington Post</div>
+          <div class="news-title">İran, Dubai Havalimanı'nı İHA'larla Hedef Aldı — Yakıt Deposu Ateşe Verildi</div>
+          <div class="news-blurb">İsrail, İran'a yönelik saldırıların "gerektiği kadar" süreceğini açıkladı. Körfez'deki sivil altyapı hedefleniyor.</div>
+        </div>
+
+        <div class="news-item">
+          <div class="news-source">Al Jazeera</div>
+          <div class="news-title">Katar: İran Saldırısı Ras Laffan LNG Tesisinde Ciddi Hasar Bıraktı</div>
+          <div class="news-blurb">Küresel LNG üretiminin %20'sini sağlayan tesis ateşe verildi. Enerji arzı ve fiyatları kritik eşikte.</div>
+        </div>
+
+        <div class="news-item">
+          <div class="news-source">Al Jazeera</div>
+          <div class="news-title">Lübnan'da Yerinden Edilmiş Kişi Sayısı 1 Milyonu Aştı</div>
+          <div class="news-blurb">İsrail'in Hizbullah harekâtının ardından Lübnan genelinde 1 milyondan fazla kişi yerinden edildi.</div>
+        </div>
+      </div>
+
+      <!-- Tech + Business -->
+      <div class="stack">
+        <div class="card" style="flex:1;">
+          <div class="card-title">💻 Tech News</div>
+
+          <div class="news-item">
+            <div class="news-source">NVIDIA Blog</div>
+            <div class="news-title">GTC 2026: Nvidia AI Çip Pazarının Trilyon Dolara Ulaşacağını Öngördü</div>
+            <div class="news-blurb">Yeni nesil AI altyapı çipleri ve hesaplama kapasitesi duyuruları konferansa damga vurdu.</div>
+          </div>
+
+          <div class="news-item">
+            <div class="news-source">Tech Startups</div>
+            <div class="news-title">Micron 2Ç Geliri $23.86 Milyar — AI Bellek Talebi Rekor Kırdı</div>
+            <div class="news-blurb">Şirket 2026 sermaye harcamasını $5 milyar artırarak $25 milyarın üzerine çıkardı.</div>
+          </div>
+
+          <div class="news-item">
+            <div class="news-source">Fortune</div>
+            <div class="news-title">AI Çip Soğutma Girişimi Frore Systems $143M Yatırım Aldı</div>
+            <div class="news-blurb">Değerleme ~$1.64 milyar. AI veri merkezlerinde ısı ve güç yönetimi kritik kısıt haline geldi.</div>
+          </div>
+        </div>
+
+        <div class="card" style="flex:1;">
+          <div class="card-title">📈 Piyasalar &amp; Finans</div>
+
+          <div class="news-item">
+            <div class="news-source">CNBC · Bloomberg</div>
+            <div class="news-title">Fed Faizi Sabit Tuttu — Enflasyon ve Jeopolitik Risk Öne Sürüldü</div>
+            <div class="news-blurb">Yakın vadeli faiz indirimi beklentisi belirgin şekilde geriledi.</div>
+          </div>
+
+          <div class="news-item">
+            <div class="news-source">Bloomberg</div>
+            <div class="news-title">Brent $115.38 · WTI $97.18 · Altın $4,710.20</div>
+            <div class="news-blurb">Hürmüz Boğazı kapanma riski enerji fiyatlarını zirveye taşıdı. Altın yüksek faiz baskısıyla geriledi.</div>
+          </div>
+
+          <div class="news-item">
+            <div class="news-source">Bloomberg · CNBC</div>
+            <div class="news-title">S&amp;P 500, 52 Haftalık Diplerden Kısmen Toparlandı</div>
+            <div class="news-blurb">Küresel satış dalgası ardından İsrail'in Hürmüz'ü açmaya destek vereceği haberiyle %1 değer kazandı.</div>
+          </div>
+        </div>
+      </div>
     </div>
 
-  </div>
-</div>
+    <!-- TURKEY NEWS -->
+    <div class="card turkey-card" style="margin-bottom:16px;">
+      <div class="turkey-header">
+        <div class="turkey-flag">🇹🇷</div>
+        <div class="turkey-title">Türkiye Haberleri</div>
+      </div>
 
-<!-- ══════════════════════════════════════════
-     NEWS — Breaking + Tech & Business
-══════════════════════════════════════════ -->
-<div class="news-grid">
+      <div class="grid-6-6">
+        <div>
+          <div class="news-item">
+            <div class="news-source">Al Jazeera</div>
+            <div class="news-title">NATO Hava Savunması Türkiye Üzerindeki İki İran Füzesini Düşürdü</div>
+            <div class="news-blurb">4 ve 9 Mart'ta gerçekleştirilen füze ihlalleri NATO sistemleriyle önlendi. Erdoğan, Bayram mesajında güvenlik taahhüdünü yineledi.</div>
+          </div>
 
-  <!-- BREAKING WORLD NEWS -->
-  <div class="card">
-    <div class="news-section-title">🌍 Breaking World News</div>
+          <div class="news-item">
+            <div class="news-source">Daily Sabah</div>
+            <div class="news-title">Dışişleri Bakanı Hakan Fidan Körfez Turu İçin Riyad'da</div>
+            <div class="news-blurb">Bölgedeki enerjiye yönelik saldırıların tırmandığı dönemde Türkiye yoğun diplomatik temas başlattı.</div>
+          </div>
+        </div>
 
-    <div class="news-item">
-      <span class="news-tag tag-world">Middle East</span>
-      <div class="news-headline">US-Iran conflict: Trump calls for Strait of Hormuz allied deployment</div>
-      <div class="news-summary">Trump urged allied deployment to the Strait of Hormuz amid escalating US-Iran tensions, but received a muted response from the UK, Japan, and China. Six US military members were killed in an Iraqi tanker crash, raising the conflict's American death toll to at least 13.</div>
+        <div>
+          <div class="news-item">
+            <div class="news-source">Hurriyet Daily News</div>
+            <div class="news-title">Irak, Hürmüz Boğazı'na Alternatif Olarak Türkiye Güzergâhını Aktif Edecek</div>
+            <div class="news-blurb">Kerkük-Ceyhan boru hattı, Irak'ın Körfez ihracatına alternatif olarak değerlendirilmeye başlandı.</div>
+          </div>
+
+          <div class="news-item">
+            <div class="news-source">Hurriyet Daily News</div>
+            <div class="news-title">Türkiye Merkezi Bütçesi Şubat'ta 24.4 Milyar TL Fazla Verdi</div>
+            <div class="news-blurb">Gelir artışıyla desteklenen bütçe fazlası, dezenflasyon hedefleri açısından olumlu sinyal olarak okundu.</div>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <div class="news-item">
-      <span class="news-tag tag-world">Geopolitics</span>
-      <div class="news-headline">Cuba erupts: Protesters torch Communist Party HQ</div>
-      <div class="news-summary">Videos appearing to show gunfire emerged as protesters attacked the Communist Party headquarters in Cuba, signaling a sharp escalation of domestic unrest on the island.</div>
+    <!-- FOOTER -->
+    <div class="footer">
+      <div class="footer-time">Son güncelleme: 20 Mart 2026, Cuma · Claude tarafından otomatik oluşturuldu</div>
+      <div class="source-pills">
+        <span class="pill">Gmail</span>
+        <span class="pill">Google Calendar</span>
+        <span class="pill">Notion</span>
+        <span class="pill">Web News</span>
+      </div>
     </div>
 
-    <div class="news-item">
-      <span class="news-tag tag-world">Europe</span>
-      <div class="news-headline">Zelensky: Iran-US conflict could threaten Ukraine's fight against Putin</div>
-      <div class="news-summary">Ukraine's president warned that a broader Iran-US war could divert Western attention and resources, threatening Kyiv's counteroffensive against Russian forces.</div>
-    </div>
+  </div><!-- /container -->
 
-  </div>
-
-  <!-- TECH & BUSINESS -->
-  <div class="card">
-    <div class="news-section-title">💻 Tech &amp; Business</div>
-
-    <div class="news-item">
-      <span class="news-tag tag-tech">AI</span>
-      <div class="news-headline">OpenAI tops $25B ARR, eyes IPO; Anthropic closes in at $19B</div>
-      <div class="news-summary">OpenAI has surpassed $25 billion in annualized revenue and is taking early steps toward a public listing potentially in late 2026. Rival Anthropic is approaching $19B ARR, underscoring how the AI model market has become one of tech's fastest-growing sectors.</div>
-    </div>
-
-    <div class="news-item">
-      <span class="news-tag tag-tech">Apple</span>
-      <div class="news-headline">Apple unveils AI-powered Siri relaunch powered by Google Gemini</div>
-      <div class="news-summary">Apple officially announced a completely reimagined Siri set to debut in 2026, featuring on-screen awareness, cross-app integration, and a context-aware AI backbone built on Google's Gemini model.</div>
-    </div>
-
-    <div class="news-item">
-      <span class="news-tag tag-biz">Markets</span>
-      <div class="news-headline">Markets slide on inflation fears; S&amp;P 500 closes at 6,606</div>
-      <div class="news-summary">The S&amp;P 500 fell 0.27% to 6,606 and the Dow lost 0.44% to 46,021 as Middle East tensions pushed oil prices to their highest since 2023. Gold dropped 4.86% to $4,658 and Bitcoin dipped to $70,502.</div>
-    </div>
-
-  </div>
-
-</div>
-
-<!-- ══════════════════════════════════════════
-     BREAKING TURKEY NEWS
-══════════════════════════════════════════ -->
-<div class="card">
-  <div class="card-header">
-    <span class="icon">🇹🇷</span>
-    <h2>Breaking Turkey News</h2>
-    <span class="count">3 stories</span>
-  </div>
-
-  <div class="news-item">
-    <span class="news-tag tag-turkey">NATO · Savunma</span>
-    <div class="news-headline">İran balistik füzesi Türkiye hava sahasında NATO tarafından düşürüldü</div>
-    <div class="news-summary">İran-ABD çatışmasının tırmanması sırasında Türk hava sahasına giren İran balistik füzesi NATO hava savunma sistemleri tarafından başarıyla etkisiz hale getirildi. NATO, 18 Mart'ta güneyde ek bir Patriot sistemi konuşlandıracağını açıkladı.</div>
-  </div>
-
-  <div class="news-item">
-    <span class="news-tag tag-turkey">Dış Politika</span>
-    <div class="news-headline">Dışişleri Bakanı Fidan'dan bölgesel diplomasi hamlesi</div>
-    <div class="news-summary">Dışişleri Bakanı Hakan Fidan, Suudi Arabistan mevkidaşı Faisal bin Ferhan ile görüşerek devam eden savaşı sona erdirmeye yönelik diplomatik çabaları ele aldı. Türkiye aynı zamanda İsrail'in İranlı yetkililere yönelik saldırılarını "yasadışı" ilan ederek kınadı.</div>
-  </div>
-
-  <div class="news-item">
-    <span class="news-tag tag-turkey">Enerji</span>
-    <div class="news-headline">Ceyhan Limanı'nda Irak petrol akışı yeniden başlıyor</div>
-    <div class="news-summary">Irak Petrol Bakanı, Türkiye'nin Ceyhan Limanı'ndan petrol ihracatının bu hafta yeniden başlayacağını açıkladı. Irak meclisi de Türkiye-Irak Ceyhan sınır kapısı üzerinden yürütülen petrol ihracatını görüşmek üzere olağanüstü toplantıya çağrıldı.</div>
-  </div>
-
-</div>
-
-<!-- ══════════════════════════════════════════
-     FOOTER
-══════════════════════════════════════════ -->
-<div class="footer">
-  <div class="footer-updated" id="footerTime">Last updated —</div>
-  <div class="source-pills">
-    <span class="source-pill">✉️ Gmail</span>
-    <span class="source-pill">📅 Google Calendar</span>
-    <span class="source-pill">📖 Notion</span>
-    <span class="source-pill">🌐 Web News</span>
-  </div>
-</div>
-
-</div><!-- /.main -->
-
-<script>
-  // ── CLOCK (Istanbul UTC+3)
-  function updateClock() {
-    const now = new Date();
-    const istanbul = new Date(now.toLocaleString('en-US', { timeZone: 'Europe/Istanbul' }));
-    const h = String(istanbul.getHours()).padStart(2, '0');
-    const m = String(istanbul.getMinutes()).padStart(2, '0');
-    document.getElementById('liveClock').textContent = h + ':' + m;
-  }
-  updateClock();
-  setInterval(updateClock, 10000);
-
-  // ── DATE
-  const dateEl = document.getElementById('heroDate');
-  const now = new Date(new Date().toLocaleString('en-US', { timeZone: 'Europe/Istanbul' }));
-  const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-  const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-  dateEl.textContent = days[now.getDay()] + ', ' + months[now.getMonth()] + ' ' + now.getDate() + ', ' + now.getFullYear();
-
-  // ── FOOTER TIMESTAMP
-  document.getElementById('footerTime').textContent = 'Last updated ' + days[now.getDay()] + ', ' + months[now.getMonth()] + ' ' + now.getDate() + ', ' + now.getFullYear();
-
-  // ── PROGRESS BAR (animate on load)
-  setTimeout(function() {
-    const bar = document.getElementById('progressBar');
-    if (bar) {
-      bar.style.width = bar.dataset.target + '%';
+  <script>
+    // Clock — Istanbul UTC+3
+    function updateClock() {
+      var now = new Date();
+      var ist = new Date(now.toLocaleString('en-US', { timeZone: 'Europe/Istanbul' }));
+      var h = String(ist.getHours()).padStart(2, '0');
+      var m = String(ist.getMinutes()).padStart(2, '0');
+      document.getElementById('clock').textContent = h + ':' + m;
     }
-  }, 250);
-</script>
+    updateClock();
+    setInterval(updateClock, 10000);
+
+    // Progress bar animation
+    setTimeout(function() {
+      var fill = document.getElementById('prog-fill');
+      if (fill) {
+        fill.style.width = fill.getAttribute('data-target') + '%';
+      }
+    }, 250);
+  </script>
 
 </body>
 </html>
