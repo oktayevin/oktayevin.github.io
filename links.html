@@ -1,284 +1,272 @@
 <!doctype html>
 <html lang="tr">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Oktay's Links</title>
-    <meta
-      name="description"
-      content="All my links."
-    />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css" />
-    <style>
-      @import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap");
 
-      * {
-        box-sizing: border-box;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Oktay's Links</title>
+  <meta name="description" content="All my links." />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css" />
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap");
 
-      body {
-        margin: 0;
-        min-height: 100vh;
-        display: grid;
-        place-items: center;
-        padding: 16px;
-        font-family: "Space Grotesk", "Inter", "Segoe UI", Roboto, Helvetica,
-          Arial, sans-serif;
-        background: #f0f0f0;
-        color: #ffffff;
-      }
+    * {
+      box-sizing: border-box;
+    }
 
-      .phone-frame {
-        width: min(100%, 500px);
-        min-height: 96vh;
-        border-radius: 52px;
-        overflow: hidden;
-        position: relative;
-        padding: 88px 34px 56px;
-        background-image: linear-gradient(
-            rgba(31, 103, 105, 0.2),
-            rgba(31, 103, 105, 0.2)
-          ),
-          url("https://images.unsplash.com/photo-1669757457244-476571df8458?auto=format&fit=crop&w=900&q=80");
-        background-size: cover;
-        background-position: center;
-        box-shadow: 0 20px 55px rgba(0, 0, 0, 0.3);
-      }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 16px;
+      font-family: "Space Grotesk", "Inter", "Segoe UI", Roboto, Helvetica,
+        Arial, sans-serif;
+      background: #f0f0f0;
+      color: #ffffff;
+    }
 
-      .overlay {
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(
-          180deg,
+    .phone-frame {
+      width: min(100%, 500px);
+      min-height: 96vh;
+      border-radius: 52px;
+      overflow: hidden;
+      position: relative;
+      padding: 88px 34px 56px;
+      background-image: linear-gradient(rgba(31, 103, 105, 0.2),
+          rgba(31, 103, 105, 0.2)),
+        url("https://images.unsplash.com/photo-1669757457244-476571df8458?auto=format&fit=crop&w=900&q=80");
+      background-size: cover;
+      background-position: center;
+      box-shadow: 0 20px 55px rgba(0, 0, 0, 0.3);
+    }
+
+    .overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg,
           rgba(37, 106, 111, 0.45) 0%,
           rgba(64, 140, 142, 0.08) 30%,
-          rgba(137, 138, 126, 0.35) 100%
-        );
-        z-index: 0;
-      }
+          rgba(137, 138, 126, 0.35) 100%);
+      z-index: 0;
+    }
 
-      .content {
-        position: relative;
-        z-index: 1;
-      }
+    .content {
+      position: relative;
+      z-index: 1;
+    }
 
-      .profile {
-        text-align: center;
-        margin-bottom: 30px;
-      }
+    .profile {
+      text-align: center;
+      margin-bottom: 30px;
+    }
 
-      .avatar {
-        width: 118px;
-        height: 118px;
-        border-radius: 50%;
-        object-fit: cover;
-        display: block;
-        margin: 0 auto 16px;
-        border: 3px solid rgba(255, 255, 255, 0.3);
-      }
+    .avatar {
+      width: 118px;
+      height: 118px;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+      margin: 0 auto 16px;
+      border: 3px solid rgba(255, 255, 255, 0.3);
+    }
 
-      h1 {
-        margin: 0;
-        font-size: clamp(2rem, 5vw, 2.8rem);
-        font-weight: 700;
-        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
-      }
+    h1 {
+      margin: 0;
+      font-size: clamp(2rem, 5vw, 2.8rem);
+      font-weight: 700;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+    }
 
-      .bio {
-        margin: 10px auto 0;
-        max-width: 380px;
-        color: rgba(255, 255, 255, 0.88);
-        font-size: clamp(1rem, 2.1vw, 1.12rem);
-        line-height: 1.45;
-        font-weight: 500;
-      }
+    .bio {
+      margin: 10px auto 0;
+      max-width: 380px;
+      color: rgba(255, 255, 255, 0.88);
+      font-size: clamp(1rem, 2.1vw, 1.12rem);
+      line-height: 1.45;
+      font-weight: 500;
+    }
 
-      .links {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        display: grid;
-        gap: 20px;
+    .links {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 20px;
+    }
+
+    .links a {
+      text-decoration: none;
+      color: #14161a;
+      background: #ffffff;
+      border-radius: 999px;
+      min-height: 74px;
+      padding: 0 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: clamp(1.5rem, 3.1vw, 2rem);
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      text-align: center;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+      transition: transform 180ms ease, box-shadow 180ms ease;
+    }
+
+    .links a:hover,
+    .links a:focus-visible {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 28px rgba(0, 0, 0, 0.26);
+      outline: none;
+    }
+
+    .left {
+      display: inline-flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .emoji {
+      font-size: 1.65rem;
+      line-height: 1;
+    }
+
+    .social {
+      margin-top: 40px;
+      display: flex;
+      justify-content: center;
+      gap: 22px;
+    }
+
+    .social a {
+      position: relative;
+      width: 54px;
+      height: 54px;
+      border-radius: 18px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      text-decoration: none;
+      color: rgba(255, 255, 255, 0.95);
+
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+
+      border: 1px solid rgba(255, 255, 255, 0.18);
+
+      box-shadow:
+        0 6px 20px rgba(0, 0, 0, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+
+      transition:
+        transform 180ms ease,
+        box-shadow 180ms ease,
+        background 180ms ease;
+    }
+
+    .social i {
+      font-size: 1.4rem;
+      transition: transform 180ms ease;
+    }
+
+    /* Hover */
+    .social a:hover {
+      transform: translateY(-4px) scale(1.08);
+      box-shadow:
+        0 12px 28px rgba(0, 0, 0, 0.35),
+        0 0 18px rgba(255, 255, 255, 0.45);
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .social a:hover i {
+      transform: scale(1.15);
+    }
+
+    /* Click press effect */
+    .social a:active {
+      transform: translateY(-1px) scale(0.96);
+    }
+
+    @media (max-width: 560px) {
+      .phone-frame {
+        border-radius: 40px;
+        padding: 66px 24px 44px;
       }
 
       .links a {
-        text-decoration: none;
-        color: #14161a;
-        background: #ffffff;
-        border-radius: 999px;
-        min-height: 74px;
-        padding: 0 28px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: clamp(1.5rem, 3.1vw, 2rem);
-        font-weight: 700;
-        letter-spacing: 0.01em;
-        text-align: center;
-        box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
-        transition: transform 180ms ease, box-shadow 180ms ease;
-      }
-
-      .links a:hover,
-      .links a:focus-visible {
-        transform: translateY(-2px);
-        box-shadow: 0 16px 28px rgba(0, 0, 0, 0.26);
-        outline: none;
-      }
-
-      .left {
-        display: inline-flex;
-        align-items: center;
-        gap: 20px;
+        min-height: 64px;
+        font-size: 1.25rem;
+        padding: 0 22px;
       }
 
       .emoji {
-        font-size: 1.65rem;
-        line-height: 1;
-      }
-
-      .social {
-        margin-top: 40px;
-        display: flex;
-        justify-content: center;
-        gap: 22px;
-      }
-
-      .social a {
-        position: relative;
-        width: 54px;
-        height: 54px;
-        border-radius: 18px;
-
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        text-decoration: none;
-        color: rgba(255, 255, 255, 0.95);
-
-        background: rgba(255, 255, 255, 0.12);
-        backdrop-filter: blur(14px);
-        -webkit-backdrop-filter: blur(14px);
-
-        border: 1px solid rgba(255, 255, 255, 0.18);
-
-        box-shadow:
-          0 6px 20px rgba(0, 0, 0, 0.25),
-          inset 0 1px 0 rgba(255, 255, 255, 0.2);
-
-        transition:
-          transform 180ms ease,
-          box-shadow 180ms ease,
-          background 180ms ease;
-      }
-
-      .social i {
         font-size: 1.4rem;
-        transition: transform 180ms ease;
       }
+    }
+  </style>
+</head>
 
-      /* Hover */
-      .social a:hover {
-        transform: translateY(-4px) scale(1.08);
-        box-shadow:
-          0 12px 28px rgba(0, 0, 0, 0.35),
-          0 0 18px rgba(255, 255, 255, 0.45);
-        background: rgba(255, 255, 255, 0.2);
-      }
+<body>
+  <main class="phone-frame" aria-label="Travel link card">
+    <div class="overlay" aria-hidden="true"></div>
+    <div class="content">
+      <section class="profile">
+        <img class="avatar" src="/assets/images/profile.jpg?auto=format&fit=crop&w=220&q=80" alt="Oktay Evin" />
+        <h1>Oktay Evin</h1>
+        <p class="bio">
+          A Management Information Systems student and Developer based in Istanbul
+        </p>
+      </section>
 
-      .social a:hover i {
-        transform: scale(1.15);
-      }
-
-      /* Click press effect */
-      .social a:active {
-        transform: translateY(-1px) scale(0.96);
-      }
-
-      @media (max-width: 560px) {
-        .phone-frame {
-          border-radius: 40px;
-          padding: 66px 24px 44px;
-        }
-
-        .links a {
-          min-height: 64px;
-          font-size: 1.25rem;
-          padding: 0 22px;
-        }
-
-        .emoji {
-          font-size: 1.4rem;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <main class="phone-frame" aria-label="Travel link card">
-      <div class="overlay" aria-hidden="true"></div>
-      <div class="content">
-        <section class="profile">
-          <img
-            class="avatar"
-            src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=220&q=80"
-            alt="Katy Delma"
-          />
-          <h1>Oktay Evin</h1>
-          <p class="bio">
-            A Management Information Systems student and Developer based in Istanbul
-          </p>
-        </section>
-
-        <ul class="links" aria-label="Links">
-          <li>
-            <a href="https://oktayevin.com" target="_blank" aria-label="My Website">
-              <span class="left"><span class="emoji">🔗</span>My Website</span>
-            </a>
-          </li>
-          <li>
-            <a href="#" aria-label="Travel Tips">
-              <span class="left"><span class="emoji">📚</span>Travel Tips</span>
-            </a>
-          </li>
-          <li>
-            <a href="#" aria-label="Hiking Equipment">
-              <span class="left"
-                ><span class="emoji">⛺</span>Hiking Equipment</span
-              >
-            </a>
-          </li>
-          <li>
-            <a href="#" aria-label="Camera Equipment">
-              <span class="left"
-                ><span class="emoji">📷</span>Camera Equipment</span
-              >
-            </a>
-          </li>
-        </ul>
-
-        <nav class="social" aria-label="Social media links">
-          <a href="https://instagram.com/oktayevin" target="_blank" aria-label="Instagram">
-            <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+      <ul class="links" aria-label="Links">
+        <li>
+          <a href="https://oktayevin.com" target="_blank" aria-label="My Website">
+            <span class="left"><span class="emoji">🔗</span>My Website</span>
           </a>
-
-          <a href="https://x.com/Oktay_Evin" aria-label="X">
-            <i class="fa-brands fa-x-twitter" aria-hidden="true"></i>
+        </li>
+        <li>
+          <a href="#" aria-label="Travel Tips">
+            <span class="left"><span class="emoji">📚</span>Travel Tips</span>
           </a>
-
-          <a href="https://linkedin.com/in/oktayevin" aria-label="LinkedIn">
-            <i class="fa-brands fa-linkedin-in" aria-hidden="true"></i>
+        </li>
+        <li>
+          <a href="#" aria-label="Hiking Equipment">
+            <span class="left"><span class="emoji">⛺</span>Hiking Equipment</span>
           </a>
-
-          <a href="https://tiktok.com/@oktayevin" aria-label="TikTok">
-            <i class="fa-brands fa-tiktok" aria-hidden="true"></i>
+        </li>
+        <li>
+          <a href="#" aria-label="Camera Equipment">
+            <span class="left"><span class="emoji">📷</span>Camera Equipment</span>
           </a>
+        </li>
+      </ul>
 
-          <a href="https://pinterest.com/oktayevin" aria-label="Pinterest">
-            <i class="fa-brands fa-pinterest-p" aria-hidden="true"></i>
-          </a>
-        </nav>
-      </div>
-    </main>
-  </body>
+      <nav class="social" aria-label="Social media links">
+        <a href="https://instagram.com/oktayevin" target="_blank" aria-label="Instagram">
+          <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+        </a>
+
+        <a href="https://x.com/Oktay_Evin" aria-label="X">
+          <i class="fa-brands fa-x-twitter" aria-hidden="true"></i>
+        </a>
+
+        <a href="https://linkedin.com/in/oktayevin" aria-label="LinkedIn">
+          <i class="fa-brands fa-linkedin-in" aria-hidden="true"></i>
+        </a>
+
+        <a href="https://tiktok.com/@oktayevin" aria-label="TikTok">
+          <i class="fa-brands fa-tiktok" aria-hidden="true"></i>
+        </a>
+
+        <a href="https://pinterest.com/oktayevin" aria-label="Pinterest">
+          <i class="fa-brands fa-pinterest-p" aria-hidden="true"></i>
+        </a>
+      </nav>
+    </div>
+  </main>
+</body>
+
 </html>
