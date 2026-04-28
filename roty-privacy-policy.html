@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Roty — Privacy Policy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,700;0,800;0,900;1,900&family=DM+Mono:wght@500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+```
+:root {
+  --cream:  #F8F4E5;
+  --cream2: #F1EAD8;
+  --paper:  #FDFAF3;
+  --ink:    #322E26;
+  --ink2:   #605749;
+  --ink3:   #99907F;
+  --coral:  #E0654D;
+  --coralD: #A53F2B;
+  --sun:    #DCC042;
+  --sunD:   #AA9620;
+  --grass:  #46BD64;
+  --grassD: #267040;
+  --sky:    #37ACDA;
+  --skyD:   #1776A3;
+  --tintSun:#F8F3DA;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: 'Nunito', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── NAV ── */
+nav {
+  position: sticky; top: 0; z-index: 200;
+  background: var(--cream);
+  border-bottom: 2.5px solid var(--ink);
+  padding: 12px 36px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.nav-logo {
+  font-size: 24px; font-weight: 900; letter-spacing: -0.5px;
+  display: flex; align-items: center; gap: 8px;
+  text-decoration: none; color: var(--ink);
+}
+.nav-back {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-family: 'DM Mono', monospace; font-size: 12px; font-weight: 500;
+  letter-spacing: .08em; text-transform: uppercase;
+  color: var(--ink2); text-decoration: none;
+  padding: 9px 16px; border-radius: 12px; border: 2px solid var(--ink);
+  box-shadow: 2px 3px 0 var(--ink);
+  transition: transform .08s, box-shadow .08s;
+}
+.nav-back:hover { transform: translateY(2px); box-shadow: 0 1px 0 var(--ink); }
+
+/* ── HERO ── */
+.hero {
+  background: var(--tintSun);
+  border-bottom: 2.5px solid var(--ink);
+  padding: 56px 36px 52px;
+  text-align: center;
+}
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: 'DM Mono', monospace; font-size: 11px; font-weight: 500;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--coral); background: rgba(224,101,77,.10);
+  border: 1.5px solid rgba(224,101,77,.28);
+  padding: 5px 12px; border-radius: 100px; margin-bottom: 20px;
+}
+.hero h1 {
+  font-size: clamp(36px, 5vw, 60px); font-weight: 900;
+  letter-spacing: -2px; line-height: 1.06; color: var(--ink);
+  margin-bottom: 14px;
+}
+.hero h1 span { color: var(--coral); }
+.hero-sub {
+  font-size: 16px; font-weight: 700; color: var(--ink2);
+  max-width: 520px; margin: 0 auto 28px; line-height: 1.6;
+}
+.hero-meta {
+  display: inline-flex; align-items: center; gap: 20px; flex-wrap: wrap; justify-content: center;
+}
+.meta-pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: 'DM Mono', monospace; font-size: 10px; font-weight: 500;
+  letter-spacing: .1em; text-transform: uppercase; color: var(--ink2);
+  background: var(--paper); border: 2px solid var(--ink); border-radius: 100px;
+  padding: 6px 14px; box-shadow: 2px 2px 0 var(--ink);
+}
+
+/* ── LAYOUT ── */
+.content-wrap {
+  max-width: 780px; margin: 0 auto;
+  padding: 64px 36px 80px;
+  display: flex; flex-direction: column; gap: 40px;
+}
+
+/* ── TOC ── */
+.toc {
+  background: var(--paper); border: 2px solid var(--ink); border-radius: 24px;
+  box-shadow: 4px 5px 0 var(--ink); padding: 28px 32px;
+}
+.toc-title {
+  font-family: 'DM Mono', monospace; font-size: 11px; font-weight: 500;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--ink2);
+  margin-bottom: 16px;
+}
+.toc-list { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+.toc-list li a {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 15px; font-weight: 800; color: var(--ink);
+  text-decoration: none; padding: 8px 12px; border-radius: 12px;
+  transition: background .12s;
+}
+.toc-list li a:hover { background: var(--tintSun); }
+.toc-num {
+  font-family: 'DM Mono', monospace; font-size: 10px; font-weight: 500;
+  color: var(--coral); min-width: 22px;
+}
+
+/* ── SECTION CARDS ── */
+.policy-section {
+  background: var(--paper); border: 2px solid var(--ink); border-radius: 24px;
+  box-shadow: 4px 5px 0 var(--ink); overflow: hidden;
+}
+.ps-header {
+  display: flex; align-items: center; gap: 14px;
+  padding: 22px 28px; border-bottom: 2px solid var(--ink);
+  background: var(--cream2);
+}
+.ps-num {
+  font-family: 'DM Mono', monospace; font-size: 12px; font-weight: 500;
+  color: var(--coral); letter-spacing: .06em; min-width: 24px;
+}
+.ps-icon {
+  width: 40px; height: 40px; border-radius: 12px; border: 2px solid var(--ink);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; flex-shrink: 0; box-shadow: 2px 2px 0 var(--ink);
+}
+.ps-title { font-size: 18px; font-weight: 900; letter-spacing: -.4px; }
+.ps-body { padding: 24px 28px; display: flex; flex-direction: column; gap: 16px; }
+
+p { font-size: 15px; font-weight: 700; color: var(--ink2); line-height: 1.7; }
+p strong { color: var(--ink); font-weight: 900; }
+
+/* ── PILL LISTS ── */
+.pill-list { display: flex; flex-direction: column; gap: 10px; }
+.pill-item {
+  display: flex; align-items: flex-start; gap: 12px;
+  background: var(--cream); border: 2px solid var(--ink); border-radius: 16px;
+  padding: 14px 16px; box-shadow: 2px 3px 0 var(--ink);
+}
+.pill-dot {
+  width: 10px; height: 10px; border-radius: 50%; border: 2px solid var(--ink);
+  flex-shrink: 0; margin-top: 4px;
+}
+.pill-item-text { font-size: 14px; font-weight: 700; color: var(--ink2); line-height: 1.6; }
+.pill-item-text strong { color: var(--ink); font-weight: 900; }
+
+/* ── HIGHLIGHT CALLOUT ── */
+.callout {
+  display: flex; align-items: flex-start; gap: 14px;
+  border: 2px solid var(--ink); border-radius: 18px; padding: 18px 20px;
+  box-shadow: 3px 4px 0 var(--ink);
+}
+.callout-icon { font-size: 22px; flex-shrink: 0; margin-top: 1px; }
+.callout-text { font-size: 14px; font-weight: 700; color: var(--ink2); line-height: 1.65; }
+.callout-text strong { color: var(--ink); font-weight: 900; }
+.callout.green { background: #D5F5DE; border-color: var(--grassD); box-shadow: 3px 4px 0 var(--grassD); }
+.callout.yellow { background: #FFF3CC; border-color: var(--sunD); box-shadow: 3px 4px 0 var(--sunD); }
+.callout.sky   { background: #CFF0FA; border-color: var(--skyD); box-shadow: 3px 4px 0 var(--skyD); }
+.callout.coral { background: #FCE8E4; border-color: var(--coralD); box-shadow: 3px 4px 0 var(--coralD); }
+
+/* ── TABLE ── */
+.data-table { width: 100%; border-collapse: collapse; }
+.data-table th {
+  font-family: 'DM Mono', monospace; font-size: 10px; font-weight: 500;
+  letter-spacing: .12em; text-transform: uppercase; color: var(--ink2);
+  background: var(--cream2); padding: 12px 16px; text-align: left;
+  border: 1.5px solid var(--ink);
+}
+.data-table td {
+  font-size: 13px; font-weight: 700; color: var(--ink2);
+  padding: 12px 16px; border: 1.5px solid var(--ink);
+  vertical-align: top; line-height: 1.55;
+}
+.data-table td strong { color: var(--ink); font-weight: 900; }
+.data-table tr:nth-child(even) td { background: var(--tintSun); }
+
+/* ── EMAIL LINK ── */
+a.email-link {
+  display: inline-flex; align-items: center; gap: 7px;
+  color: var(--coral); font-weight: 900; text-decoration: none;
+  border-bottom: 2px solid var(--coral);
+}
+a.email-link:hover { color: var(--coralD); border-color: var(--coralD); }
+
+/* ── JURISDICTION GRID ── */
+.juris-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.juris-card {
+  background: var(--cream); border: 2px solid var(--ink); border-radius: 16px;
+  padding: 16px 14px; box-shadow: 2px 3px 0 var(--ink); text-align: center;
+}
+.juris-flag { font-size: 24px; margin-bottom: 6px; }
+.juris-name { font-size: 13px; font-weight: 900; color: var(--ink); margin-bottom: 2px; }
+.juris-law  { font-family: 'DM Mono', monospace; font-size: 9px; color: var(--ink2); text-transform: uppercase; letter-spacing: .1em; }
+
+/* ── FOOTER ── */
+.doc-footer {
+  background: var(--tintSun); border-top: 2.5px solid var(--ink);
+  padding: 40px 36px; text-align: center;
+}
+.doc-footer p { font-size: 14px; font-weight: 700; color: var(--ink2); margin-bottom: 6px; }
+.doc-footer strong { color: var(--ink); }
+
+footer {
+  padding: 26px 36px; border-top: 2px solid var(--ink);
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 12px; background: var(--cream);
+}
+.footer-logo { font-size: 20px; font-weight: 900; display: flex; align-items: center; gap: 7px; }
+footer p { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--ink2); }
+.footer-links { display: flex; gap: 20px; }
+.footer-links a { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--ink2); text-decoration: none; }
+.footer-links a:hover { color: var(--ink); text-decoration: underline; }
+
+@media (max-width: 640px) {
+  nav { padding: 12px 18px; }
+  .hero { padding: 44px 20px 40px; }
+  .content-wrap { padding: 40px 18px 60px; }
+  .ps-body, .ps-header { padding: 18px 18px; }
+  .toc { padding: 20px 18px; }
+  .juris-grid { grid-template-columns: 1fr; }
+  footer { padding: 20px; flex-direction: column; align-items: flex-start; }
+  .doc-footer { padding: 36px 20px; }
+}
+```
+
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+
+<nav>
+  <a href="roty.html" class="nav-logo">
+    <svg width="28" height="28" viewBox="0 0 60 60" fill="none">
+      <path d="M16 34 C12 24 16 12 28 12 C32 6 40 6 44 12 C54 14 56 28 50 36 C50 46 44 52 36 52 C30 52 26 52 22 48 C16 46 14 40 16 34Z" fill="#EFC0B0" stroke="#322E26" stroke-width="3"/>
+      <circle cx="24" cy="30" r="4.5" fill="white" stroke="#322E26" stroke-width="2.2"/>
+      <circle cx="38" cy="30" r="4.5" fill="white" stroke="#322E26" stroke-width="2.2"/>
+      <circle cx="25" cy="30" r="2" fill="#322E26"/>
+      <circle cx="39" cy="30" r="2" fill="#322E26"/>
+      <path d="M25 40 Q30 45 37 40" stroke="#322E26" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+    </svg>
+    Roty
+  </a>
+  <a href="roty.html" class="nav-back">← Back to Home</a>
+</nav>
+
+<!-- HERO -->
+
+<div class="hero">
+  <div class="hero-eyebrow">Legal Document</div>
+  <h1>Privacy <span>Policy</span></h1>
+  <p class="hero-sub">Roty is built on a simple principle: your data is yours. Everything stays on your device. We don't collect it, sell it, or share it.</p>
+  <div class="hero-meta">
+    <div class="meta-pill">📅 Effective: April 28, 2026</div>
+    <div class="meta-pill">🔄 Last Updated: April 28, 2026</div>
+    <div class="meta-pill">📱 Roty iOS App</div>
+  </div>
+</div>
+
+<!-- CONTENT -->
+
+<div class="content-wrap">
+
+  <!-- TABLE OF CONTENTS -->
+
+  <div class="toc">
+    <div class="toc-title">Contents</div>
+    <ol class="toc-list">
+      <li><a href="#s1"><span class="toc-num">01</span> Who We Are</a></li>
+      <li><a href="#s2"><span class="toc-num">02</span> The Short Version</a></li>
+      <li><a href="#s3"><span class="toc-num">03</span> Data We Collect & Why</a></li>
+      <li><a href="#s4"><span class="toc-num">04</span> Data We Do Not Collect</a></li>
+      <li><a href="#s5"><span class="toc-num">05</span> Third-Party Services</a></li>
+      <li><a href="#s6"><span class="toc-num">06</span> Apple Platform Permissions</a></li>
+      <li><a href="#s7"><span class="toc-num">07</span> Data Retention & Deletion</a></li>
+      <li><a href="#s8"><span class="toc-num">08</span> Children's Privacy</a></li>
+      <li><a href="#s9"><span class="toc-num">09</span> Your Rights</a></li>
+      <li><a href="#s10"><span class="toc-num">10</span> Jurisdiction Coverage</a></li>
+      <li><a href="#s11"><span class="toc-num">11</span> Changes to This Policy</a></li>
+      <li><a href="#s12"><span class="toc-num">12</span> Contact</a></li>
+    </ol>
+  </div>
+
+  <!-- 01 WHO WE ARE -->
+
+  <div class="policy-section" id="s1">
+    <div class="ps-header">
+      <span class="ps-num">01</span>
+      <div class="ps-icon" style="background:#CFF0FA;">🧠</div>
+      <div class="ps-title">Who We Are</div>
+    </div>
+    <div class="ps-body">
+      <p>Roty is an iOS application developed and published by <strong>Oktay Evin</strong>, an independent developer based in <strong>Istanbul, Turkey</strong>. Roty is a personal productivity and habit-building app that uses Apple's Screen Time API to let users lock and unlock apps based on earned in-app coins.</p>
+      <p>This Privacy Policy applies to the Roty iOS app ("the App") and governs how any information related to your use of the App is handled. By using Roty, you agree to the practices described in this document.</p>
+      <div class="callout sky">
+        <div class="callout-icon">📬</div>
+        <div class="callout-text">For any privacy-related questions, you can reach us at <a class="email-link" href="mailto:hello@oktayevin.com">hello@oktayevin.com</a></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 02 SHORT VERSION -->
+
+  <div class="policy-section" id="s2">
+    <div class="ps-header">
+      <span class="ps-num">02</span>
+      <div class="ps-icon" style="background:#D5F5DE;">⚡</div>
+      <div class="ps-title">The Short Version</div>
+    </div>
+    <div class="ps-body">
+      <p>If you only read one section, read this one:</p>
+      <div class="pill-list">
+        <div class="pill-item">
+          <div class="pill-dot" style="background:var(--grass);"></div>
+          <div class="pill-item-text"><strong>All your data lives on your device.</strong> Roty does not have a backend server. There is no database we control that contains your information.</div>
+        </div>
+        <div class="pill-item">
+          <div class="pill-dot" style="background:var(--grass);"></div>
+          <div class="pill-item-text"><strong>We never transmit personal data.</strong> Your name, age, step count, quest history, coins, and habits never leave your iPhone.</div>
+        </div>
+        <div class="pill-item">
+          <div class="pill-dot" style="background:var(--grass);"></div>
+          <div class="pill-item-text"><strong>No analytics, no trackers, no ads.</strong> Roty contains zero third-party SDKs that collect behavioral or personal data.</div>
+        </div>
+        <div class="pill-item">
+          <div class="pill-dot" style="background:var(--grass);"></div>
+          <div class="pill-item-text"><strong>No account required.</strong> You never sign up, log in, or provide an email address to use Roty.</div>
+        </div>
+        <div class="pill-item">
+          <div class="pill-dot" style="background:var(--grass);"></div>
+          <div class="pill-item-text"><strong>Deleting the app deletes everything.</strong> Uninstalling Roty removes all locally stored data from your device permanently.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 03 DATA WE COLLECT -->
+
+  <div class="policy-section" id="s3">
+    <div class="ps-header">
+      <span class="ps-num">03</span>
+      <div class="ps-icon" style="background:#FFF3CC;">🗂</div>
+      <div class="ps-title">Data We Collect & Why</div>
+    </div>
+    <div class="ps-body">
+      <p>Roty stores a minimal set of data <strong>locally on your device only</strong>, using Apple's standard on-device storage (SwiftData and UserDefaults). None of it is accessible to us or any third party.</p>
+
+```
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>Data</th>
+        <th>Where it's stored</th>
+        <th>Why it's needed</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Your first name</strong> (optional, entered during onboarding)</td>
+        <td>On-device (UserDefaults)</td>
+        <td>Personalises the "Hello, [Name]" greeting in the app</td>
+      </tr>
+      <tr>
+        <td><strong>Age & daily phone usage estimate</strong> (entered during onboarding)</td>
+        <td>On-device (UserDefaults)</td>
+        <td>Calculates the brain "rot meter" and impact stats shown in onboarding</td>
+      </tr>
+      <tr>
+        <td><strong>Quest list and completion history</strong></td>
+        <td>On-device (SwiftData)</td>
+        <td>Tracks which quests you've completed today and your overall progress</td>
+      </tr>
+      <tr>
+        <td><strong>Coin balance</strong></td>
+        <td>On-device (UserDefaults)</td>
+        <td>Stores your earned coins so you can spend them in the Shop</td>
+      </tr>
+      <tr>
+        <td><strong>Daily streak count</strong></td>
+        <td>On-device (UserDefaults)</td>
+        <td>Tracks consecutive days of completing at least one quest</td>
+      </tr>
+      <tr>
+        <td><strong>Step count</strong> (read-only, from Apple Health)</td>
+        <td>Never stored — read live from HealthKit</td>
+        <td>Displays today's steps and calculates bonus coin rewards</td>
+      </tr>
+      <tr>
+        <td><strong>Selected apps for Screen Time blocking</strong></td>
+        <td>On-device App Group (shared container)</td>
+        <td>Tells the Screen Time extension which apps to block/unblock</td>
+      </tr>
+      <tr>
+        <td><strong>App unlock timer state</strong></td>
+        <td>On-device (UserDefaults)</td>
+        <td>Tracks whether apps are currently unlocked and how much time remains</td>
+      </tr>
+      <tr>
+        <td><strong>Onboarding completion flag</strong></td>
+        <td>On-device (UserDefaults)</td>
+        <td>Remembers whether you've completed setup so it's not shown again</td>
+      </tr>
+      <tr>
+        <td><strong>App theme preference</strong></td>
+        <td>On-device (UserDefaults)</td>
+        <td>Remembers your light/dark/system appearance setting</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout yellow">
+    <div class="callout-icon">🔒</div>
+    <div class="callout-text"><strong>Photos taken for photo quests are never saved or stored.</strong> When you complete a photo quest (e.g., "Drink Water", "Make Bed"), the photo is passed directly to on-device image recognition and immediately discarded. It is never written to your Photo Library, never saved to disk, and never transmitted anywhere.</div>
+  </div>
+</div>
+```
+
+  </div>
+
+  <!-- 04 DATA WE DO NOT COLLECT -->
+
+  <div class="policy-section" id="s4">
+    <div class="ps-header">
+      <span class="ps-num">04</span>
+      <div class="ps-icon" style="background:#FCE8E4;">🚫</div>
+      <div class="ps-title">Data We Do Not Collect</div>
+    </div>
+    <div class="ps-body">
+      <p>To be completely explicit, Roty <strong>never</strong> collects, processes, or transmits any of the following:</p>
+      <div class="pill-list">
+        <div class="pill-item">
+          <div class="pill-dot" style="background:var(--coral);"></div>
+          <div class="pill-item-text"><strong>Device identifiers</strong> — no IDFA, IDFV, serial number, or any hardware identifier</div>
+        </div>
+        <div class="pill-item">
+          <div class="pill-dot" style="background:var(--coral);"></div>
+          <div class="pill-item-text"><strong>Location data</strong> — Roty never requests or reads your GPS location</div>
+        </div>
+        <div class="pill-item">
+          <div class="pill-dot" style="background:var(--coral);"></div>
+          <div class="pill-item-text"><strong>IP address or network data</strong> — Roty makes no outbound network requests during normal use</div>
+        </div>
+        <div class="pill-item">
+          <div class="pill-dot" style="background:var(--coral);"></div>
+          <div class="pill-item-text"><strong>Contacts, calendar, or messages</strong> — Roty does not access any communication data</div>
+        </div>
+        <div class="pill-item">
+          <div class="pill-dot" style="background:var(--coral);"></div>
+          <div class="pill-item-text"><strong>Crash reports or diagnostic data</strong> — no crash reporting SDK is included</div>
+        </div>
+        <div class="pill-item">
+          <div class="pill-dot" style="background:var(--coral);"></div>
+          <div class="pill-item-text"><strong>Behavioral analytics</strong> — no events, sessions, screen views, or tap data are tracked</div>
+        </div>
+        <div class="pill-item">
+          <div class="pill-dot" style="background:var(--coral);"></div>
+          <div class="pill-item-text"><strong>Financial or payment information</strong> — in-app purchases (if applicable) are handled entirely by Apple. Roty never sees your payment details</div>
+        </div>
+        <div class="pill-item">
+          <div class="pill-dot" style="background:var(--coral);"></div>
+          <div class="pill-item-text"><strong>Health data beyond step count</strong> — Roty only reads today's step count from HealthKit and does not read, write, or store any other health metrics</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 05 THIRD-PARTY SERVICES -->
+
+  <div class="policy-section" id="s5">
+    <div class="ps-header">
+      <span class="ps-num">05</span>
+      <div class="ps-icon" style="background:#F0D5EC;">🔗</div>
+      <div class="ps-title">Third-Party Services</div>
+    </div>
+    <div class="ps-body">
+      <p>Roty contains <strong>no third-party analytics SDKs, advertising networks, crash reporters, or data brokers</strong>. The only external services involved in your experience with Roty are Apple's own platform services:</p>
+      <div class="pill-list">
+        <div class="pill-item">
+          <div class="pill-dot" style="background:var(--sky);"></div>
+          <div class="pill-item-text"><strong>Apple HealthKit</strong> — used in read-only mode to fetch your daily step count. Governed by Apple's privacy policy and the permissions you grant in iOS Settings.</div>
+        </div>
+        <div class="pill-item">
+          <div class="pill-dot" style="background:var(--sky);"></div>
+          <div class="pill-item-text"><strong>Apple Screen Time (FamilyControls / ManagedSettings / DeviceActivity)</strong> — used to block and unblock your chosen apps. This data stays entirely within iOS and is never accessible to Roty's code once the blocking is applied.</div>
+        </div>
+        <div class="pill-item">
+          <div class="pill-dot" style="background:var(--sky);"></div>
+          <div class="pill-item-text"><strong>Apple Push Notifications (UNUserNotificationCenter)</strong> — used only to send local, on-device notifications (e.g., when your unlock timer is about to expire). Roty does not use remote push notifications and has no push notification server.</div>
+        </div>
+        <div class="pill-item">
+          <div class="pill-dot" style="background:var(--sky);"></div>
+          <div class="pill-item-text"><strong>Apple App Store / StoreKit</strong> — handles any in-app purchase transactions. Apple's privacy practices govern all payment processing. Roty only receives a confirmation of purchase status, never your payment details.</div>
+        </div>
+      </div>
+      <p>Apple's privacy policy is available at <strong>apple.com/privacy</strong>.</p>
+    </div>
+  </div>
+
+  <!-- 06 APPLE PERMISSIONS -->
+
+  <div class="policy-section" id="s6">
+    <div class="ps-header">
+      <span class="ps-num">06</span>
+      <div class="ps-icon" style="background:#CFF0FA;">📱</div>
+      <div class="ps-title">Apple Platform Permissions</div>
+    </div>
+    <div class="ps-body">
+      <p>Roty requests the following iOS permissions. All are optional except Screen Time, which is core to the app's functionality. You can revoke any permission at any time in <strong>iOS Settings → Roty</strong>.</p>
+      <div class="pill-list">
+        <div class="pill-item">
+          <div class="pill-dot" style="background:var(--coral);"></div>
+          <div class="pill-item-text"><strong>Screen Time (FamilyControls)</strong> — Required for app blocking and unlocking. Roty uses the DeviceActivityMonitor extension to apply and remove app shields. Without this permission, the core unlock feature does not work.</div>
+        </div>
+        <div class="pill-item">
+          <div class="pill-dot" style="background:var(--sun);"></div>
+          <div class="pill-item-text"><strong>Apple Health (HealthKit — Steps read-only)</strong> — Optional. Used to read today's step count for the step reward feature. Roty only reads <em>step count</em> and no other health data.</div>
+        </div>
+        <div class="pill-item">
+          <div class="pill-dot" style="background:var(--sky);"></div>
+          <div class="pill-item-text"><strong>Notifications</strong> — Optional. Used for local, on-device reminders only (e.g., app relock alerts). No remote notifications. Notification content is generated entirely on your device.</div>
+        </div>
+        <div class="pill-item">
+          <div class="pill-dot" style="background:var(--grass);"></div>
+          <div class="pill-item-text"><strong>Camera</strong> — Optional, used only during photo quest verification. Photos are processed on-device for content recognition and immediately discarded. They are never saved, shared, or stored.</div>
+        </div>
+      </div>
+      <div class="callout green">
+        <div class="callout-icon">✅</div>
+        <div class="callout-text">Roty will always explain <strong>why</strong> a permission is needed before requesting it. You will never be surprised by an unexpected permission prompt.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 07 RETENTION & DELETION -->
+
+  <div class="policy-section" id="s7">
+    <div class="ps-header">
+      <span class="ps-num">07</span>
+      <div class="ps-icon" style="background:#D5F5DE;">🗑</div>
+      <div class="ps-title">Data Retention & Deletion</div>
+    </div>
+    <div class="ps-body">
+      <p>Because all data is stored locally on your device, you are always in full control of it.</p>
+      <div class="pill-list">
+        <div class="pill-item">
+          <div class="pill-dot" style="background:var(--grass);"></div>
+          <div class="pill-item-text"><strong>Deleting the app</strong> removes all locally stored Roty data from your device permanently, including your quest history, coin balance, streak, name, and preferences.</div>
+        </div>
+        <div class="pill-item">
+          <div class="pill-dot" style="background:var(--grass);"></div>
+          <div class="pill-item-text"><strong>Revoking HealthKit permission</strong> in iOS Settings will immediately stop Roty from reading any step data. Previously read step counts are not stored by Roty and are discarded after display.</div>
+        </div>
+        <div class="pill-item">
+          <div class="pill-dot" style="background:var(--grass);"></div>
+          <div class="pill-item-text"><strong>There is no account to delete</strong> because there is no account. We hold no copy of your data on any server. No deletion request needs to be submitted to us.</div>
+        </div>
+      </div>
+      <p>If you have questions about data specific to Apple's own platform services (iCloud backups, HealthKit, App Store receipts), those are managed through your Apple ID settings.</p>
+    </div>
+  </div>
+
+  <!-- 08 CHILDREN -->
+
+  <div class="policy-section" id="s8">
+    <div class="ps-header">
+      <span class="ps-num">08</span>
+      <div class="ps-icon" style="background:#FFF3CC;">👧</div>
+      <div class="ps-title">Children's Privacy</div>
+    </div>
+    <div class="ps-body">
+      <p>Roty is designed to be suitable for users of all ages, including children. The onboarding flow explicitly allows users as young as 8 years old to set up the app.</p>
+      <p>Because Roty collects no personal data and transmits nothing off-device, it does not raise concerns under children's privacy regulations including <strong>COPPA</strong> (US), <strong>GDPR-K</strong> (EU), or <strong>KVKK</strong> (Turkey) with respect to data collection from minors. No personal information is collected, processed, or shared regardless of the user's age.</p>
+      <div class="callout yellow">
+        <div class="callout-icon">⚠️</div>
+        <div class="callout-text">If you are a parent or guardian and have concerns about your child's use of Roty, please contact us at <a class="email-link" href="mailto:hello@oktayevin.com">hello@oktayevin.com</a>. We are happy to assist.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 09 YOUR RIGHTS -->
+
+  <div class="policy-section" id="s9">
+    <div class="ps-header">
+      <span class="ps-num">09</span>
+      <div class="ps-icon" style="background:#D5F5DE;">⚖️</div>
+      <div class="ps-title">Your Rights</div>
+    </div>
+    <div class="ps-body">
+      <p>Depending on where you live, you may have specific legal rights regarding your personal data. Because Roty stores all data locally on your device and we do not process or hold any personal data on our end, most of these rights are automatically satisfied — you already have full access, control, portability, and erasure capability through your own device.</p>
+      <div class="pill-list">
+        <div class="pill-item">
+          <div class="pill-dot" style="background:var(--grass);"></div>
+          <div class="pill-item-text"><strong>Right to access</strong> — All your data is on your device. Open the app to see it at any time.</div>
+        </div>
+        <div class="pill-item">
+          <div class="pill-dot" style="background:var(--grass);"></div>
+          <div class="pill-item-text"><strong>Right to rectification</strong> — You can edit your name and settings directly inside the app's Settings screen.</div>
+        </div>
+        <div class="pill-item">
+          <div class="pill-dot" style="background:var(--grass);"></div>
+          <div class="pill-item-text"><strong>Right to erasure ("right to be forgotten")</strong> — Delete the app. All data is gone immediately. There is no server-side copy to delete.</div>
+        </div>
+        <div class="pill-item">
+          <div class="pill-dot" style="background:var(--grass);"></div>
+          <div class="pill-item-text"><strong>Right to data portability</strong> — Your data is stored in standard iOS formats. iPhone backups (via iCloud or iTunes) will include it if you choose to back up your device.</div>
+        </div>
+        <div class="pill-item">
+          <div class="pill-dot" style="background:var(--grass);"></div>
+          <div class="pill-item-text"><strong>Right to object / restrict processing</strong> — You can revoke any individual permission (Health, Notifications, Camera) at any time via iOS Settings without deleting the app.</div>
+        </div>
+      </div>
+      <p>If you believe your rights have not been satisfied, you may contact us at <a class="email-link" href="mailto:hello@oktayevin.com">hello@oktayevin.com</a>. Residents of the EU may also lodge a complaint with their local Data Protection Authority. Residents of Turkey may contact the <strong>Kişisel Verileri Koruma Kurumu (KVKK)</strong> at kvkk.gov.tr.</p>
+    </div>
+  </div>
+
+  <!-- 10 JURISDICTION -->
+
+  <div class="policy-section" id="s10">
+    <div class="ps-header">
+      <span class="ps-num">10</span>
+      <div class="ps-icon" style="background:#CFF0FA;">🌍</div>
+      <div class="ps-title">Jurisdiction Coverage</div>
+    </div>
+    <div class="ps-body">
+      <p>This privacy policy is written to comply with the data protection laws of the following major jurisdictions. Because Roty collects no personal data on our servers, compliance is largely inherent in the app's design.</p>
+      <div class="juris-grid">
+        <div class="juris-card">
+          <div class="juris-flag">🇹🇷</div>
+          <div class="juris-name">Turkey</div>
+          <div class="juris-law">KVKK (6698)</div>
+        </div>
+        <div class="juris-card">
+          <div class="juris-flag">🇪🇺</div>
+          <div class="juris-name">European Union</div>
+          <div class="juris-law">GDPR (2016/679)</div>
+        </div>
+        <div class="juris-card">
+          <div class="juris-flag">🇺🇸</div>
+          <div class="juris-name">United States</div>
+          <div class="juris-law">COPPA / CalOPPA</div>
+        </div>
+      </div>
+      <p>Under <strong>GDPR</strong>: Roty does not act as a "data controller" or "data processor" under GDPR definitions in the context of personal data, as we do not collect, store, or process personal data on any infrastructure we control.</p>
+      <p>Under <strong>KVKK</strong>: No personal data is processed by Roty outside of the user's own device. No data transfer to third countries occurs. There is no data controller registration obligation triggered by this app's current data practices.</p>
+      <p>Under <strong>COPPA</strong>: Roty does not collect personal information from children under 13 or users of any age, and therefore is fully compliant.</p>
+    </div>
+  </div>
+
+  <!-- 11 CHANGES -->
+
+  <div class="policy-section" id="s11">
+    <div class="ps-header">
+      <span class="ps-num">11</span>
+      <div class="ps-icon" style="background:#FFF3CC;">🔄</div>
+      <div class="ps-title">Changes to This Policy</div>
+    </div>
+    <div class="ps-body">
+      <p>We may update this Privacy Policy from time to time, for example if the app adds new features that involve different data practices. When changes are made:</p>
+      <div class="pill-list">
+        <div class="pill-item">
+          <div class="pill-dot" style="background:var(--sun);"></div>
+          <div class="pill-item-text">The <strong>"Last Updated"</strong> date at the top of this page will be revised.</div>
+        </div>
+        <div class="pill-item">
+          <div class="pill-dot" style="background:var(--sun);"></div>
+          <div class="pill-item-text">If a change is <strong>material</strong> (e.g., we begin collecting new categories of data), we will notify users through the App Store release notes or an in-app notice.</div>
+        </div>
+        <div class="pill-item">
+          <div class="pill-dot" style="background:var(--sun);"></div>
+          <div class="pill-item-text">Continued use of Roty after a policy update constitutes acceptance of the revised terms.</div>
+        </div>
+      </div>
+      <p>We commit to never silently introducing data collection without updating this policy and notifying users.</p>
+    </div>
+  </div>
+
+  <!-- 12 CONTACT -->
+
+  <div class="policy-section" id="s12">
+    <div class="ps-header">
+      <span class="ps-num">12</span>
+      <div class="ps-icon" style="background:#D5F5DE;">✉️</div>
+      <div class="ps-title">Contact</div>
+    </div>
+    <div class="ps-body">
+      <p>If you have any questions, concerns, or requests related to this Privacy Policy or the way Roty handles data, please reach out:</p>
+      <div class="callout green">
+        <div class="callout-icon">👋</div>
+        <div class="callout-text">
+          <strong>Oktay Evin</strong><br/>
+          Independent Developer · Istanbul, Turkey<br/>
+          <a class="email-link" href="mailto:hello@oktayevin.com" style="margin-top:6px;display:inline-flex;">hello@oktayevin.com</a>
+        </div>
+      </div>
+      <p>We aim to respond to all privacy inquiries within <strong>5 business days</strong>. For urgent matters related to potential data breaches or children's safety, please mark your subject line accordingly and we will prioritise your message.</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- DOCUMENT FOOTER -->
+
+<div class="doc-footer">
+  <p><strong>Roty Privacy Policy</strong> · Effective April 28, 2026</p>
+  <p>This document was prepared in good faith for the Roty iOS application by Oktay Evin.</p>
+  <p style="margin-top:8px;font-size:13px;color:var(--ink3);">This is not a legal document prepared by a licensed attorney. For binding legal advice, consult a qualified lawyer in your jurisdiction.</p>
+</div>
+
+<!-- FOOTER -->
+
+<footer>
+  <div class="footer-logo">
+    <svg width="26" height="26" viewBox="0 0 60 60" fill="none">
+      <path d="M16 34 C12 24 16 12 28 12 C32 6 40 6 44 12 C54 14 56 28 50 36 C50 46 44 52 36 52 C30 52 26 52 22 48 C16 46 14 40 16 34Z" fill="#EFC0B0" stroke="#322E26" stroke-width="3"/>
+      <circle cx="24" cy="30" r="4.5" fill="white" stroke="#322E26" stroke-width="2.2"/>
+      <circle cx="38" cy="30" r="4.5" fill="white" stroke="#322E26" stroke-width="2.2"/>
+      <circle cx="25" cy="30" r="2" fill="#322E26"/>
+      <circle cx="39" cy="30" r="2" fill="#322E26"/>
+      <path d="M25 40 Q30 45 37 40" stroke="#322E26" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+    </svg>
+    Roty
+  </div>
+  <p>© 2026 Oktay Evin</p>
+  <div class="footer-links">
+    <a href="roty.html">Home</a>
+    <a href="mailto:hello@oktayevin.com">Contact</a>
+  </div>
+</footer>
+
+</body>
+</html>
