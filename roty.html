@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Roty — Keep Your Brain Fresh</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,700;0,800;0,900;1,900&family=DM+Mono:wght@500&display=swap" rel="stylesheet"/>
+  <style>
+    /* ─── RESET & ROOT ─── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    .rp {
+      /* all Roty styles scoped under .rp to avoid conflicts with host site */
+      --cream:   #F8F4E5;
+      --cream2:  #F1EAD8;
+      --paper:   #FDFAF3;
+      --ink:     #322E26;
+      --ink2:    #605749;
+      --ink3:    #99907F;
+      --coral:   #E0654D;
+      --coralD:  #A53F2B;
+      --sun:     #DCC042;
+      --sunD:    #AA9620;
+      --grass:   #46BD64;
+      --grassD:  #267040;
+      --sky:     #37ACDA;
+      --skyD:    #1776A3;
+      --plum:    #B661A3;
+      --plumD:   #7F3A6E;
+      --tan:     #F8F3DA;
+
+      background: var(--cream) !important;
+      color: var(--ink) !important;
+      font-family: 'Nunito', sans-serif !important;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+
+    /* pages */
+    .rp-page { display: none; }
+    .rp-page.active { display: block; }
+
+    /* ─── NAV ─── */
+    .rp .nav {
+      position: sticky; top: 0; z-index: 200;
+      background: var(--cream) !important;
+      border-bottom: 2.5px solid var(--ink) !important;
+      padding: 13px 36px;
+      display: flex !important; align-items: center; justify-content: space-between;
+    }
+    .rp .nav-logo {
+      font-size: 22px !important; font-weight: 900 !important;
+      color: var(--ink) !important; text-decoration: none !important;
+      display: flex !important; align-items: center; gap: 8px; cursor: pointer;
+      font-family: 'Nunito', sans-serif !important;
+    }
+    .rp .nav-btn {
+      display: inline-flex !important; align-items: center; gap: 7px;
+      font-family: 'Nunito', sans-serif !important; font-size: 14px !important; font-weight: 900 !important;
+      padding: 9px 20px !important; border-radius: 13px !important;
+      text-decoration: none !important; cursor: pointer; white-space: nowrap;
+      transition: transform .08s, box-shadow .08s;
+    }
+    .rp .nav-btn.dark {
+      background: var(--ink) !important; color: var(--paper) !important;
+      border: 2px solid var(--ink) !important; box-shadow: 0 4px 0 var(--coralD) !important;
+    }
+    .rp .nav-btn.dark:hover { transform: translateY(2px); box-shadow: 0 2px 0 var(--coralD) !important; }
+    .rp .nav-btn.ghost {
+      background: transparent !important; color: var(--ink2) !important;
+      border: 2px solid var(--ink) !important; box-shadow: 2px 3px 0 var(--ink) !important;
+      font-family: 'DM Mono', monospace !important; font-size: 11px !important; letter-spacing: .08em; text-transform: uppercase;
+    }
+    .rp .nav-btn.ghost:hover { transform: translateY(1px); box-shadow: 1px 2px 0 var(--ink) !important; }
+
+    /* ─── HERO ─── */
+    .rp .hero {
+      max-width: 1100px; margin: 0 auto;
+      padding: 64px 36px 56px;
+      display: grid !important; grid-template-columns: 1fr 400px; gap: 48px; align-items: center;
+    }
+    .rp .eyebrow {
+      display: inline-flex !important; align-items: center; gap: 6px;
+      font-family: 'DM Mono', monospace !important; font-size: 11px !important; font-weight: 500 !important;
+      letter-spacing: .14em; text-transform: uppercase; color: var(--coral) !important;
+      background: rgba(224,101,77,.10) !important; border: 1.5px solid rgba(224,101,77,.28) !important;
+      padding: 5px 12px !important; border-radius: 100px !important; margin-bottom: 18px;
+    }
+    .rp .eyebrow-dot {
+      width: 6px !important; height: 6px !important; border-radius: 50% !important;
+      background: var(--coral) !important; display: inline-block !important;
+      animation: rp-blink 1.6s ease infinite;
+    }
+    @keyframes rp-blink { 0%,100%{opacity:1} 50%{opacity:.25} }
+
+    .rp .hero-h1 {
+      font-size: clamp(44px,5.5vw,76px) !important; font-weight: 900 !important;
+      letter-spacing: -2.5px !important; line-height: 1.02 !important;
+      color: var(--ink) !important; margin-bottom: 20px !important;
+      font-family: 'Nunito', sans-serif !important;
+    }
+    .rp .hero-h1 .c { color: var(--coral) !important; }
+    .rp .hero-h1 .hl { position: relative; display: inline-block; white-space: nowrap; }
+    .rp .hero-h1 .hl::after {
+      content: ''; position: absolute; left: -2px; right: -2px; bottom: 2px;
+      height: 10px; background: var(--sun) !important; border-radius: 3px !important; z-index: -1; opacity: .7;
+    }
+    .rp .hero-sub {
+      font-size: 17px !important; font-weight: 700 !important; color: var(--ink2) !important;
+      line-height: 1.6; max-width: 490px; margin-bottom: 32px !important;
+      font-family: 'Nunito', sans-serif !important;
+    }
+    .rp .chips { display: flex !important; gap: 9px; flex-wrap: wrap; margin-bottom: 32px; }
+    .rp .chip {
+      display: inline-flex !important; align-items: center; gap: 5px;
+      font-family: 'DM Mono', monospace !important; font-size: 10px !important; font-weight: 500 !important;
+      text-transform: uppercase; letter-spacing: .08em; color: var(--ink) !important;
+      padding: 6px 12px !important; border-radius: 100px !important;
+      border: 2px solid var(--ink) !important; box-shadow: 2px 2px 0 var(--ink) !important;
+    }
+    .rp .actions { display: flex !important; gap: 14px; align-items: center; flex-wrap: wrap; }
+    .rp .btn-main {
+      display: inline-flex !important; align-items: center; gap: 8px;
+      background: var(--coral) !important; color: #fff !important;
+      font-family: 'Nunito', sans-serif !important; font-size: 16px !important; font-weight: 900 !important;
+      padding: 14px 28px !important; border-radius: 17px !important; border: 2px solid var(--ink) !important;
+      box-shadow: 0 5px 0 var(--coralD), 0 7px 0 var(--ink) !important;
+      text-decoration: none !important; transition: transform .08s, box-shadow .08s;
+    }
+    .rp .btn-main:hover { transform: translateY(3px); box-shadow: 0 2px 0 var(--coralD), 0 4px 0 var(--ink) !important; }
+    .rp .btn-main:active { transform: translateY(7px); box-shadow: none !important; }
+    .rp .btn-ghost {
+      font-size: 14px !important; font-weight: 800 !important; color: var(--ink2) !important;
+      text-decoration: none !important; font-family: 'Nunito', sans-serif !important;
+    }
+    .rp .btn-ghost:hover { color: var(--ink) !important; }
+
+    /* ─── MASCOT ─── */
+    .rp .mascot-wrap { display: flex !important; justify-content: center; align-items: center; }
+    .rp .mascot-c { animation: rp-float 3s ease-in-out infinite; filter: drop-shadow(6px 10px 0 rgba(50,46,38,.16)); }
+    @keyframes rp-float { 0%,100%{transform:translateY(0) rotate(-1deg)} 50%{transform:translateY(-11px) rotate(1deg)} }
+
+    /* ─── TICKER ─── */
+    .rp .ticker {
+      background: var(--ink) !important;
+      border-top: 2px solid var(--ink) !important; border-bottom: 2px solid var(--ink) !important;
+      padding: 16px 0; overflow: hidden; white-space: nowrap;
+    }
+    .rp .ticker-track { display: inline-flex !important; animation: rp-scroll 20s linear infinite; }
+    @keyframes rp-scroll { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+    .rp .ticker-item {
+      display: inline-flex !important; align-items: center; gap: 10px; padding: 0 28px;
+      font-family: 'DM Mono', monospace !important; font-size: 12px !important; font-weight: 500 !important;
+      color: rgba(255,255,255,.55) !important; letter-spacing: .12em; text-transform: uppercase;
+    }
+    .rp .ticker-item .hi { color: var(--sun) !important; }
+
+    /* ─── SHARED SECTION HELPERS ─── */
+    .rp .wrap { max-width: 1100px; margin: 0 auto; padding: 80px 36px; }
+    .rp .wrap-sm { max-width: 800px; margin: 0 auto; padding: 64px 36px 80px; }
+    .rp .bg-tan  { background: var(--tan) !important; border-top: 2px solid var(--ink) !important; border-bottom: 2px solid var(--ink) !important; }
+    .rp .bg-dark { background: var(--ink) !important; border-top: 2px solid var(--ink) !important; border-bottom: 2px solid var(--ink) !important; }
+    .rp .bg-coral{ background: var(--coral) !important; border-top: 2.5px solid var(--ink) !important; border-bottom: 2.5px solid var(--ink) !important; }
+    .rp .bt { border-top: 2px solid var(--ink) !important; }
+
+    .rp .eyebrow-label {
+      font-family: 'DM Mono', monospace !important; font-size: 11px !important; font-weight: 500 !important;
+      letter-spacing: .14em; text-transform: uppercase; color: var(--coral) !important;
+      margin-bottom: 12px; display: block;
+    }
+    .rp .eyebrow-label.dim { color: rgba(255,255,255,.4) !important; }
+    .rp .sec-title {
+      font-size: clamp(30px,4vw,50px) !important; font-weight: 900 !important;
+      letter-spacing: -1.5px !important; line-height: 1.06 !important;
+      font-family: 'Nunito', sans-serif !important; color: var(--ink) !important;
+    }
+    .rp .sec-title.light { color: var(--paper) !important; }
+    .rp .sec-title .c  { color: var(--coral) !important; }
+    .rp .sec-title .cy { color: var(--sun) !important; }
+    .rp .sec-title em  { font-style: italic; color: var(--ink3) !important; }
+    .rp .sec-hdr { margin-bottom: 44px; }
+
+    /* ─── STEPS ─── */
+    .rp .steps { display: flex !important; flex-direction: column; gap: 3px; }
+    .rp .step {
+      background: var(--paper) !important; border: 2px solid var(--ink) !important;
+      padding: 26px 30px !important;
+      display: grid !important; grid-template-columns: 56px 1fr auto; gap: 20px; align-items: start;
+      transition: background .15s;
+    }
+    .rp .step:first-child { border-radius: 22px 22px 0 0 !important; }
+    .rp .step:last-child  { border-radius: 0 0 22px 22px !important; }
+    .rp .step:hover { background: var(--tan) !important; }
+    .rp .step-n  { font-size: 34px !important; font-weight: 900 !important; color: var(--coral) !important; opacity: .22; line-height: 1; font-family: 'Nunito', sans-serif !important; }
+    .rp .step-t  { font-size: 19px !important; font-weight: 900 !important; color: var(--ink) !important; margin-bottom: 5px !important; font-family: 'Nunito', sans-serif !important; }
+    .rp .step-d  { font-size: 14px !important; font-weight: 700 !important; color: var(--ink2) !important; line-height: 1.6; font-family: 'Nunito', sans-serif !important; }
+    .rp .step-badge {
+      display: inline-flex !important; align-items: center; gap: 5px; flex-shrink: 0;
+      font-family: 'DM Mono', monospace !important; font-size: 10px !important; font-weight: 500 !important;
+      letter-spacing: .08em; text-transform: uppercase; color: var(--ink) !important;
+      padding: 6px 11px !important; border-radius: 100px !important;
+      border: 2px solid var(--ink) !important; box-shadow: 2px 2px 0 var(--ink) !important;
+      white-space: nowrap; align-self: start; margin-top: 3px;
+    }
+
+    /* ─── QUEST TYPE CARDS ─── */
+    .rp .qt-grid { display: grid !important; grid-template-columns: repeat(3,1fr); gap: 3px; }
+    .rp .qt-card {
+      background: var(--paper) !important; border: 2px solid var(--ink) !important;
+      padding: 30px 26px !important; transition: transform .12s;
+    }
+    .rp .qt-card:first-child { border-radius: 22px 0 0 22px !important; }
+    .rp .qt-card:last-child  { border-radius: 0 22px 22px 0 !important; }
+    .rp .qt-card:hover { transform: translateY(-4px); }
+    .rp .qt-icon {
+      width: 54px !important; height: 54px !important; border-radius: 16px !important;
+      border: 2px solid var(--ink) !important;
+      display: flex !important; align-items: center; justify-content: center;
+      font-size: 26px !important; margin-bottom: 16px !important;
+    }
+    .rp .qt-icon.sky  { background: #CFF0FA !important; box-shadow: 2px 3px 0 var(--skyD) !important; }
+    .rp .qt-icon.plum { background: #F0D5EC !important; box-shadow: 2px 3px 0 var(--plumD) !important; }
+    .rp .qt-icon.grn  { background: #D5F5DE !important; box-shadow: 2px 3px 0 var(--grassD) !important; }
+    .rp .qt-sub  { font-family: 'DM Mono', monospace !important; font-size: 10px !important; color: var(--ink2) !important; text-transform: uppercase; letter-spacing: .1em; margin-bottom: 7px; display: block; }
+    .rp .qt-t    { font-size: 20px !important; font-weight: 900 !important; color: var(--ink) !important; margin-bottom: 9px !important; font-family: 'Nunito', sans-serif !important; }
+    .rp .qt-d    { font-size: 13px !important; font-weight: 700 !important; color: var(--ink2) !important; line-height: 1.6; font-family: 'Nunito', sans-serif !important; }
+
+    /* ─── ROT METER ─── */
+    .rp .rot-grid { max-width: 1100px; margin: 0 auto; display: grid !important; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+    .rp .rot-text p { font-size: 15px !important; font-weight: 700 !important; color: rgba(255,255,255,.5) !important; line-height: 1.65; margin-top: 14px !important; font-family: 'Nunito', sans-serif !important; }
+    .rp .brain-states { display: flex !important; flex-direction: column; gap: 12px; }
+    .rp .bsc {
+      background: rgba(255,255,255,.05) !important; border: 2px solid rgba(255,255,255,.1) !important;
+      border-radius: 18px !important; padding: 16px 18px !important;
+      display: flex !important; align-items: center; gap: 14px; transition: background .15s;
+    }
+    .rp .bsc:hover { background: rgba(255,255,255,.09) !important; }
+    .rp .bsc-title { font-size: 15px !important; font-weight: 900 !important; color: #fff !important; margin-bottom: 3px !important; font-family: 'Nunito', sans-serif !important; }
+    .rp .bsc-desc  { font-family: 'DM Mono', monospace !important; font-size: 9px !important; color: rgba(255,255,255,.4) !important; text-transform: uppercase; letter-spacing: .09em; }
+    .rp .bsc-meter {
+      width: 48px !important; height: 48px !important; border-radius: 13px !important;
+      border: 2px solid rgba(255,255,255,.12) !important;
+      display: flex !important; flex-direction: column; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .rp .bsc-num   { font-size: 13px !important; font-weight: 900 !important; line-height: 1; font-family: 'Nunito', sans-serif !important; }
+    .rp .bsc-label { font-family: 'DM Mono', monospace !important; font-size: 7px !important; color: rgba(255,255,255,.35) !important; text-transform: uppercase; letter-spacing: .06em; margin-top: 2px; }
+
+    /* ─── COIN CARDS ─── */
+    .rp .coin-grid { max-width: 1100px; margin: 0 auto; display: grid !important; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+    .rp .coin-text p { font-size: 15px !important; font-weight: 700 !important; color: var(--ink2) !important; line-height: 1.65; margin-top: 14px !important; max-width: 400px; font-family: 'Nunito', sans-serif !important; }
+    .rp .coin-list { display: flex !important; flex-direction: column; gap: 10px; }
+    .rp .coin-card {
+      background: var(--paper) !important; border: 2px solid var(--ink) !important;
+      border-radius: 18px !important; padding: 16px 20px !important;
+      display: flex !important; align-items: center; gap: 14px;
+      box-shadow: 3px 4px 0 var(--ink) !important; transition: transform .1s;
+    }
+    .rp .coin-card:hover { transform: translateY(-2px); }
+    .rp .coin-icon {
+      width: 48px !important; height: 48px !important; border-radius: 14px !important;
+      border: 2px solid var(--ink) !important; box-shadow: 2px 2px 0 var(--ink) !important;
+      display: flex !important; align-items: center; justify-content: center; font-size: 22px !important; flex-shrink: 0;
+    }
+    .rp .coin-info { flex: 1; }
+    .rp .coin-mins  { font-size: 19px !important; font-weight: 900 !important; color: var(--ink) !important; font-family: 'Nunito', sans-serif !important; }
+    .rp .coin-label { font-family: 'DM Mono', monospace !important; font-size: 10px !important; color: var(--ink2) !important; text-transform: uppercase; letter-spacing: .09em; margin-top: 2px; }
+    .rp .coin-cost {
+      display: inline-flex !important; align-items: center; gap: 5px;
+      background: var(--sun) !important; border: 2px solid var(--ink) !important; border-radius: 11px !important;
+      padding: 6px 12px !important; box-shadow: 2px 3px 0 var(--sunD) !important;
+      font-size: 15px !important; font-weight: 900 !important; color: var(--ink) !important; flex-shrink: 0;
+      font-family: 'Nunito', sans-serif !important;
+    }
+
+    /* ─── FEATURES ─── */
+    .rp .feat-grid { display: grid !important; grid-template-columns: repeat(2,1fr); gap: 3px; margin-top: 44px; }
+    .rp .feat {
+      background: var(--paper) !important; border: 2px solid var(--ink) !important;
+      padding: 28px 26px !important; transition: background .15s;
+    }
+    .rp .feat:nth-child(1){ border-radius: 22px 0 0 0 !important; }
+    .rp .feat:nth-child(2){ border-radius: 0 22px 0 0 !important; }
+    .rp .feat:nth-child(3){ border-radius: 0 0 0 22px !important; }
+    .rp .feat:nth-child(4){ border-radius: 0 0 22px 0 !important; }
+    .rp .feat:hover { background: var(--tan) !important; }
+    .rp .feat-ico  { font-size: 28px !important; margin-bottom: 14px !important; display: block !important; }
+    .rp .feat-t    { font-size: 17px !important; font-weight: 900 !important; color: var(--ink) !important; margin-bottom: 7px !important; font-family: 'Nunito', sans-serif !important; }
+    .rp .feat-d    { font-size: 13px !important; font-weight: 700 !important; color: var(--ink2) !important; line-height: 1.65; font-family: 'Nunito', sans-serif !important; }
+
+    /* ─── CTA ─── */
+    .rp .cta { padding: 80px 36px; text-align: center; position: relative; overflow: hidden; }
+    .rp .cta-h2 {
+      font-size: clamp(34px,5vw,60px) !important; font-weight: 900 !important; letter-spacing: -2px;
+      color: #fff !important; text-shadow: 3px 4px 0 var(--coralD); margin-bottom: 12px !important;
+      font-family: 'Nunito', sans-serif !important;
+    }
+    .rp .cta-p { font-size: 15px !important; font-weight: 700 !important; color: rgba(255,255,255,.75) !important; margin-bottom: 32px !important; font-family: 'Nunito', sans-serif !important; }
+    .rp .cta-btn {
+      display: inline-flex !important; align-items: center; gap: 9px;
+      background: var(--sun) !important; color: var(--ink) !important;
+      font-family: 'Nunito', sans-serif !important; font-size: 17px !important; font-weight: 900 !important;
+      padding: 15px 36px !important; border-radius: 17px !important; border: 2.5px solid var(--ink) !important;
+      box-shadow: 0 6px 0 var(--ink) !important; text-decoration: none !important;
+      transition: transform .08s, box-shadow .08s;
+    }
+    .rp .cta-btn:hover { transform: translateY(3px); box-shadow: 0 3px 0 var(--ink) !important; }
+    .rp .cta-btn:active { transform: translateY(6px); box-shadow: none !important; }
+    .rp .confetti { position: absolute; pointer-events: none; inset: 0; overflow: hidden; }
+    .rp .cp {
+      position: absolute !important; width: var(--cw); height: var(--ch);
+      background: var(--cc) !important; border: 1.5px solid var(--ink) !important;
+      border-radius: var(--cr) !important; top: var(--ct); left: var(--cl);
+      animation: rp-fall var(--cd) linear infinite var(--cdel);
+    }
+    @keyframes rp-fall {
+      from { transform: translateY(-40px) rotate(var(--crot)); opacity: 1; }
+      to   { transform: translateY(210px) rotate(calc(var(--crot) + 180deg)); opacity: 0; }
+    }
+
+    /* ─── FOOTER ─── */
+    .rp .footer {
+      padding: 24px 36px !important; border-top: 2px solid var(--ink) !important;
+      background: var(--cream) !important;
+      display: flex !important; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+    }
+    .rp .footer-logo { font-size: 19px !important; font-weight: 900 !important; color: var(--ink) !important; display: flex !important; align-items: center; gap: 7px; font-family: 'Nunito', sans-serif !important; }
+    .rp .footer p { font-family: 'DM Mono', monospace !important; font-size: 11px !important; color: var(--ink2) !important; }
+    .rp .footer-links { display: flex !important; gap: 18px; }
+    .rp .footer-links a { font-family: 'DM Mono', monospace !important; font-size: 11px !important; color: var(--ink2) !important; text-decoration: none !important; cursor: pointer; }
+    .rp .footer-links a:hover { color: var(--ink) !important; text-decoration: underline !important; }
+
+    /* ─── PRIVACY SPECIFIC ─── */
+    .rp .pp-hero {
+      background: var(--tan) !important; border-bottom: 2.5px solid var(--ink) !important;
+      padding: 52px 36px 48px; text-align: center;
+    }
+    .rp .pp-h1 {
+      font-size: clamp(34px,5vw,58px) !important; font-weight: 900 !important;
+      letter-spacing: -2px; color: var(--ink) !important; margin-bottom: 12px !important;
+      font-family: 'Nunito', sans-serif !important;
+    }
+    .rp .pp-h1 span { color: var(--coral) !important; }
+    .rp .pp-sub { font-size: 15px !important; font-weight: 700 !important; color: var(--ink2) !important; max-width: 500px; margin: 0 auto 24px !important; line-height: 1.6; font-family: 'Nunito', sans-serif !important; }
+    .rp .pp-meta { display: inline-flex !important; align-items: center; gap: 16px; flex-wrap: wrap; justify-content: center; }
+    .rp .pp-pill {
+      display: inline-flex !important; align-items: center; gap: 5px;
+      font-family: 'DM Mono', monospace !important; font-size: 9px !important; font-weight: 500 !important;
+      letter-spacing: .1em; text-transform: uppercase; color: var(--ink2) !important;
+      background: var(--paper) !important; border: 2px solid var(--ink) !important; border-radius: 100px !important;
+      padding: 5px 12px !important; box-shadow: 2px 2px 0 var(--ink) !important;
+    }
+    .rp .toc {
+      background: var(--paper) !important; border: 2px solid var(--ink) !important;
+      border-radius: 22px !important; box-shadow: 4px 5px 0 var(--ink) !important;
+      padding: 26px 28px !important; margin-bottom: 32px;
+    }
+    .rp .toc-hdr { font-family: 'DM Mono', monospace !important; font-size: 10px !important; color: var(--ink2) !important; text-transform: uppercase; letter-spacing: .12em; margin-bottom: 14px; }
+    .rp .toc-list { list-style: none !important; display: flex !important; flex-direction: column; gap: 2px; }
+    .rp .toc-list li a {
+      display: flex !important; align-items: center; gap: 10px;
+      font-size: 14px !important; font-weight: 800 !important; color: var(--ink) !important;
+      text-decoration: none !important; padding: 7px 10px !important; border-radius: 10px !important;
+      transition: background .12s; cursor: pointer; font-family: 'Nunito', sans-serif !important;
+    }
+    .rp .toc-list li a:hover { background: var(--tan) !important; }
+    .rp .toc-n { font-family: 'DM Mono', monospace !important; font-size: 10px !important; color: var(--coral) !important; min-width: 22px; }
+    .rp .ps {
+      background: var(--paper) !important; border: 2px solid var(--ink) !important;
+      border-radius: 22px !important; box-shadow: 4px 5px 0 var(--ink) !important;
+      overflow: hidden; margin-bottom: 24px;
+    }
+    .rp .ps-hdr {
+      display: flex !important; align-items: center; gap: 12px;
+      padding: 20px 26px !important; border-bottom: 2px solid var(--ink) !important;
+      background: var(--cream2) !important;
+    }
+    .rp .ps-n { font-family: 'DM Mono', monospace !important; font-size: 11px !important; color: var(--coral) !important; letter-spacing: .06em; min-width: 22px; }
+    .rp .ps-ico {
+      width: 38px !important; height: 38px !important; border-radius: 11px !important;
+      border: 2px solid var(--ink) !important; box-shadow: 2px 2px 0 var(--ink) !important;
+      display: flex !important; align-items: center; justify-content: center; font-size: 17px !important; flex-shrink: 0;
+    }
+    .rp .ps-title { font-size: 17px !important; font-weight: 900 !important; color: var(--ink) !important; font-family: 'Nunito', sans-serif !important; }
+    .rp .ps-body { padding: 22px 26px !important; display: flex !important; flex-direction: column; gap: 14px; }
+    .rp .ps-body p { font-size: 14px !important; font-weight: 700 !important; color: var(--ink2) !important; line-height: 1.7; font-family: 'Nunito', sans-serif !important; }
+    .rp .ps-body p strong { color: var(--ink) !important; font-weight: 900 !important; }
+    .rp .pill-list { display: flex !important; flex-direction: column; gap: 8px; }
+    .rp .pill-item {
+      display: flex !important; align-items: flex-start; gap: 10px;
+      background: var(--cream) !important; border: 2px solid var(--ink) !important;
+      border-radius: 14px !important; padding: 12px 14px !important; box-shadow: 2px 2px 0 var(--ink) !important;
+    }
+    .rp .pd { width: 9px !important; height: 9px !important; border-radius: 50% !important; border: 2px solid var(--ink) !important; flex-shrink: 0; margin-top: 4px; }
+    .rp .pill-item p { font-size: 13px !important; font-weight: 700 !important; color: var(--ink2) !important; line-height: 1.6; font-family: 'Nunito', sans-serif !important; }
+    .rp .callout {
+      display: flex !important; align-items: flex-start; gap: 12px;
+      border: 2px solid var(--ink) !important; border-radius: 16px !important;
+      padding: 16px 18px !important; box-shadow: 3px 3px 0 var(--ink) !important;
+    }
+    .rp .callout p { font-size: 13px !important; font-weight: 700 !important; color: var(--ink2) !important; line-height: 1.65; font-family: 'Nunito', sans-serif !important; }
+    .rp .callout p strong { color: var(--ink) !important; font-weight: 900 !important; }
+    .rp .callout p a { color: var(--coral) !important; font-weight: 900 !important; }
+    .rp .callout.grn  { background: #D5F5DE !important; border-color: var(--grassD) !important; box-shadow: 3px 3px 0 var(--grassD) !important; }
+    .rp .callout.yel  { background: #FFF3CC !important; border-color: var(--sunD) !important;   box-shadow: 3px 3px 0 var(--sunD) !important; }
+    .rp .callout.sky  { background: #CFF0FA !important; border-color: var(--skyD) !important;   box-shadow: 3px 3px 0 var(--skyD) !important; }
+    .rp .callout.red  { background: #FCE8E4 !important; border-color: var(--coralD) !important; box-shadow: 3px 3px 0 var(--coralD) !important; }
+    .rp .callout-ico { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
+    .rp .data-table { width: 100% !important; border-collapse: collapse !important; }
+    .rp .data-table th {
+      font-family: 'DM Mono', monospace !important; font-size: 9px !important; font-weight: 500 !important;
+      letter-spacing: .1em; text-transform: uppercase; color: var(--ink2) !important;
+      background: var(--cream2) !important; padding: 10px 14px !important; text-align: left;
+      border: 1.5px solid var(--ink) !important;
+    }
+    .rp .data-table td {
+      font-size: 12px !important; font-weight: 700 !important; color: var(--ink2) !important;
+      padding: 10px 14px !important; border: 1.5px solid var(--ink) !important;
+      vertical-align: top !important; line-height: 1.55; font-family: 'Nunito', sans-serif !important;
+    }
+    .rp .data-table td strong { color: var(--ink) !important; font-weight: 900 !important; }
+    .rp .data-table tr:nth-child(even) td { background: var(--tan) !important; }
+    .rp .juris-grid { display: grid !important; grid-template-columns: repeat(3,1fr); gap: 10px; }
+    .rp .juris-card {
+      background: var(--cream) !important; border: 2px solid var(--ink) !important;
+      border-radius: 15px !important; padding: 16px 12px !important;
+      box-shadow: 2px 3px 0 var(--ink) !important; text-align: center;
+    }
+    .rp .juris-flag { font-size: 24px !important; margin-bottom: 5px; display: block !important; }
+    .rp .juris-name { font-size: 13px !important; font-weight: 900 !important; color: var(--ink) !important; margin-bottom: 2px; font-family: 'Nunito', sans-serif !important; }
+    .rp .juris-law  { font-family: 'DM Mono', monospace !important; font-size: 9px !important; color: var(--ink2) !important; text-transform: uppercase; letter-spacing: .08em; }
+    .rp .pp-footer { padding: 36px; text-align: center; border-top: 2px solid var(--ink) !important; background: var(--tan) !important; }
+    .rp .pp-footer p { font-size: 13px !important; font-weight: 700 !important; color: var(--ink2) !important; margin-bottom: 4px; font-family: 'Nunito', sans-serif !important; }
+    .rp .pp-footer p strong { color: var(--ink) !important; font-weight: 900 !important; }
+    .rp .pp-footer .disclaimer { font-size: 11px !important; color: var(--ink3) !important; margin-top: 8px; font-family: 'DM Mono', monospace !important; }
+    .rp a.elink { color: var(--coral) !important; font-weight: 900 !important; text-decoration: none !important; border-bottom: 2px solid var(--coral) !important; }
+    .rp a.elink:hover { color: var(--coralD) !important; border-color: var(--coralD) !important; }
+
+    /* ─── SCROLL REVEAL ─── */
+    .rp .rv { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
+    .rp .rv.in { opacity: 1; transform: translateY(0); }
+    @keyframes rp-up { from{opacity:0;transform:translateY(22px)} to{opacity:1;transform:translateY(0)} }
+    .rp .hero-left > * { animation: rp-up .5s ease both; }
+    .rp .hero-left > *:nth-child(1){animation-delay:.04s}
+    .rp .hero-left > *:nth-child(2){animation-delay:.11s}
+    .rp .hero-left > *:nth-child(3){animation-delay:.18s}
+    .rp .hero-left > *:nth-child(4){animation-delay:.25s}
+    .rp .hero-left > *:nth-child(5){animation-delay:.32s}
+    .rp .mascot-wrap { animation: rp-up .7s .28s ease both; }
+
+    /* ─── RESPONSIVE ─── */
+    @media(max-width:860px){
+      .rp .nav { padding: 12px 18px !important; }
+      .rp .hero { grid-template-columns: 1fr !important; padding: 40px 18px 32px !important; gap: 32px; }
+      .rp .mascot-c { width: 240px !important; height: 240px !important; }
+      .rp .mascot-wrap { order: -1; }
+      .rp .wrap { padding: 52px 18px !important; }
+      .rp .wrap-sm { padding: 44px 18px 52px !important; }
+      .rp .qt-grid { grid-template-columns: 1fr !important; }
+      .rp .qt-card { border-radius: 0 !important; }
+      .rp .qt-grid .qt-card:first-child { border-radius: 22px 22px 0 0 !important; }
+      .rp .qt-grid .qt-card:last-child  { border-radius: 0 0 22px 22px !important; }
+      .rp .rot-grid { grid-template-columns: 1fr !important; gap: 40px; }
+      .rp .coin-grid { grid-template-columns: 1fr !important; gap: 40px; }
+      .rp .feat-grid { grid-template-columns: 1fr !important; }
+      .rp .feat { border-radius: 0 !important; }
+      .rp .feat:nth-child(1){ border-radius: 22px 22px 0 0 !important; }
+      .rp .feat:nth-child(4){ border-radius: 0 0 22px 22px !important; }
+      .rp .cta { padding: 56px 18px !important; }
+      .rp .footer { padding: 18px !important; flex-direction: column; align-items: flex-start; }
+      .rp .step { grid-template-columns: 48px 1fr !important; }
+      .rp .step-badge { display: none !important; }
+      .rp .pp-hero { padding: 40px 18px 36px !important; }
+      .rp .juris-grid { grid-template-columns: 1fr !important; }
+      .rp .pp-footer { padding: 28px 18px !important; }
+    }
+  </style>
+</head>
+<body>
+<div class="rp" id="rp-root">
+
+  <!-- ════════════════════════════════════════
+       PAGE: LANDING
+  ════════════════════════════════════════ -->
+  <div class="rp-page active" id="page-home">
+
+    <!-- NAV -->
+    <nav class="nav">
+      <div class="nav-logo" onclick="goto('home')">
+        <svg width="28" height="28" viewBox="0 0 60 60" fill="none">
+          <path d="M16 34C12 24 16 12 28 12C32 6 40 6 44 12C54 14 56 28 50 36C50 46 44 52 36 52C30 52 26 52 22 48C16 46 14 40 16 34Z" fill="#EFC0B0" stroke="#322E26" stroke-width="3"/>
+          <circle cx="24" cy="30" r="4.5" fill="white" stroke="#322E26" stroke-width="2.2"/>
+          <circle cx="38" cy="30" r="4.5" fill="white" stroke="#322E26" stroke-width="2.2"/>
+          <circle cx="25" cy="30" r="2" fill="#322E26"/>
+          <circle cx="39" cy="30" r="2" fill="#322E26"/>
+          <path d="M25 40Q30 45 37 40" stroke="#322E26" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+        </svg>
+        Roty
+      </div>
+      <a href="#download" class="nav-btn dark">🍎 Download Free</a>
+    </nav>
+
+    <!-- HERO -->
+    <div style="max-width:1100px;margin:0 auto;">
+      <section class="hero">
+        <div class="hero-left">
+          <div class="eyebrow"><span class="eyebrow-dot"></span> iOS App · Gamified Habits</div>
+          <h1 class="hero-h1">Keep your<br/>brain <span class="hl">fresh.</span></h1>
+          <p class="hero-sub">Do tiny quests every day. Earn coins. Trade them for the apps that <strong style="color:#E0654D;font-weight:900;">rot your brain</strong> — on your terms.</p>
+          <div class="chips">
+            <div class="chip" style="background:#D5F5DE !important;border-color:#267040 !important;box-shadow:2px 2px 0 #267040 !important;">🔥 Build habits</div>
+            <div class="chip" style="background:#FFF3CC !important;border-color:#AA9620 !important;box-shadow:2px 2px 0 #AA9620 !important;">🪙 Earn unlocks</div>
+            <div class="chip" style="background:#CFF0FA !important;border-color:#1776A3 !important;box-shadow:2px 2px 0 #1776A3 !important;">✨ Feel alive</div>
+          </div>
+          <div class="actions">
+            <a href="#download" class="btn-main">🍎 Download on App Store</a>
+            <a href="#how" class="btn-ghost">How it works →</a>
+          </div>
+        </div>
+        <div class="mascot-wrap">
+          <canvas class="mascot-c" id="brainMain" width="380" height="380"></canvas>
+        </div>
+      </section>
+    </div>
+
+    <!-- TICKER -->
+    <div class="ticker">
+      <div class="ticker-track">
+        <span class="ticker-item">🧠 Keep Your Brain Fresh <span class="hi">✦</span></span>
+        <span class="ticker-item">🪙 Earn Coins Daily <span class="hi">✦</span></span>
+        <span class="ticker-item">🔒 Unlock Your Apps <span class="hi">✦</span></span>
+        <span class="ticker-item">🔥 Build Streaks <span class="hi">✦</span></span>
+        <span class="ticker-item">📸 Prove It With Photos <span class="hi">✦</span></span>
+        <span class="ticker-item">⏱ Focus Timer Quests <span class="hi">✦</span></span>
+        <span class="ticker-item">🚶 Step Rewards <span class="hi">✦</span></span>
+        <span class="ticker-item">💪 50+ Quests <span class="hi">✦</span></span>
+        <span class="ticker-item">🧠 Keep Your Brain Fresh <span class="hi">✦</span></span>
+        <span class="ticker-item">🪙 Earn Coins Daily <span class="hi">✦</span></span>
+        <span class="ticker-item">🔒 Unlock Your Apps <span class="hi">✦</span></span>
+        <span class="ticker-item">🔥 Build Streaks <span class="hi">✦</span></span>
+        <span class="ticker-item">📸 Prove It With Photos <span class="hi">✦</span></span>
+        <span class="ticker-item">⏱ Focus Timer Quests <span class="hi">✦</span></span>
+        <span class="ticker-item">🚶 Step Rewards <span class="hi">✦</span></span>
+        <span class="ticker-item">💪 50+ Quests <span class="hi">✦</span></span>
+      </div>
+    </div>
+
+    <!-- HOW IT WORKS -->
+    <div class="bg-tan" id="how">
+      <div class="wrap">
+        <div class="sec-hdr rv"><span class="eyebrow-label">How it works</span><h2 class="sec-title">Simple loop.<br/><span class="c">Earn → Spend → Repeat.</span></h2></div>
+        <div class="steps rv" style="transition-delay:.1s">
+          <div class="step"><div class="step-n">01</div><div><div class="step-t">Pick your daily quests</div><div class="step-d">Choose from 50+ built-in habits — reading, working out, drinking water, brushing teeth and more.</div></div><div class="step-badge" style="background:#D5F5DE !important;border-color:#267040 !important;">💪 Habits</div></div>
+          <div class="step"><div class="step-n">02</div><div><div class="step-t">Complete them & earn 🪙 coins</div><div class="step-d">Start a timer, snap a photo as proof, or tap to confirm. Harder quests and longer timers reward more coins.</div></div><div class="step-badge" style="background:#FFF3CC !important;border-color:#AA9620 !important;">🪙 Coins</div></div>
+          <div class="step"><div class="step-n">03</div><div><div class="step-t">Spend coins to unlock apps</div><div class="step-d">Head to the Shop and pick how many minutes you want. Roty uses Apple's Screen Time API to unblock your chosen apps instantly.</div></div><div class="step-badge" style="background:#CFF0FA !important;border-color:#1776A3 !important;">🔓 Unlock</div></div>
+          <div class="step"><div class="step-n">04</div><div><div class="step-t">Apps re-lock when time's up</div><div class="step-d">When the clock runs out your apps are blocked again automatically, in the background. Want more time? Earn more coins. No shortcuts.</div></div><div class="step-badge" style="background:#F0D5EC !important;border-color:#7F3A6E !important;">🔒 Locked</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- QUEST TYPES -->
+    <div class="wrap">
+      <div class="sec-hdr rv"><span class="eyebrow-label">Quest Types</span><h2 class="sec-title">Three ways to<br/><span class="c">prove it.</span></h2></div>
+      <div class="qt-grid rv" style="transition-delay:.1s">
+        <div class="qt-card"><div class="qt-icon sky">⏱</div><span class="qt-sub">Focus · Timer Quest</span><div class="qt-t">Stay on task</div><div class="qt-d">Set a duration and start. Roty tracks it live — even in the background. Commit longer = earn more coins. Works for reading, studying, gym, yoga and more.</div></div>
+        <div class="qt-card"><div class="qt-icon plum">📸</div><span class="qt-sub">Proof · Photo Quest</span><div class="qt-t">Show the receipts</div><div class="qt-d">Snap a photo and AI verifies it. Made your bed? Drank water? Ate a fruit? Roty checks if the photo matches the quest — no cheating.</div></div>
+        <div class="qt-card"><div class="qt-icon grn">✅</div><span class="qt-sub">Honor · Statement Quest</span><div class="qt-t">Your word is enough</div><div class="qt-d">For habits that can't be measured — slept 8 hours, took vitamins, called a friend. Tap to confirm. Roty trusts you. Don't break the streak.</div></div>
+      </div>
+    </div>
+
+    <!-- ROT METER -->
+    <div class="bg-dark">
+      <div class="wrap">
+        <div class="rot-grid">
+          <div class="rot-text rv"><span class="eyebrow-label dim">The Concept</span><h2 class="sec-title light">Your brain has a<br/><span class="cy">rot meter.</span></h2><p>Roty's mascot reflects your phone habits in real time. The more you doom-scroll, the more your brain rots. Do quests daily to keep it fresh — and smiling.</p></div>
+          <div class="brain-states rv" style="transition-delay:.15s">
+            <div class="bsc">
+              <canvas id="b0" width="60" height="60" style="flex-shrink:0;width:60px;height:60px;"></canvas>
+              <div style="flex:1"><div class="bsc-title">Fresh Brain</div><div class="bsc-desc">Quests done · Coins earned · Living well</div></div>
+              <div class="bsc-meter" style="background:rgba(70,189,100,.15) !important;border-color:rgba(70,189,100,.3) !important;"><div class="bsc-num" style="color:#46BD64 !important;">0%</div><div class="bsc-label">ROT</div></div>
+            </div>
+            <div class="bsc">
+              <canvas id="b50" width="60" height="60" style="flex-shrink:0;width:60px;height:60px;"></canvas>
+              <div style="flex:1"><div class="bsc-title">Getting Stale</div><div class="bsc-desc">Screen time creeping up · Time to quest</div></div>
+              <div class="bsc-meter" style="background:rgba(220,192,66,.15) !important;border-color:rgba(220,192,66,.3) !important;"><div class="bsc-num" style="color:#DCC042 !important;">50%</div><div class="bsc-label">ROT</div></div>
+            </div>
+            <div class="bsc">
+              <canvas id="b90" width="60" height="60" style="flex-shrink:0;width:60px;height:60px;"></canvas>
+              <div style="flex:1"><div class="bsc-title">Fully Rotten</div><div class="bsc-desc">Moldy · Smelly · Put the phone down</div></div>
+              <div class="bsc-meter" style="background:rgba(224,101,77,.15) !important;border-color:rgba(224,101,77,.3) !important;"><div class="bsc-num" style="color:#E0654D !important;">90%</div><div class="bsc-label">ROT</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- COIN SHOP -->
+    <div class="wrap">
+      <div class="coin-grid">
+        <div class="rv">
+          <span class="eyebrow-label">🪙 The Coin Shop</span>
+          <h2 class="sec-title">Earn it.<br/><span class="c">Spend it.</span></h2>
+          <div class="coin-text"><p>Every coin was earned through real effort. Trade them for the apps you want. 1 coin = 1 minute. Apps re-lock automatically when time's up — no manual steps needed.</p></div>
+        </div>
+        <div class="coin-list rv" style="transition-delay:.15s">
+          <div class="coin-card"><div class="coin-icon" style="background:#CFF0FA !important;">📱</div><div class="coin-info"><div class="coin-mins">5 minutes</div><div class="coin-label">Quick unlock</div></div><div class="coin-cost"><svg width="16" height="16" viewBox="0 0 24 24"><polygon points="8,2 16,2 22,8 22,16 16,22 8,22 2,16 2,8" fill="#DCC042" stroke="#322E26" stroke-width="2"/></svg> 5</div></div>
+          <div class="coin-card"><div class="coin-icon" style="background:#F0D5EC !important;">🎮</div><div class="coin-info"><div class="coin-mins">30 minutes</div><div class="coin-label">Solid session</div></div><div class="coin-cost"><svg width="16" height="16" viewBox="0 0 24 24"><polygon points="8,2 16,2 22,8 22,16 16,22 8,22 2,16 2,8" fill="#DCC042" stroke="#322E26" stroke-width="2"/></svg> 30</div></div>
+          <div class="coin-card"><div class="coin-icon" style="background:#D5F5DE !important;">🏆</div><div class="coin-info"><div class="coin-mins">90 minutes</div><div class="coin-label">Full session</div></div><div class="coin-cost"><svg width="16" height="16" viewBox="0 0 24 24"><polygon points="8,2 16,2 22,8 22,16 16,22 8,22 2,16 2,8" fill="#DCC042" stroke="#322E26" stroke-width="2"/></svg> 90</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FEATURES -->
+    <div class="bt">
+      <div class="wrap">
+        <div class="sec-hdr rv"><span class="eyebrow-label">More features</span><h2 class="sec-title">Built to keep<br/><em>you going.</em></h2></div>
+        <div class="feat-grid rv" style="transition-delay:.1s">
+          <div class="feat"><span class="feat-ico">🔥</span><div class="feat-t">Daily Streaks</div><div class="feat-d">Complete at least one quest per day to maintain your streak. Miss a day — the counter resets. No mercy.</div></div>
+          <div class="feat"><span class="feat-ico">🚶</span><div class="feat-t">Step Rewards via HealthKit</div><div class="feat-d">Connect Apple Health and earn passive coins just from walking. Set your daily step goal and watch the coins accumulate.</div></div>
+          <div class="feat"><span class="feat-ico">📚</span><div class="feat-t">50+ Quest Library</div><div class="feat-d">Gym, yoga, journaling, zero inbox, learning languages, watering plants — a massive catalog across health, chores, focus, and self-care.</div></div>
+          <div class="feat"><span class="feat-ico">🔒</span><div class="feat-t">Actually Blocked</div><div class="feat-d">Uses Apple's native Screen Time API via FamilyControls. Your chosen apps are truly blocked — not just reminded. Background-safe. Every time.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="bg-coral" id="download">
+      <div class="cta">
+        <div class="confetti" aria-hidden="true">
+          <div class="cp" style="--cw:10px;--ch:10px;--cc:#DCC042;--cr:50%;--ct:8%;--cl:10%;--cd:4s;--cdel:0s;--crot:20deg;"></div>
+          <div class="cp" style="--cw:8px;--ch:14px;--cc:#46BD64;--cr:3px;--ct:5%;--cl:25%;--cd:5s;--cdel:.5s;--crot:-30deg;"></div>
+          <div class="cp" style="--cw:12px;--ch:8px;--cc:#37ACDA;--cr:3px;--ct:12%;--cl:50%;--cd:3.5s;--cdel:.3s;--crot:45deg;"></div>
+          <div class="cp" style="--cw:9px;--ch:9px;--cc:#B661A3;--cr:50%;--ct:6%;--cl:70%;--cd:4.5s;--cdel:1s;--crot:10deg;"></div>
+          <div class="cp" style="--cw:11px;--ch:7px;--cc:#FDFAF3;--cr:3px;--ct:9%;--cl:85%;--cd:3.8s;--cdel:.7s;--crot:-15deg;"></div>
+          <div class="cp" style="--cw:7px;--ch:12px;--cc:#DCC042;--cr:2px;--ct:4%;--cl:40%;--cd:5.2s;--cdel:1.5s;--crot:60deg;"></div>
+        </div>
+        <canvas id="brainCTA" width="120" height="120" style="display:block;margin:0 auto 16px;width:120px;height:120px;"></canvas>
+        <h2 class="cta-h2">Ready to keep it fresh?</h2>
+        <p class="cta-p">Free to download. No account. No ads. Your data stays on your device.</p>
+        <a href="#" class="cta-btn">🍎 Download on App Store</a>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+      <div class="footer-logo">
+        <svg width="24" height="24" viewBox="0 0 60 60" fill="none"><path d="M16 34C12 24 16 12 28 12C32 6 40 6 44 12C54 14 56 28 50 36C50 46 44 52 36 52C30 52 26 52 22 48C16 46 14 40 16 34Z" fill="#EFC0B0" stroke="#322E26" stroke-width="3"/><circle cx="24" cy="30" r="4.5" fill="white" stroke="#322E26" stroke-width="2.2"/><circle cx="38" cy="30" r="4.5" fill="white" stroke="#322E26" stroke-width="2.2"/><circle cx="25" cy="30" r="2" fill="#322E26"/><circle cx="39" cy="30" r="2" fill="#322E26"/><path d="M25 40Q30 45 37 40" stroke="#322E26" stroke-width="2.2" stroke-linecap="round" fill="none"/></svg>
+        Roty
+      </div>
+      <p>© 2026 Oktay Evin</p>
+      <div class="footer-links">
+        <a onclick="goto('home')">Home</a>
+        <a onclick="goto('privacy')">Privacy Policy</a>
+        <a href="mailto:hello@oktayevin.com">Support</a>
+      </div>
+    </div>
+
+  </div><!-- /page-home -->
+
+
+  <!-- ════════════════════════════════════════
+       PAGE: PRIVACY POLICY
+  ════════════════════════════════════════ -->
+  <div class="rp-page" id="page-privacy">
+
+    <!-- NAV -->
+    <nav class="nav">
+      <div class="nav-logo" onclick="goto('home')">
+        <svg width="28" height="28" viewBox="0 0 60 60" fill="none"><path d="M16 34C12 24 16 12 28 12C32 6 40 6 44 12C54 14 56 28 50 36C50 46 44 52 36 52C30 52 26 52 22 48C16 46 14 40 16 34Z" fill="#EFC0B0" stroke="#322E26" stroke-width="3"/><circle cx="24" cy="30" r="4.5" fill="white" stroke="#322E26" stroke-width="2.2"/><circle cx="38" cy="30" r="4.5" fill="white" stroke="#322E26" stroke-width="2.2"/><circle cx="25" cy="30" r="2" fill="#322E26"/><circle cx="39" cy="30" r="2" fill="#322E26"/><path d="M25 40Q30 45 37 40" stroke="#322E26" stroke-width="2.2" stroke-linecap="round" fill="none"/></svg>
+        Roty
+      </div>
+      <a onclick="goto('home')" class="nav-btn ghost">← Back to Home</a>
+    </nav>
+
+    <!-- HERO -->
+    <div class="pp-hero">
+      <div class="eyebrow" style="margin-bottom:16px;">Legal Document</div>
+      <h1 class="pp-h1">Privacy <span>Policy</span></h1>
+      <p class="pp-sub">Roty is built on a simple principle: your data is yours. Everything stays on your device. We don't collect it, sell it, or share it.</p>
+      <div class="pp-meta">
+        <div class="pp-pill">📅 Effective: April 28, 2026</div>
+        <div class="pp-pill">🔄 Last Updated: April 28, 2026</div>
+        <div class="pp-pill">📱 Roty iOS App</div>
+      </div>
+    </div>
+
+    <!-- CONTENT -->
+    <div class="wrap-sm">
+
+      <!-- TOC -->
+      <div class="toc">
+        <div class="toc-hdr">Contents</div>
+        <ol class="toc-list">
+          <li><a href="#pp-s1"><span class="toc-n">01</span> Who We Are</a></li>
+          <li><a href="#pp-s2"><span class="toc-n">02</span> The Short Version</a></li>
+          <li><a href="#pp-s3"><span class="toc-n">03</span> Data We Collect & Why</a></li>
+          <li><a href="#pp-s4"><span class="toc-n">04</span> Data We Do Not Collect</a></li>
+          <li><a href="#pp-s5"><span class="toc-n">05</span> Third-Party Services</a></li>
+          <li><a href="#pp-s6"><span class="toc-n">06</span> Apple Platform Permissions</a></li>
+          <li><a href="#pp-s7"><span class="toc-n">07</span> Data Retention & Deletion</a></li>
+          <li><a href="#pp-s8"><span class="toc-n">08</span> Children's Privacy</a></li>
+          <li><a href="#pp-s9"><span class="toc-n">09</span> Your Rights</a></li>
+          <li><a href="#pp-s10"><span class="toc-n">10</span> Jurisdiction Coverage</a></li>
+          <li><a href="#pp-s11"><span class="toc-n">11</span> Changes to This Policy</a></li>
+          <li><a href="#pp-s12"><span class="toc-n">12</span> Contact</a></li>
+        </ol>
+      </div>
+
+      <!-- S01 -->
+      <div class="ps" id="pp-s1">
+        <div class="ps-hdr"><span class="ps-n">01</span><div class="ps-ico" style="background:#CFF0FA !important;">🧠</div><div class="ps-title">Who We Are</div></div>
+        <div class="ps-body">
+          <p>Roty is an iOS application developed and published by <strong>Oktay Evin</strong>, an independent developer based in <strong>Istanbul, Turkey</strong>. Roty is a gamified habit-building app that uses Apple's Screen Time API to let users lock and unlock apps based on coins earned by completing real-life daily quests.</p>
+          <p>This Privacy Policy applies to the Roty iOS app and governs how any information related to your use of the App is handled. By using Roty, you agree to the practices described in this document.</p>
+          <div class="callout sky"><span class="callout-ico">📬</span><p>For any privacy-related questions, you can reach us at <a class="elink" href="mailto:hello@oktayevin.com">hello@oktayevin.com</a></p></div>
+        </div>
+      </div>
+
+      <!-- S02 -->
+      <div class="ps" id="pp-s2">
+        <div class="ps-hdr"><span class="ps-n">02</span><div class="ps-ico" style="background:#D5F5DE !important;">⚡</div><div class="ps-title">The Short Version</div></div>
+        <div class="ps-body">
+          <p>If you only read one section, read this one:</p>
+          <div class="pill-list">
+            <div class="pill-item"><div class="pd" style="background:var(--grass)!important;"></div><p><strong>All your data lives on your device.</strong> Roty has no backend server. There is no database we control that contains your information.</p></div>
+            <div class="pill-item"><div class="pd" style="background:var(--grass)!important;"></div><p><strong>We never transmit personal data.</strong> Your name, quests, coins, streaks, and habits never leave your iPhone.</p></div>
+            <div class="pill-item"><div class="pd" style="background:var(--grass)!important;"></div><p><strong>No analytics, no trackers, no ads.</strong> Roty contains zero third-party SDKs that collect behavioral or personal data.</p></div>
+            <div class="pill-item"><div class="pd" style="background:var(--grass)!important;"></div><p><strong>No account required.</strong> You never sign up, log in, or provide an email address to use Roty.</p></div>
+            <div class="pill-item"><div class="pd" style="background:var(--grass)!important;"></div><p><strong>Deleting the app deletes everything.</strong> Uninstalling Roty removes all locally stored data permanently.</p></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- S03 -->
+      <div class="ps" id="pp-s3">
+        <div class="ps-hdr"><span class="ps-n">03</span><div class="ps-ico" style="background:#FFF3CC !important;">🗂</div><div class="ps-title">Data We Collect & Why</div></div>
+        <div class="ps-body">
+          <p>Roty stores a minimal set of data <strong>locally on your device only</strong>, using Apple's standard on-device storage (SwiftData and UserDefaults). None of it is accessible to us or any third party.</p>
+          <table class="data-table">
+            <thead><tr><th>Data</th><th>Stored</th><th>Why</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Your first name</strong> (optional)</td><td>On-device (UserDefaults)</td><td>Personalises the "Hello, [Name]" greeting on the dashboard</td></tr>
+              <tr><td><strong>Age & daily phone usage estimate</strong> (onboarding)</td><td>On-device (UserDefaults)</td><td>Calculates the brain rot meter and impact stats shown during onboarding</td></tr>
+              <tr><td><strong>Quest list & completion history</strong></td><td>On-device (SwiftData)</td><td>Tracks which quests you've completed and your overall progress</td></tr>
+              <tr><td><strong>Coin balance</strong></td><td>On-device (UserDefaults)</td><td>Stores your earned coins so you can spend them in the Shop</td></tr>
+              <tr><td><strong>Daily streak count</strong></td><td>On-device (UserDefaults)</td><td>Tracks consecutive days of completing at least one quest</td></tr>
+              <tr><td><strong>Step count</strong> (read-only from Apple Health)</td><td>Never stored — read live from HealthKit</td><td>Displays today's steps and calculates bonus coin rewards</td></tr>
+              <tr><td><strong>Selected apps for Screen Time blocking</strong></td><td>On-device App Group (shared container)</td><td>Tells the DeviceActivityMonitor extension which apps to block/unblock</td></tr>
+              <tr><td><strong>App unlock timer state</strong></td><td>On-device (UserDefaults)</td><td>Tracks whether apps are currently unlocked and how much time remains</td></tr>
+              <tr><td><strong>Onboarding completion flag</strong></td><td>On-device (UserDefaults)</td><td>Remembers whether setup is complete so it's not shown again</td></tr>
+              <tr><td><strong>App theme preference</strong></td><td>On-device (UserDefaults)</td><td>Remembers your light/dark/system appearance setting</td></tr>
+            </tbody>
+          </table>
+          <div class="callout yel"><span class="callout-ico">🔒</span><p><strong>Photos taken for photo quests are never saved or stored.</strong> When you complete a photo quest, the photo is passed directly to on-device image recognition and immediately discarded. It is never written to your Photo Library, saved to disk, or transmitted anywhere.</p></div>
+        </div>
+      </div>
+
+      <!-- S04 -->
+      <div class="ps" id="pp-s4">
+        <div class="ps-hdr"><span class="ps-n">04</span><div class="ps-ico" style="background:#FCE8E4 !important;">🚫</div><div class="ps-title">Data We Do Not Collect</div></div>
+        <div class="ps-body">
+          <p>To be completely explicit, Roty <strong>never</strong> collects, processes, or transmits any of the following:</p>
+          <div class="pill-list">
+            <div class="pill-item"><div class="pd" style="background:var(--coral)!important;"></div><p><strong>Device identifiers</strong> — no IDFA, IDFV, serial number, or any hardware identifier</p></div>
+            <div class="pill-item"><div class="pd" style="background:var(--coral)!important;"></div><p><strong>Location data</strong> — Roty never requests or reads your GPS location</p></div>
+            <div class="pill-item"><div class="pd" style="background:var(--coral)!important;"></div><p><strong>IP address or network data</strong> — Roty makes no outbound network requests during normal use</p></div>
+            <div class="pill-item"><div class="pd" style="background:var(--coral)!important;"></div><p><strong>Contacts, calendar, or messages</strong> — Roty does not access any communication data</p></div>
+            <div class="pill-item"><div class="pd" style="background:var(--coral)!important;"></div><p><strong>Crash reports or diagnostic data</strong> — no crash reporting SDK is included</p></div>
+            <div class="pill-item"><div class="pd" style="background:var(--coral)!important;"></div><p><strong>Behavioral analytics</strong> — no events, sessions, screen views, or tap data are tracked</p></div>
+            <div class="pill-item"><div class="pd" style="background:var(--coral)!important;"></div><p><strong>Financial or payment information</strong> — in-app purchases are handled entirely by Apple. Roty never sees your payment details</p></div>
+            <div class="pill-item"><div class="pd" style="background:var(--coral)!important;"></div><p><strong>Health data beyond step count</strong> — Roty only reads today's step count from HealthKit and does not read, write, or store any other health metrics</p></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- S05 -->
+      <div class="ps" id="pp-s5">
+        <div class="ps-hdr"><span class="ps-n">05</span><div class="ps-ico" style="background:#F0D5EC !important;">🔗</div><div class="ps-title">Third-Party Services</div></div>
+        <div class="ps-body">
+          <p>Roty contains <strong>no third-party analytics SDKs, advertising networks, crash reporters, or data brokers</strong>. The only external services involved are Apple's own platform services:</p>
+          <div class="pill-list">
+            <div class="pill-item"><div class="pd" style="background:var(--sky)!important;"></div><p><strong>Apple HealthKit</strong> — read-only, fetches your daily step count. Governed by Apple's privacy policy and iOS permissions you control.</p></div>
+            <div class="pill-item"><div class="pd" style="background:var(--sky)!important;"></div><p><strong>Apple Screen Time (FamilyControls / ManagedSettings / DeviceActivity)</strong> — used to block and unblock your chosen apps. Data stays entirely within iOS.</p></div>
+            <div class="pill-item"><div class="pd" style="background:var(--sky)!important;"></div><p><strong>Apple Push Notifications (UNUserNotificationCenter)</strong> — local, on-device notifications only (e.g. timer expiry alerts). No remote push server.</p></div>
+            <div class="pill-item"><div class="pd" style="background:var(--sky)!important;"></div><p><strong>Apple App Store / StoreKit</strong> — handles any in-app purchase transactions. Roty only receives a purchase confirmation, never your payment details.</p></div>
+          </div>
+          <p>Apple's privacy policy is available at <strong>apple.com/privacy</strong>.</p>
+        </div>
+      </div>
+
+      <!-- S06 -->
+      <div class="ps" id="pp-s6">
+        <div class="ps-hdr"><span class="ps-n">06</span><div class="ps-ico" style="background:#CFF0FA !important;">📱</div><div class="ps-title">Apple Platform Permissions</div></div>
+        <div class="ps-body">
+          <p>Roty requests the following iOS permissions. You can revoke any at any time in <strong>iOS Settings → Roty</strong>.</p>
+          <div class="pill-list">
+            <div class="pill-item"><div class="pd" style="background:var(--coral)!important;"></div><p><strong>Screen Time (FamilyControls)</strong> — Required. Used for app blocking and unlocking via the DeviceActivityMonitor extension. The core feature won't work without this.</p></div>
+            <div class="pill-item"><div class="pd" style="background:var(--sun)!important;"></div><p><strong>Apple Health (HealthKit — Steps only)</strong> — Optional. Reads today's step count for the step reward feature. Only step count is accessed, no other health data.</p></div>
+            <div class="pill-item"><div class="pd" style="background:var(--sky)!important;"></div><p><strong>Notifications</strong> — Optional. Used for local, on-device reminders only (e.g. relock alerts). No remote push notifications whatsoever.</p></div>
+            <div class="pill-item"><div class="pd" style="background:var(--grass)!important;"></div><p><strong>Camera</strong> — Optional. Used only during photo quest verification. Photos are processed on-device and immediately discarded — never saved or shared.</p></div>
+          </div>
+          <div class="callout grn"><span class="callout-ico">✅</span><p>Roty will always explain <strong>why</strong> a permission is needed before requesting it. You will never be surprised by an unexpected permission prompt.</p></div>
+        </div>
+      </div>
+
+      <!-- S07 -->
+      <div class="ps" id="pp-s7">
+        <div class="ps-hdr"><span class="ps-n">07</span><div class="ps-ico" style="background:#D5F5DE !important;">🗑</div><div class="ps-title">Data Retention & Deletion</div></div>
+        <div class="ps-body">
+          <p>Because all data is stored locally on your device, you are always in full control of it.</p>
+          <div class="pill-list">
+            <div class="pill-item"><div class="pd" style="background:var(--grass)!important;"></div><p><strong>Deleting the app</strong> removes all locally stored Roty data permanently — quest history, coin balance, streak, name, preferences — everything.</p></div>
+            <div class="pill-item"><div class="pd" style="background:var(--grass)!important;"></div><p><strong>Revoking HealthKit permission</strong> in iOS Settings immediately stops Roty from reading step data. Previously read step counts are not stored and are discarded after display.</p></div>
+            <div class="pill-item"><div class="pd" style="background:var(--grass)!important;"></div><p><strong>There is no account to delete</strong> — we hold no copy of your data on any server. No deletion request needs to be submitted to us.</p></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- S08 -->
+      <div class="ps" id="pp-s8">
+        <div class="ps-hdr"><span class="ps-n">08</span><div class="ps-ico" style="background:#FFF3CC !important;">👧</div><div class="ps-title">Children's Privacy</div></div>
+        <div class="ps-body">
+          <p>Roty is designed to be suitable for users of all ages. The onboarding flow explicitly supports users as young as 8 years old.</p>
+          <p>Because Roty collects no personal data and transmits nothing off-device, it does not raise concerns under children's privacy regulations including <strong>COPPA</strong> (US), <strong>GDPR-K</strong> (EU), or <strong>KVKK</strong> (Turkey). No personal information is collected, processed, or shared regardless of the user's age.</p>
+          <div class="callout yel"><span class="callout-ico">⚠️</span><p>If you are a parent or guardian with concerns about your child's use of Roty, please contact us at <a class="elink" href="mailto:hello@oktayevin.com">hello@oktayevin.com</a>. We are happy to assist.</p></div>
+        </div>
+      </div>
+
+      <!-- S09 -->
+      <div class="ps" id="pp-s9">
+        <div class="ps-hdr"><span class="ps-n">09</span><div class="ps-ico" style="background:#D5F5DE !important;">⚖️</div><div class="ps-title">Your Rights</div></div>
+        <div class="ps-body">
+          <p>Because Roty stores all data locally and we hold no personal data on our end, most rights are automatically satisfied — you already have full access, control, portability, and erasure capability through your own device.</p>
+          <div class="pill-list">
+            <div class="pill-item"><div class="pd" style="background:var(--grass)!important;"></div><p><strong>Right to access</strong> — All your data is on your device. Open the app to see it at any time.</p></div>
+            <div class="pill-item"><div class="pd" style="background:var(--grass)!important;"></div><p><strong>Right to rectification</strong> — Edit your name and settings directly inside the app's Settings screen.</p></div>
+            <div class="pill-item"><div class="pd" style="background:var(--grass)!important;"></div><p><strong>Right to erasure</strong> — Delete the app. All data is gone immediately. No server-side copy exists.</p></div>
+            <div class="pill-item"><div class="pd" style="background:var(--grass)!important;"></div><p><strong>Right to portability</strong> — Your data is in standard iOS formats, included in any iPhone backup you choose to create.</p></div>
+            <div class="pill-item"><div class="pd" style="background:var(--grass)!important;"></div><p><strong>Right to object / restrict</strong> — Revoke any individual permission (Health, Notifications, Camera) at any time via iOS Settings without deleting the app.</p></div>
+          </div>
+          <p>If you believe your rights have not been satisfied, contact us at <a class="elink" href="mailto:hello@oktayevin.com">hello@oktayevin.com</a>. EU residents may also lodge a complaint with their local Data Protection Authority. Turkish residents may contact the <strong>KVKK</strong> at kvkk.gov.tr.</p>
+        </div>
+      </div>
+
+      <!-- S10 -->
+      <div class="ps" id="pp-s10">
+        <div class="ps-hdr"><span class="ps-n">10</span><div class="ps-ico" style="background:#CFF0FA !important;">🌍</div><div class="ps-title">Jurisdiction Coverage</div></div>
+        <div class="ps-body">
+          <p>This policy is written to comply with data protection laws across the following jurisdictions. Compliance is largely inherent in the app's privacy-by-design architecture.</p>
+          <div class="juris-grid">
+            <div class="juris-card"><span class="juris-flag">🇹🇷</span><div class="juris-name">Turkey</div><div class="juris-law">KVKK (Law 6698)</div></div>
+            <div class="juris-card"><span class="juris-flag">🇪🇺</span><div class="juris-name">European Union</div><div class="juris-law">GDPR (2016/679)</div></div>
+            <div class="juris-card"><span class="juris-flag">🇺🇸</span><div class="juris-name">United States</div><div class="juris-law">COPPA / CalOPPA</div></div>
+          </div>
+          <p><strong>GDPR:</strong> Roty does not act as a "data controller" or "data processor" under GDPR because we do not collect, store, or process personal data on any infrastructure we control.</p>
+          <p><strong>KVKK:</strong> No personal data is processed outside of the user's own device. No data transfer to third countries occurs.</p>
+          <p><strong>COPPA:</strong> Roty does not collect personal information from users of any age, and is therefore fully compliant.</p>
+        </div>
+      </div>
+
+      <!-- S11 -->
+      <div class="ps" id="pp-s11">
+        <div class="ps-hdr"><span class="ps-n">11</span><div class="ps-ico" style="background:#FFF3CC !important;">🔄</div><div class="ps-title">Changes to This Policy</div></div>
+        <div class="ps-body">
+          <div class="pill-list">
+            <div class="pill-item"><div class="pd" style="background:var(--sun)!important;"></div><p>The <strong>"Last Updated"</strong> date at the top of this page will be revised whenever changes are made.</p></div>
+            <div class="pill-item"><div class="pd" style="background:var(--sun)!important;"></div><p>If a change is <strong>material</strong> (e.g. we begin collecting new data), we will notify users through the App Store release notes or an in-app notice.</p></div>
+            <div class="pill-item"><div class="pd" style="background:var(--sun)!important;"></div><p>We commit to <strong>never silently introducing data collection</strong> without updating this policy and notifying users first.</p></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- S12 -->
+      <div class="ps" id="pp-s12">
+        <div class="ps-hdr"><span class="ps-n">12</span><div class="ps-ico" style="background:#D5F5DE !important;">✉️</div><div class="ps-title">Contact</div></div>
+        <div class="ps-body">
+          <div class="callout grn">
+            <span class="callout-ico">👋</span>
+            <p><strong>Oktay Evin</strong><br/>Independent Developer · Istanbul, Turkey<br/><a class="elink" href="mailto:hello@oktayevin.com" style="margin-top:6px;display:inline-block;">hello@oktayevin.com</a></p>
+          </div>
+          <p>We aim to respond to all privacy inquiries within <strong>5 business days</strong>. For urgent matters related to data breaches or children's safety, please mark your subject line accordingly and we will prioritise your message.</p>
+        </div>
+      </div>
+
+    </div><!-- /wrap-sm -->
+
+    <!-- PP FOOTER -->
+    <div class="pp-footer">
+      <p><strong>Roty Privacy Policy</strong> · Effective April 28, 2026</p>
+      <p>Prepared in good faith by Oktay Evin for the Roty iOS application.</p>
+      <p class="disclaimer">This is not a legal document prepared by a licensed attorney. For binding legal advice, consult a qualified lawyer in your jurisdiction.</p>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+      <div class="footer-logo">
+        <svg width="24" height="24" viewBox="0 0 60 60" fill="none"><path d="M16 34C12 24 16 12 28 12C32 6 40 6 44 12C54 14 56 28 50 36C50 46 44 52 36 52C30 52 26 52 22 48C16 46 14 40 16 34Z" fill="#EFC0B0" stroke="#322E26" stroke-width="3"/><circle cx="24" cy="30" r="4.5" fill="white" stroke="#322E26" stroke-width="2.2"/><circle cx="38" cy="30" r="4.5" fill="white" stroke="#322E26" stroke-width="2.2"/><circle cx="25" cy="30" r="2" fill="#322E26"/><circle cx="39" cy="30" r="2" fill="#322E26"/><path d="M25 40Q30 45 37 40" stroke="#322E26" stroke-width="2.2" stroke-linecap="round" fill="none"/></svg>
+        Roty
+      </div>
+      <p>© 2026 Oktay Evin</p>
+      <div class="footer-links">
+        <a onclick="goto('home')">Home</a>
+        <a href="mailto:hello@oktayevin.com">Contact</a>
+      </div>
+    </div>
+
+  </div><!-- /page-privacy -->
+
+</div><!-- /rp-root -->
+
+<script>
+/* ── ROUTING ── */
+function goto(page) {
+  document.querySelectorAll('.rp-page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + page).classList.add('active');
+  window.scrollTo(0, 0);
+  history.pushState({page}, '', page === 'home' ? '#' : '#' + page);
+  if (page === 'home') initHomeBrains();
+}
+
+window.addEventListener('popstate', e => {
+  const page = (e.state && e.state.page) || 'home';
+  document.querySelectorAll('.rp-page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + page).classList.add('active');
+  if (page === 'home') initHomeBrains();
+});
+
+// Handle direct hash on load
+if (window.location.hash === '#privacy') goto('privacy');
+
+/* ── BRAIN CANVAS RENDERER ── */
+function drawBrain(canvas, rot, happy) {
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const w = canvas.width, s = w / 200;
+  ctx.clearRect(0, 0, w, w);
+  const r = Math.min(1, Math.max(0, rot));
+  const lp = (a,b) => a + (b-a)*r;
+  const mc = `rgb(${Math.round(lp(.94,.55)*255)},${Math.round(lp(.73,.63)*255)},${Math.round(lp(.67,.50)*255)})`;
+  const sc = `rgb(${Math.round(lp(.72,.33)*255)},${Math.round(lp(.51,.40)*255)},${Math.round(lp(.45,.30)*255)})`;
+  const hc = `rgba(${Math.round(lp(.98,.65)*255)},${Math.round(lp(.83,.72)*255)},${Math.round(lp(.79,.62)*255)},.7)`;
+  const ink='#322E26', paper='#FDFAF3';
+  const bp = (x,y) => [x*s, y*s];
+  function brainPath(ox=0,oy=0){
+    ctx.beginPath();
+    ctx.moveTo(...bp(50+ox,110+oy));
+    ctx.bezierCurveTo(...bp(40+ox,75+oy),...bp(55+ox,40+oy),...bp(95+ox,42+oy));
+    ctx.bezierCurveTo(...bp(100+ox,30+oy),...bp(110+ox,30+oy),...bp(118+ox,42+oy));
+    ctx.bezierCurveTo(...bp(155+ox,40+oy),...bp(170+ox,80+oy),...bp(158+ox,115+oy));
+    ctx.bezierCurveTo(...bp(165+ox,140+oy),...bp(145+ox,165+oy),...bp(120+ox,160+oy));
+    ctx.bezierCurveTo(...bp(115+ox,170+oy),...bp(100+ox,172+oy),...bp(92+ox,162+oy));
+    ctx.bezierCurveTo(...bp(70+ox,168+oy),...bp(48+ox,150+oy),...bp(50+ox,110+oy));
+    ctx.closePath();
+  }
+  ctx.save(); ctx.globalAlpha=.14;
+  ctx.beginPath(); ctx.ellipse(100*s,178*s,70*s,8*s,0,0,Math.PI*2);
+  ctx.fillStyle='#000'; ctx.fill(); ctx.restore();
+  ctx.save(); ctx.translate(4*s,6*s); brainPath(); ctx.fillStyle=sc; ctx.fill(); ctx.restore();
+  brainPath(); ctx.fillStyle=mc; ctx.fill();
+  brainPath(); ctx.strokeStyle=ink; ctx.lineWidth=3*s; ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(...bp(100,34));
+  ctx.bezierCurveTo(...bp(99,80),...bp(104,120),...bp(100,168));
+  ctx.strokeStyle=ink; ctx.lineWidth=2.5*s; ctx.stroke();
+  [[65,70,72,78,68,88,64,98,62,108],[80,55,88,65,82,75,76,85,78,95],[115,55,122,65,118,78,114,91,122,100],[135,70,145,80,138,95,131,110,142,115]].forEach(g=>{
+    ctx.beginPath(); ctx.moveTo(g[0]*s,g[1]*s);
+    ctx.quadraticCurveTo(g[2]*s,g[3]*s,g[4]*s,g[5]*s);
+    ctx.quadraticCurveTo(g[6]*s,g[7]*s,g[8]*s,g[9]*s);
+    ctx.strokeStyle=sc; ctx.lineWidth=3*s; ctx.stroke();
+  });
+  ctx.beginPath(); ctx.moveTo(...bp(60,60)); ctx.quadraticCurveTo(...bp(75,50),...bp(85,55));
+  ctx.strokeStyle=hc; ctx.lineWidth=4*s; ctx.stroke();
+  if(r>.35){ ctx.fillStyle=`rgba(77,102,64,${Math.min(1,r*1.5)})`;
+    [[72,85,4+r*3],[130,100,5+r*4],[90,150,3+r*3]].forEach(([cx,cy,rd])=>{ctx.beginPath();ctx.arc(cx*s,cy*s,rd*s,0,Math.PI*2);ctx.fill();});}
+  [[82,100],[122,100]].forEach(([ex,ey])=>{ctx.beginPath();ctx.arc(ex*s,ey*s,7*s,0,Math.PI*2);ctx.fillStyle=paper;ctx.fill();ctx.strokeStyle=ink;ctx.lineWidth=2.2*s;ctx.stroke();});
+  (happy?[[82,100],[122,100]]:[[80,101],[124,101]]).forEach(([px,py])=>{ctx.beginPath();ctx.arc(px*s,py*s,3.2*s,0,Math.PI*2);ctx.fillStyle=ink;ctx.fill();});
+  (happy?[[84,98],[124,98]]:[[82,99],[126,99]]).forEach(([hx,hy])=>{ctx.beginPath();ctx.arc(hx*s,hy*s,1.2*s,0,Math.PI*2);ctx.fillStyle=paper;ctx.fill();});
+  ctx.strokeStyle=ink; ctx.lineWidth=3*s; ctx.lineCap='round'; ctx.beginPath();
+  if(happy){ctx.moveTo(...bp(88,125));ctx.quadraticCurveTo(...bp(100,138),...bp(112,125));}
+  else if(r>.7){ctx.moveTo(...bp(86,132));ctx.quadraticCurveTo(...bp(100,122),...bp(114,132));}
+  else{ctx.moveTo(...bp(88,128));ctx.lineTo(...bp(112,128));}
+  ctx.stroke();
+  if(happy){ctx.fillStyle='rgba(230,107,92,.55)';[[71,115.5,8,5],[124,115.5,8,5]].forEach(([cx,cy,rx,ry])=>{ctx.beginPath();ctx.ellipse(cx*s,cy*s,rx*s,ry*s,0,0,Math.PI*2);ctx.fill();});}
+  if(r<.3){ctx.fillStyle='#DCC042';ctx.strokeStyle=ink;ctx.lineWidth=1.5*s;[[30,53,1],[170,57,1],[175,154,.6]].forEach(([cx,cy,sc2])=>{const pts=[[cx,cy-8*sc2],[cx+2*sc2,cy-3*sc2],[cx+8*sc2,cy],[cx+2*sc2,cy+3*sc2],[cx,cy+8*sc2],[cx-2*sc2,cy+3*sc2],[cx-8*sc2,cy],[cx-2*sc2,cy-3*sc2]];ctx.beginPath();ctx.moveTo(pts[0][0]*s,pts[0][1]*s);pts.slice(1).forEach(([px,py])=>ctx.lineTo(px*s,py*s));ctx.closePath();ctx.fill();ctx.stroke();});}
+  if(r>.65){ctx.strokeStyle=`rgba(128,148,102,${Math.min(.7,r)})`;ctx.lineWidth=2.5*s;ctx.lineCap='round';[[75,30,75,14],[100,22,100,6],[125,30,125,14]].forEach(([sx,sy,ex,ey])=>{ctx.beginPath();ctx.moveTo(sx*s,sy*s);ctx.quadraticCurveTo((sx-3)*s,(sy-8)*s,ex*s,ey*s);ctx.stroke();});}
+}
+
+/* ── HOME BRAIN ANIMATIONS ── */
+let mainRAF;
+function initHomeBrains() {
+  cancelAnimationFrame(mainRAF);
+  const mc = document.getElementById('brainMain');
+  const ctaC = document.getElementById('brainCTA');
+  function loop(){ drawBrain(mc,0,true); mainRAF=requestAnimationFrame(loop); }
+  loop();
+  drawBrain(ctaC, 0, true);
+  drawBrain(document.getElementById('b0'),  0,   true);
+  drawBrain(document.getElementById('b50'), 0.5, false);
+  drawBrain(document.getElementById('b90'), 0.9, false);
+}
+initHomeBrains();
+
+/* ── SCROLL REVEAL ── */
+const rvObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+}, { threshold: 0.1 });
+function initReveal() {
+  document.querySelectorAll('.rp .rv').forEach(el => rvObs.observe(el));
+}
+initReveal();
+</script>
+</body>
+</html>
