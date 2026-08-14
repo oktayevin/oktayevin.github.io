@@ -197,12 +197,12 @@ globalThis.cv = Object.assign(globalThis.cv || {}, {
       "handle": "oktayevin09@gmail.com",
       "url": "mailto:oktayevin09@gmail.com"
     },
-    {
+    /*{
       "id": "new_phone",
       "platform": "Phone",
       "handle": "+905395586498",
       "url": "tel:+905395586498"
-    },
+    },*/
     {
       "id": "b1DuhTv1lj6920NQELvh",
       "platform": "Website",
